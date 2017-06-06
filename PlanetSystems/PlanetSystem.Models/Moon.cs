@@ -9,6 +9,8 @@ namespace PlanetSystem.Models
         {
             this.Planet = new Planet();
             this.PlanetSystem = new PlanetSystem();
+            this.Coordinates = new Models.Point();
+            this.Velocity = new Models.Vector();
         }
 
         [Key]
@@ -24,18 +26,22 @@ namespace PlanetSystem.Models
 
         public double Density { get; set; }
 
-        public double Vx { get; set; }
+        //[ForeignKey("fk_MoonCoordinates_Point")]
+        public int PointID { get; set; }
 
-        public double Vy { get; set; }
+        public virtual Point Coordinates { get; set; }
 
-        public double Vz { get; set; }
+        //[ForeignKey("fk_MoonVelocity_Vector")]
+        public int VectorID { get; set; }
 
-        [ForeignKey("fk_Moon_Planet")]
+        public Vector Velocity { get; set; }
+
+        //[ForeignKey("fk_Moon_Planet")]
         public int PlanetID { get; set; }
 
         public virtual Planet Planet { get; set; }
 
-        [ForeignKey("fk_Moon_PlanetSystem")]
+        //[ForeignKey("fk_Moon_PlanetSystem")]
         public int PlanetSystemID { get; set; }
 
         public virtual PlanetSystem PlanetSystem { get; set; }

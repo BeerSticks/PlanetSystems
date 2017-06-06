@@ -8,6 +8,8 @@ namespace PlanetSystem.Models
         public Star()
         {
             this.PlanetSystem = new PlanetSystem();
+            this.Coordinates = new Models.Point();
+            
         }
 
         [Key]
@@ -23,7 +25,12 @@ namespace PlanetSystem.Models
 
         public double Density { get; set; }
 
-        [ForeignKey("fk_Star_PlanetSystem")]
+        ///[ForeignKey("fk_StarCoordinates_Point")]
+        public int PointID { get; set; }
+
+        public virtual Point Coordinates { get; set; }
+
+        //[ForeignKey("fk_Star_PlanetSystem")]
         public int PlanetSystemID { get; set; }
 
         public virtual PlanetSystem PlanetSystem { get; set; }

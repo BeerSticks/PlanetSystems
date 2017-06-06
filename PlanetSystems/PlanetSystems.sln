@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetSystems.Client", "PlanetSystems\PlanetSystems.Client.csproj", "{EC3969AE-86D9-4CD3-B234-F4A3953A4D53}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetSystem.Models", "PlanetSystem.Models\PlanetSystem.Models.csproj", "{4EFD5B47-2913-4CC1-8716-3F16CD526303}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetSystems.Data", "PlanetSystems.Data\PlanetSystems.Data.csproj", "{09B9BE91-2AD7-4304-9A83-A0ABEF196FBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteData", "SQLiteData\SQLiteData.csproj", "{1CD77D86-EA28-48AD-B65E-3C5304EF52C6}"
 EndProject
@@ -17,24 +13,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsGenerators", "Report
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetSystem.UserInterface", "PlanetSystem.UserInterface\PlanetSystem.UserInterface.csproj", "{91C3D87D-8926-40BC-9A52-58186D96F06C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetSystem.Data", "PlanetSystem.Data\PlanetSystem.Data.csproj", "{D5232EDF-2AFD-4D46-8536-0402F100823F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EC3969AE-86D9-4CD3-B234-F4A3953A4D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC3969AE-86D9-4CD3-B234-F4A3953A4D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC3969AE-86D9-4CD3-B234-F4A3953A4D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC3969AE-86D9-4CD3-B234-F4A3953A4D53}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EFD5B47-2913-4CC1-8716-3F16CD526303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EFD5B47-2913-4CC1-8716-3F16CD526303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EFD5B47-2913-4CC1-8716-3F16CD526303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EFD5B47-2913-4CC1-8716-3F16CD526303}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09B9BE91-2AD7-4304-9A83-A0ABEF196FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09B9BE91-2AD7-4304-9A83-A0ABEF196FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09B9BE91-2AD7-4304-9A83-A0ABEF196FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09B9BE91-2AD7-4304-9A83-A0ABEF196FBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CD77D86-EA28-48AD-B65E-3C5304EF52C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CD77D86-EA28-48AD-B65E-3C5304EF52C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD77D86-EA28-48AD-B65E-3C5304EF52C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +41,10 @@ Global
 		{91C3D87D-8926-40BC-9A52-58186D96F06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C3D87D-8926-40BC-9A52-58186D96F06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C3D87D-8926-40BC-9A52-58186D96F06C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5232EDF-2AFD-4D46-8536-0402F100823F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5232EDF-2AFD-4D46-8536-0402F100823F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5232EDF-2AFD-4D46-8536-0402F100823F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5232EDF-2AFD-4D46-8536-0402F100823F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

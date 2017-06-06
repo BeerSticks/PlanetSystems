@@ -8,6 +8,8 @@ namespace PlanetSystem.Models
         public Asteroid()
         {
             this.PlanetSystem = new PlanetSystem();
+            this.Coordinates = new Models.Point();
+            this.Velocity = new Models.Vector();
         }
 
         [Key]
@@ -23,13 +25,17 @@ namespace PlanetSystem.Models
 
         public double Density { get; set; }
 
-        public double Vx { get; set; }
+        //[ForeignKey("fk_AsteroidCoordinates_Point")]
+        public int PointID { get; set; }
 
-        public double Vy { get; set; }
+        public virtual Point Coordinates { get; set; }
 
-        public double Vz { get; set; }
+        //[ForeignKey("fk_AsteroidVelocity_Vector")]
+        public int VectorID { get; set; }
 
-        [ForeignKey("fk_Asteroid_PlanetSystem")]
+        public Vector Velocity { get; set; }
+
+        //[ForeignKey("fk_Asteroid_PlanetSystem")]
         public int PlanetSystemID { get; set; }
 
         public virtual PlanetSystem PlanetSystem { get; set; }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PlanetSystems.Data")]
+[assembly: AssemblyTitle("PlanetSystem.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PlanetSystems.Data")]
+[assembly: AssemblyProduct("PlanetSystem.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("09b9be91-2ad7-4304-9a83-a0abef196fbd")]
+[assembly: Guid("d5232edf-2afd-4d46-8536-0402f100823f")]
 
 // Version information for an assembly consists of the following four values:
 //
