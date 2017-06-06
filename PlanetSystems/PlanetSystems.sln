@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetSystems.Client", "PlanetSystems\PlanetSystems.Client.csproj", "{EC3969AE-86D9-4CD3-B234-F4A3953A4D53}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSQLData", "PostgreSQLData\PostgreSQLData.csproj", "{C426443E-D63F-4B18-A401-20369A46A347}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsGenerators", "ReportsGenerators\ReportsGenerators.csproj", "{078AC86A-9DEB-44DC-944C-F0F436F5861D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetSystem.UserInterface", "PlanetSystem.UserInterface\PlanetSystem.UserInterface.csproj", "{91C3D87D-8926-40BC-9A52-58186D96F06C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{078AC86A-9DEB-44DC-944C-F0F436F5861D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{078AC86A-9DEB-44DC-944C-F0F436F5861D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{078AC86A-9DEB-44DC-944C-F0F436F5861D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C3D87D-8926-40BC-9A52-58186D96F06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C3D87D-8926-40BC-9A52-58186D96F06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C3D87D-8926-40BC-9A52-58186D96F06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C3D87D-8926-40BC-9A52-58186D96F06C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
