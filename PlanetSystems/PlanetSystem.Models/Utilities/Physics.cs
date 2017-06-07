@@ -121,5 +121,19 @@ namespace PlanetSystem.Models.Utilities
                 bodies[i].ApplyForce(gravityOnBody, secondsOfSimulation);
             }
         }
+
+        public static double GetRelativeTangentialSpeedForOrbit(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody)
+        {
+            double distance = GetDistanceBetweenPoints(orbitingBody.Center, orbitedBody.Center);
+            double requiredTangentialSpeedFixed = Math.Sqrt((GravitationalConstant * orbitedBody.Mass / distance) * GravitationalConstantDecimalFix);
+            return requiredTangentialSpeedFixed;
+        }
+
+        public static double GetRadiusOfOrbit(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody, double relativeTangentialSpeed)
+        {
+            double requiredRadiusNotFixed = GravitationalConstant * orbitedBody.Mass / (relativeTangentialSpeed * relativeTangentialSpeed);
+            double requiredRadiusFixed = requiredRadiusNotFixed * GravitationalConstantDecimalFix;
+            return requiredRadiusFixed;
+        }
     }
 }
