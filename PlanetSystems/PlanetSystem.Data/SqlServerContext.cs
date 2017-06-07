@@ -1,5 +1,7 @@
 ﻿using PlanetSystem.Models;
 using System.Data.Entity;
+using PlanetSystem.Models.Bodies;
+using PlanetSystem.Models.Utilities;
 
 namespace PlanetSystem.Data
 {
@@ -14,13 +16,11 @@ namespace PlanetSystem.Data
 
         public virtual DbSet<Asteroid> Asteroids { get; set; }
 
-        public virtual DbSet<AstronomicalBody> AstronomicalBodies { get; set; }
-
-        public virtual DbSet<Moon> Moon { get; set; }
+        public virtual DbSet<Moon> Moons { get; set; }
 
         public virtual DbSet<Planet> Planets { get; set; }
 
-        public virtual DbSet<PlanetSystem.Models.PlanetSystem> PlanetSystems { get; set; }
+        public virtual DbSet<PlanetarySystem> PlanetarySystems { get; set; }
 
         public virtual DbSet<Point> Points { get; set; }
 
