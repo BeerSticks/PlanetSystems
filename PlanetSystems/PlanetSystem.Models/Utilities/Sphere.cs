@@ -19,8 +19,9 @@ namespace PlanetSystem.Models.Utilities
             this.Radius = radius;
         }
         
+        protected Sphere() { }
+
         // Properties
-        public  int PointId { get; set; }
         public virtual Point Center { get; set; }
         public double Radius
         {

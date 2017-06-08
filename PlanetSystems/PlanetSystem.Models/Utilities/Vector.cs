@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace PlanetSystem.Models.Utilities
 {
+    [ComplexType]
+    [Table("Velocities")]
     public partial class Vector
     {
         // Fields
@@ -41,8 +44,6 @@ namespace PlanetSystem.Models.Utilities
         }
 
         //Properties
-        [Key]
-        public int Id { get; set; }
 
         //-------------------------------------------------------
         #region CartesianProperties

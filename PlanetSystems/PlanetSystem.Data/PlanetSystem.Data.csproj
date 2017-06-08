@@ -52,13 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201706070845259_Initial.cs" />
-    <Compile Include="Migrations\201706070845259_Initial.Designer.cs">
-      <DependentUpon>201706070845259_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201706081029514_RelationsUpdate.cs" />
+    <Compile Include="Migrations\201706081029514_RelationsUpdate.Designer.cs">
+      <DependentUpon>201706081029514_RelationsUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706070910551_Second.cs" />
-    <Compile Include="Migrations\201706070910551_Second.Designer.cs">
-      <DependentUpon>201706070910551_Second.cs</DependentUpon>
+    <Compile Include="Migrations\201706081324551_ClassAndRelationUpdate.cs" />
+    <Compile Include="Migrations\201706081324551_ClassAndRelationUpdate.Designer.cs">
+      <DependentUpon>201706081324551_ClassAndRelationUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -76,11 +76,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706070845259_Initial.resx">
-      <DependentUpon>201706070845259_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706081029514_RelationsUpdate.resx">
+      <DependentUpon>201706081029514_RelationsUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706070910551_Second.resx">
-      <DependentUpon>201706070910551_Second.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706081324551_ClassAndRelationUpdate.resx">
+      <DependentUpon>201706081324551_ClassAndRelationUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

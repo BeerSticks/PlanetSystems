@@ -7,13 +7,13 @@ namespace PlanetSystem.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Second : IMigrationMetadata
+    public sealed partial class RelationsUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Second));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RelationsUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706070910551_Second"; }
+            get { return "201706081029514_RelationsUpdate"; }
         }
         
         string IMigrationMetadata.Source

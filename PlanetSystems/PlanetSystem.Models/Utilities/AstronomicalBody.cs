@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace  PlanetSystem.Models.Utilities
+namespace PlanetSystem.Models.Utilities
 {
     public partial class AstronomicalBody : Sphere
     {
@@ -11,28 +11,29 @@ namespace  PlanetSystem.Models.Utilities
         private string _name;
 
         // Construcors
-        public AstronomicalBody(Point center, double mass, double radius, Vector velocity)
+        public AstronomicalBody(Point center, double mass, double radius, Vector velocity, string name)
             : base(center, radius)
         {
             Velocity = velocity;
             Mass = mass;
+            Name = name;
         }
 
-        public AstronomicalBody(Point center, double mass, double radius)
-            : this(center, mass, radius, new Vector(new Point(0, 0, 0)))
+        public AstronomicalBody(Point center, double mass, double radius, string name)
+            : this(center, mass, radius, new Vector(new Point(0, 0, 0)), name)
         {
         }
 
         public AstronomicalBody(AstronomicalBody body)
-            : this(body.Center, body.Mass, body.Radius, body.Velocity)
+            : this(body.Center, body.Mass, body.Radius, body.Velocity, body.Name)
         {
         }
 
+        protected AstronomicalBody() { }
+
         // Properties
 
-        [Key]
-        public int Id { get; set; }
-
+        [Required]
         public string Name
         {
             get
@@ -43,7 +44,7 @@ namespace  PlanetSystem.Models.Utilities
             {
                 if (value.Length > 0)
                 {
-                this._name = value;
+                    this._name = value;
 
                 }
                 else
@@ -53,6 +54,7 @@ namespace  PlanetSystem.Models.Utilities
             }
         }
 
+        [Required]
         public double Mass
         {
             get { return _mass; }
@@ -69,7 +71,7 @@ namespace  PlanetSystem.Models.Utilities
             }
         }
 
-        public double Density
+        public virtual double Density
         {
             get
             {
@@ -77,20 +79,20 @@ namespace  PlanetSystem.Models.Utilities
                 return density;
             }
         }
-        public virtual int VelocityId { get; set; }
-        public Vector Velocity { get; set; }
+
+        public virtual Vector Velocity { get; set; }
 
         // Methods
         public void AdvanceMovement(double timeInSeconds)
         {
-            AstronomicalBody dummyBody = new AstronomicalBody(this.Center, this.Mass, this.Radius, this.Velocity);
+            AstronomicalBody dummyBody = new AstronomicalBody(this.Center, this.Mass, this.Radius, this.Velocity, this.Name);
             Physics.AdvanceMovementOfBody(ref dummyBody, timeInSeconds);
             this.Center = dummyBody.Center;
         }
 
         public void ApplyForce(Vector force, double secondsUnderForce)
         {
-            AstronomicalBody dummyBody = new AstronomicalBody(this.Center, this.Mass, this.Radius, this.Velocity);
+            AstronomicalBody dummyBody = new AstronomicalBody(this.Center, this.Mass, this.Radius, this.Velocity, this.Name);
             Physics.ApplyForceToBody(ref dummyBody, force, secondsUnderForce);
             this.Center = dummyBody.Center;
             this.Velocity = dummyBody.Velocity;

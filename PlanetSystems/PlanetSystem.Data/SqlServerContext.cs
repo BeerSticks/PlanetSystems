@@ -12,6 +12,10 @@ namespace PlanetSystem.Data
         {
         }
 
+        //public virtual DbSet<Vector> Vectors { get; set; }
+
+        //public virtual DbSet<Point> Points { get; set; }
+
         public virtual DbSet<ArtificialObject> ArtificialObjects { get; set; }
 
         public virtual DbSet<Asteroid> Asteroids { get; set; }
@@ -22,11 +26,8 @@ namespace PlanetSystem.Data
 
         public virtual DbSet<PlanetarySystem> PlanetarySystems { get; set; }
 
-        public virtual DbSet<Point> Points { get; set; }
-
         public virtual DbSet<Star> Stars { get; set; }
 
-        public virtual DbSet<Vector> Vectors { get; set; }
 
     }
 }

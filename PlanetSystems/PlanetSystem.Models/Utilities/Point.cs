@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlanetSystem.Models.Utilities
 {
+    [ComplexType]
+    [Table("Positions")]
     public partial class Point
     {
         // Constructors
@@ -13,10 +16,9 @@ namespace PlanetSystem.Models.Utilities
             this.Z = z;
         }
 
-        // Properties
-        [Key]
-        public int Id { get; set; }
+        private Point() { }
 
+        // Properties
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }

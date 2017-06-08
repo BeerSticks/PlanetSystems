@@ -4,30 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PlanetSystem.Models.Utilities;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlanetSystem.Models.Bodies
 {
     public partial class Asteroid : AstronomicalBody
     {
         // Constructors
-        public Asteroid(Point center, double mass, double radius, Vector velocity)
-            : base(center, mass, radius, velocity)
+        public Asteroid(Point center, double mass, double radius, Vector velocity, string name)
+            : base(center, mass, radius, velocity, name)
         {
         }
 
-        public Asteroid(Point center, double mass, double radius)
-            : this(center, mass, radius, new Vector(new Point(0, 0, 0)))
+        public Asteroid(Point center, double mass, double radius, string name)
+            : this(center, mass, radius, new Vector(new Point(0, 0, 0)), name)
         {
         }
 
         public Asteroid(Asteroid asteroid)
-            : this(asteroid.Center, asteroid.Mass, asteroid.Radius, asteroid.Velocity)
+            : this(asteroid.Center, asteroid.Mass, asteroid.Radius, asteroid.Velocity, asteroid.Name)
         {
         }
 
-        // Properties
-        public int? PlanetarySystemId { get; set; }
-        public virtual PlanetarySystem PlanetarySystem { get; set; }
+        // Required from Entity Framework
+        private Asteroid() { }
 
+        // Properties
+        [Key]
+        public int AsteroidId { get; set; }
+        public int? PlanetarySystemId { get; set; }
+
+        [ForeignKey("PlanetarySystemId")]
+        public virtual PlanetarySystem PlanetarySystem { get; set; }
     }
 }
