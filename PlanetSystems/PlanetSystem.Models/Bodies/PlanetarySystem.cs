@@ -3,6 +3,7 @@ using PlanetSystem.Models.Utilities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.Linq;
 
 namespace PlanetSystem.Models.Bodies
 {
@@ -14,6 +15,7 @@ namespace PlanetSystem.Models.Bodies
         private List<Planet> _planets;
         private List<Moon> _moons;
         private List<Asteroid> _asteroids;
+        private List<ArtificialObject> _artificialObjects;
         private List<AstronomicalBody> _bodies;
 
         // Constructors
@@ -54,9 +56,27 @@ namespace PlanetSystem.Models.Bodies
         }
 
         public virtual Star Star { get { return this._star; } }
-        public virtual ICollection<Planet> Planets { get { return _planets.AsReadOnly(); } }
-        public virtual ICollection<Moon> Moons { get { return _moons.AsReadOnly(); } }
-        public virtual ICollection<Asteroid> Asteroids { get { return _asteroids.AsReadOnly(); } }
+        public virtual ICollection<Planet> Planets
+        {
+            get { return this._planets; }
+            set { this._planets = value.ToList(); }
+        }
+        public virtual ICollection<Moon> Moons
+        {
+            get { return this._moons; }
+            set { this._moons = (List<Moon>)value; }
+        }
+
+        public virtual ICollection<Asteroid> Asteroids
+        {
+            get { return this._asteroids; }
+            set { this._asteroids = (List<Asteroid>)value; }
+        }
+        public virtual ICollection<ArtificialObject> ArtificialObjects
+        {
+            get { return this._artificialObjects; }
+            set { this._artificialObjects = (List<ArtificialObject>)value; }
+        }
 
         // Dont put Bodies List in Database.
         [NotMapped]
@@ -74,7 +94,7 @@ namespace PlanetSystem.Models.Bodies
         public void AddPlanet(Planet planet)
         {
             this._planets.Add(planet);
-            this._bodies.Add(planet);
+            //this._bodies.Add(planet);
             planet.PlanetarySystem = this;
         }
 
@@ -83,12 +103,49 @@ namespace PlanetSystem.Models.Bodies
             this._planets.Remove(planet);
             this._bodies.Remove(planet);
             planet.PlanetarySystem = null;
+
             // TODO: clear planet's references to the system;
+        }
+
+        public void AttachMoonToPlanet(Moon moon, Planet planet)
+        {
+            // TODO: Validations
+            moon.DetachFromPlanet();
+            moon.PlanetarySystem = this;
+            this._planets[this._planets.IndexOf(planet)].AttachMoon(moon);
         }
 
         public void DetachMoonsFromPlanet(Planet planet)
         {
             // TODO: Implement
+        }
+
+        public void AddAsteroid(Asteroid asteroid)
+        {
+            this._asteroids.Add(asteroid);
+            this._bodies.Add(asteroid);
+            asteroid.PlanetarySystem = this;
+        }
+
+        public void RemoveAsteroid(Asteroid asteroid)
+        {
+            this._asteroids.Remove(asteroid);
+            this._bodies.Remove(asteroid);
+            asteroid.PlanetarySystem = null;
+        }
+
+        public void AddArtificialObject(ArtificialObject artificialObject)
+        {
+            this._artificialObjects.Add(artificialObject);
+            this._bodies.Add(artificialObject);
+            artificialObject.PlanetarySystem = this;
+        }
+
+        public void RemoveArtificialObject(ArtificialObject artificialObject)
+        {
+            this._artificialObjects.Remove(artificialObject);
+            this._bodies.Remove(artificialObject);
+            artificialObject.PlanetarySystem = null;
         }
 
         public void AdvanceTime(double seconds)
@@ -101,6 +158,7 @@ namespace PlanetSystem.Models.Bodies
             this._planets = new List<Planet>();
             this._moons = new List<Moon>();
             this._asteroids = new List<Asteroid>();
+            this._artificialObjects = new List<ArtificialObject>();
             this._bodies = new List<AstronomicalBody>();
         }
     }

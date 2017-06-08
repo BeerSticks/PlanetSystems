@@ -12,6 +12,10 @@ namespace PlanetSystem.Data
     {
         static void Main(string[] args)
         {
+            //TESTPopulateDb();
+            //Database.LoadPlanetarySystem("Solar system");
+            Console.WriteLine("Done");
+            Console.ReadLine();
         }
 
         static void TESTPopulateDb()
@@ -38,17 +42,18 @@ namespace PlanetSystem.Data
                     radius: 5,
                     velocity: new Vector(new Point(0, 29780, 0)),
                     name: "Moon");
-
-                earth.AttachMoon(moon);
+                
 
                 solarSystem.SetStar(sun);
                 solarSystem.AddPlanet(earth);
+                solarSystem.AttachMoonToPlanet(moon, earth);
 
                 context.PlanetarySystems.Add(solarSystem);
                 context.Stars.Add(sun);
                 context.Planets.Add(earth);
                 context.Moons.Add(moon);
 
+                Console.WriteLine("presave");
                 context.SaveChanges();
             }
         }

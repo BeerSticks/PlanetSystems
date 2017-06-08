@@ -61,6 +61,7 @@ namespace PlanetSystem.Models.Bodies
                     this._planet = planet;
                     this._isAttached = true;
                     this.PlanetarySystem = planet.PlanetarySystem;
+                    this.PlanetarySystemId = planet.PlanetarySystemId;
                 }
                 else
                 {

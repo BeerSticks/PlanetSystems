@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlanetSystem.Models.Utilities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace PlanetSystem.Models.Bodies
 {
@@ -47,7 +48,8 @@ namespace PlanetSystem.Models.Bodies
 
         public virtual ICollection<Moon> Moons
         {
-            get { return this._moons.AsReadOnly(); }
+            get { return this._moons; }
+            set { this._moons = (List<Moon>)value; }
         }
 
         // Methods
@@ -76,6 +78,11 @@ namespace PlanetSystem.Models.Bodies
             {
                 throw new ArgumentException("Planetary system mismatch");
             }
+        }
+
+        public void AttachMoons(ICollection<Moon> moons)
+        {
+            moons.ToList().ForEach(m => this.AttachMoon(m));
         }
 
         public void DetachMoon(Moon moon)
