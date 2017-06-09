@@ -3,7 +3,7 @@ namespace PlanetSystem.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class RelationsUpdate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace PlanetSystem.Data.Migrations
                     {
                         ArtificialObjectId = c.Int(nullable: false, identity: true),
                         PlanetarySystemId = c.Int(),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Mass = c.Double(nullable: false),
                         Velocity_X = c.Double(nullable: false),
                         Velocity_Y = c.Double(nullable: false),
@@ -21,7 +21,6 @@ namespace PlanetSystem.Data.Migrations
                         Velocity_Length = c.Double(nullable: false),
                         Velocity_Theta = c.Double(nullable: false),
                         Velocity_Phi = c.Double(nullable: false),
-                        PointId = c.Int(nullable: false),
                         Center_X = c.Double(nullable: false),
                         Center_Y = c.Double(nullable: false),
                         Center_Z = c.Double(nullable: false),
@@ -36,7 +35,7 @@ namespace PlanetSystem.Data.Migrations
                 c => new
                     {
                         PlanetarySystemId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.PlanetarySystemId);
             
@@ -46,7 +45,7 @@ namespace PlanetSystem.Data.Migrations
                     {
                         AsteroidId = c.Int(nullable: false, identity: true),
                         PlanetarySystemId = c.Int(),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Mass = c.Double(nullable: false),
                         Velocity_X = c.Double(nullable: false),
                         Velocity_Y = c.Double(nullable: false),
@@ -54,7 +53,6 @@ namespace PlanetSystem.Data.Migrations
                         Velocity_Length = c.Double(nullable: false),
                         Velocity_Theta = c.Double(nullable: false),
                         Velocity_Phi = c.Double(nullable: false),
-                        PointId = c.Int(nullable: false),
                         Center_X = c.Double(nullable: false),
                         Center_Y = c.Double(nullable: false),
                         Center_Z = c.Double(nullable: false),
@@ -71,7 +69,7 @@ namespace PlanetSystem.Data.Migrations
                         MoonId = c.Int(nullable: false, identity: true),
                         PlanetarySystemId = c.Int(),
                         PlanetId = c.Int(),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Mass = c.Double(nullable: false),
                         Velocity_X = c.Double(nullable: false),
                         Velocity_Y = c.Double(nullable: false),
@@ -79,15 +77,14 @@ namespace PlanetSystem.Data.Migrations
                         Velocity_Length = c.Double(nullable: false),
                         Velocity_Theta = c.Double(nullable: false),
                         Velocity_Phi = c.Double(nullable: false),
-                        PointId = c.Int(nullable: false),
                         Center_X = c.Double(nullable: false),
                         Center_Y = c.Double(nullable: false),
                         Center_Z = c.Double(nullable: false),
                         Radius = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.MoonId)
-                .ForeignKey("dbo.PlanetarySystems", t => t.PlanetarySystemId)
                 .ForeignKey("dbo.Planets", t => t.PlanetId)
+                .ForeignKey("dbo.PlanetarySystems", t => t.PlanetarySystemId)
                 .Index(t => t.PlanetarySystemId)
                 .Index(t => t.PlanetId);
             
@@ -97,7 +94,7 @@ namespace PlanetSystem.Data.Migrations
                     {
                         PlanetId = c.Int(nullable: false, identity: true),
                         PlanetarySystemId = c.Int(),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Mass = c.Double(nullable: false),
                         Velocity_X = c.Double(nullable: false),
                         Velocity_Y = c.Double(nullable: false),
@@ -105,7 +102,6 @@ namespace PlanetSystem.Data.Migrations
                         Velocity_Length = c.Double(nullable: false),
                         Velocity_Theta = c.Double(nullable: false),
                         Velocity_Phi = c.Double(nullable: false),
-                        PointId = c.Int(nullable: false),
                         Center_X = c.Double(nullable: false),
                         Center_Y = c.Double(nullable: false),
                         Center_Z = c.Double(nullable: false),
@@ -123,7 +119,7 @@ namespace PlanetSystem.Data.Migrations
                 c => new
                     {
                         StarId = c.Int(nullable: false),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Mass = c.Double(nullable: false),
                         Velocity_X = c.Double(nullable: false),
                         Velocity_Y = c.Double(nullable: false),
@@ -131,7 +127,6 @@ namespace PlanetSystem.Data.Migrations
                         Velocity_Length = c.Double(nullable: false),
                         Velocity_Theta = c.Double(nullable: false),
                         Velocity_Phi = c.Double(nullable: false),
-                        PointId = c.Int(nullable: false),
                         Center_X = c.Double(nullable: false),
                         Center_Y = c.Double(nullable: false),
                         Center_Z = c.Double(nullable: false),
@@ -147,11 +142,11 @@ namespace PlanetSystem.Data.Migrations
         {
             DropForeignKey("dbo.Planets", "Star_StarId", "dbo.Stars");
             DropForeignKey("dbo.Stars", "StarId", "dbo.PlanetarySystems");
-            DropForeignKey("dbo.ArtificialObjects", "PlanetarySystemId", "dbo.PlanetarySystems");
+            DropForeignKey("dbo.Moons", "PlanetarySystemId", "dbo.PlanetarySystems");
             DropForeignKey("dbo.Planets", "PlanetarySystemId", "dbo.PlanetarySystems");
             DropForeignKey("dbo.Moons", "PlanetId", "dbo.Planets");
-            DropForeignKey("dbo.Moons", "PlanetarySystemId", "dbo.PlanetarySystems");
             DropForeignKey("dbo.Asteroids", "PlanetarySystemId", "dbo.PlanetarySystems");
+            DropForeignKey("dbo.ArtificialObjects", "PlanetarySystemId", "dbo.PlanetarySystems");
             DropIndex("dbo.Stars", new[] { "StarId" });
             DropIndex("dbo.Planets", new[] { "Star_StarId" });
             DropIndex("dbo.Planets", new[] { "PlanetarySystemId" });

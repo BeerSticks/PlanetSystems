@@ -44,6 +44,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,17 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
-    <Compile Include="Migrations\201706081029514_RelationsUpdate.cs" />
-    <Compile Include="Migrations\201706081029514_RelationsUpdate.Designer.cs">
-      <DependentUpon>201706081029514_RelationsUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706081324551_ClassAndRelationUpdate.cs" />
-    <Compile Include="Migrations\201706081324551_ClassAndRelationUpdate.Designer.cs">
-      <DependentUpon>201706081324551_ClassAndRelationUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706081924377_CollectionsAccessUpdate.cs" />
-    <Compile Include="Migrations\201706081924377_CollectionsAccessUpdate.Designer.cs">
-      <DependentUpon>201706081924377_CollectionsAccessUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\201706091647320_Initial.cs" />
+    <Compile Include="Migrations\201706091647320_Initial.Designer.cs">
+      <DependentUpon>201706091647320_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -81,14 +77,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706081029514_RelationsUpdate.resx">
-      <DependentUpon>201706081029514_RelationsUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706081324551_ClassAndRelationUpdate.resx">
-      <DependentUpon>201706081324551_ClassAndRelationUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706081924377_CollectionsAccessUpdate.resx">
-      <DependentUpon>201706081924377_CollectionsAccessUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706091647320_Initial.resx">
+      <DependentUpon>201706091647320_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
