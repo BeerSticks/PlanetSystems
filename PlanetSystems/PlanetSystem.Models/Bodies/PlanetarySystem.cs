@@ -89,7 +89,8 @@ namespace PlanetSystem.Models.Bodies
         // Methods
         public void SetStar(Star star)
         {
-            this._star = star;
+            //this._star = star;
+            this.Star = star;
             //this._bodies.Add(star);
             star.PlanetarySystem = this;
             //TODO: Detach the old star and maybe reposition the new one to 0,0,0
