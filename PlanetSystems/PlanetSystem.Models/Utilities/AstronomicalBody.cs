@@ -1,10 +1,11 @@
-﻿using System;
+﻿using PlanetSystem.Models.Utilities.Contracts;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace PlanetSystem.Models.Utilities
 {
-    public partial class AstronomicalBody : Sphere
+    public partial class AstronomicalBody : Sphere, IAstronomicalBody
     {
         // Fields
         private double _mass;
@@ -71,7 +72,7 @@ namespace PlanetSystem.Models.Utilities
             }
         }
 
-        public virtual double Density
+        public double Density
         {
             get
             {

@@ -95,35 +95,86 @@ namespace PlanetSystem.Models.Bodies
             //TODO: Detach the old star and maybe reposition the new one to 0,0,0
         }
 
-        public void AddPlanet(Planet planet)
+        public void AddPlanetByOrbitalRadius(Planet planet, double radius)
         {
             this._planets.Add(planet);
             //this._bodies.Add(planet);
             this._star.Planets.Add(planet);
             planet.PlanetarySystem = this;
+            Physics.EnterOrbitByGivenRadius(ref planet, this.Star, radius);
+        }
+
+        public void AddPlanetByOrbitalSpeed(Planet planet, double speed)
+        {
+            this._planets.Add(planet);
+            //this._bodies.Add(planet);
+            this._star.Planets.Add(planet);
+            planet.PlanetarySystem = this;
+            Physics.EnterOrbitByGivenSpeed(ref planet, this.Star, speed);
         }
 
         public void RemovePlanet(Planet planet)
         {
             this._planets.Remove(planet);
-            //this._bodies.Remove(planet);
             this._star.Planets.Remove(planet);
             planet.PlanetarySystem = null;
+            foreach (var moon in planet.Moons)
+            {
+                Moons.Remove(moon);
+            }
 
-            // TODO: clear planet's references to the system;
+            //planet.DetachMoons();
         }
 
-        public void AttachMoonToPlanet(Moon moon, Planet planet)
+        public void AddMoonByOrbitalRadius(Moon moon, Planet planet, double radius)
         {
-            // TODO: Validations
-            moon.DetachFromPlanet();
+            moon.Planet = planet;
+            this._moons.Add(moon);
+            planet.Moons.Add(moon);
             moon.PlanetarySystem = this;
-            this._planets[this._planets.IndexOf(planet)].AttachMoon(moon);
+            Physics.EnterOrbitByGivenRadius(ref moon, planet, radius);
+
+            //// TODO: Validations
+            ////moon.DetachFromPlanet();
+            //moon.PlanetarySystem = this;
+            //AddMoon(moon);
+            //this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalRadius(moon, radius);
+        }
+
+        public void AddMoonByOrbitalSpeed(Moon moon, Planet planet, double speed)
+        {
+            moon.Planet = planet;
+            this._moons.Add(moon);
+            planet.Moons.Add(moon);
+            moon.PlanetarySystem = this;
+            Physics.EnterOrbitByGivenRadius(ref moon, planet, speed);
+            //// TODO: Validations
+            ////moon.DetachFromPlanet();
+            //moon.PlanetarySystem = this;
+            //this.AddMoon(moon);
+            //this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalSpeed(moon, speed);
+        }
+
+        private void AddMoon(Moon moon)
+        {
+            int index = this._moons.IndexOf(moon);
+            if (index < 0)
+            {
+                this.Moons.Add(moon);
+            }
+        }
+
+        public void DetachMoonFromPlanet(Moon moon, Planet planet)
+        {
+            //planet.DetachMoon(moon);
         }
 
         public void DetachMoonsFromPlanet(Planet planet)
         {
-            // TODO: Implement
+            foreach (var moon in planet.Moons)
+            {
+                //planet.DetachMoon(moon);
+            }
         }
 
         public void AddAsteroid(Asteroid asteroid)

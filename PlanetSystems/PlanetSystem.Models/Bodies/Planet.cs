@@ -29,7 +29,7 @@ namespace PlanetSystem.Models.Bodies
         }
 
         // Required from Entity Framework
-        private Planet()
+        public Planet()
         {
             this._moons = new List<Moon>();
         }
@@ -46,57 +46,76 @@ namespace PlanetSystem.Models.Bodies
         [ForeignKey("StarId")]
         public virtual Star Star { get { return PlanetarySystem.Star; } }
 
-        public virtual ICollection<Moon> Moons
-        {
-            get { return this._moons; }
-            set { this._moons = (List<Moon>)value; }
-        }
+        public virtual ICollection<Moon> Moons { get; set; }
 
         // Methods
-        public void AttachMoon(Moon moon)
-        {
-            if (this.PlanetarySystem == moon.PlanetarySystem)
-            {
-                if (!moon.IsAttached)
-                {
-                    if (_moons.IndexOf(moon) < 0)
-                    {
-                        _moons.Add(moon);
-                        moon.AttachToPlanet(this);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Moon already attached to this planet.");
-                    }
-                }
-                else
-                {
-                    throw new ArgumentException("Moon is already attached to this or other planet.");
-                }
-            }
-            else
-            {
-                throw new ArgumentException("Planetary system mismatch");
-            }
-        }
+        //public void AttachMoonByOrbitalRadius(Moon moon, double radius)
+        //{
+        //    if (!this.Moons.Contains(moon))
+        //    {
+        //        bool nameFound = false;
+        //        foreach (var m in this.Moons)
+        //        {
+        //            if (moon.Name == m.Name)
+        //            {
+        //                nameFound = true;
+        //                break;
+        //            }
+        //        }
 
-        public void AttachMoons(ICollection<Moon> moons)
-        {
-            moons.ToList().ForEach(m => this.AttachMoon(m));
-        }
+        //        if (!nameFound)
+        //        {
+        //            this.Moons.Add(moon);
+        //            moon.AttachToPlanet(this);
+        //            Physics.EnterOrbitByGivenRadius(ref moon, this, radius);
+        //        }
+        //    }
+        //}
 
-        public void DetachMoon(Moon moon)
-        {
-            int index = _moons.IndexOf(moon);
-            if (index >= 0)
-            {
-                moon.DetachFromPlanet();
-                _moons.Remove(moon);
-            }
-        }
+        //public void AttachMoonByOrbitalSpeed(Moon moon, double speed)
+        //{
+        //    if (!this.Moons.Contains(moon))
+        //    {
+        //        bool nameFound = false;
+        //        foreach (var m in this.Moons)
+        //        {
+        //            if (moon.Name == m.Name)
+        //            {
+        //                nameFound = true;
+        //                break;
+        //            }
+        //        }
+
+        //        if (!nameFound)
+        //        {
+        //            this.Moons.Add(moon);
+        //            moon.AttachToPlanet(this);
+        //            Physics.EnterOrbitByGivenSpeed(ref moon, this, speed);
+        //        }
+        //    }
+        //}
+
+        //public void DetachMoon(Moon moon)
+        //{
+        //    int index = _moons.IndexOf(moon);
+        //    if (index >= 0)
+        //    {
+        //        moon.DetachFromPlanet();
+        //        _moons.Remove(moon);
+        //    }
+        //}
+
+        //public void DetachMoons()
+        //{
+        //    foreach (var moon in Moons)
+        //    {
+        //        DetachMoon(moon);
+        //    }
+        //}
 
         private void InitCollections()
         {
+            this.Moons = new List<Moon>();
             this._moons = new List<Moon>();
         }
     }

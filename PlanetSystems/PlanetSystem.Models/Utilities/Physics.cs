@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlanetSystem.Models.Utilities.Contracts;
+using System;
 using System.Collections.Generic;
 
 namespace PlanetSystem.Models.Utilities
@@ -122,33 +123,51 @@ namespace PlanetSystem.Models.Utilities
             }
         }
         
-        public static double GetRelativeTangentialSpeedForOrbit(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody)
+        public static double GetRelativeTangentialSpeedForOrbit(AstronomicalBody satellite, AstronomicalBody primary)
         {
-            double distance = GetDistanceBetweenPoints(orbitingBody.Center, orbitedBody.Center);
-            double requiredTangentialSpeedFixed = Math.Sqrt((GravitationalConstant * orbitedBody.Mass / distance) * GravitationalConstantDecimalFix);
+            double distance = GetDistanceBetweenPoints(satellite.Center, primary.Center);
+            double requiredTangentialSpeedFixed = Math.Sqrt((GravitationalConstant * primary.Mass / distance) * GravitationalConstantDecimalFix);
             return requiredTangentialSpeedFixed;
         }
 
-        public static double GetRadiusOfOrbit(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody, double relativeTangentialSpeed)
+        public static double GetRadiusOfOrbit(AstronomicalBody satellite, AstronomicalBody primary, double relativeTangentialSpeed)
         {
-            double requiredRadiusNotFixed = GravitationalConstant * orbitedBody.Mass / (relativeTangentialSpeed * relativeTangentialSpeed);
+            double requiredRadiusNotFixed = GravitationalConstant * primary.Mass / (relativeTangentialSpeed * relativeTangentialSpeed);
             double requiredRadiusFixed = requiredRadiusNotFixed * GravitationalConstantDecimalFix;
             return requiredRadiusFixed;
         }
 
-        public static void EnterOrbitByGivenRadius(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody, double radius, 
-            Vector orbitAxis, double startingPointOffset)
+        public static void EnterOrbitByGivenRadius<T>(ref T satellite, AstronomicalBody primary, double radius
+            /*Vector orbitAxis, double startingPointOffset*/) where T : AstronomicalBody, new()
         {
             // startingPointOffset == 0 => point with the highest x
             // orbit axis - right hand rule
-            // TODO: Implement 
+            // TODO: Implement orbital axis and startingPointOffset
+            
+            satellite.Center = new Point(
+                primary.Center.X + radius,
+                primary.Center.Y,
+                primary.Center.Z);
+            double relativeTangentialSpeed = GetRelativeTangentialSpeedForOrbit(satellite, primary);
+            Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, Math.PI / 2);
+            Vector satelliteAbsoluteVelocity = satelliteRelativeVelocity + primary.Velocity;
+            satellite.Velocity = satelliteAbsoluteVelocity;
         }
 
-        public static void EnterOrbitByGivenSpeed(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody, double speed, 
-            Vector orbitAxis, double StartingPointOffset)
+        public static void EnterOrbitByGivenSpeed<T>(ref T satellite, AstronomicalBody primary, double relativeTangentialSpeed
+            /*Vector orbitAxis, double StartingPointOffset*/) where T : AstronomicalBody, new()
         {
+            // startingPointOffset == 0 => point with the highest x
             // orbit axis - right hand rule
-            // TODO: Implement 
+            // TODO: Implement orbital axis and startingPointOffset
+            double radius = GetRadiusOfOrbit(satellite, primary, relativeTangentialSpeed);
+            satellite.Center = new Point(
+                primary.Center.X + radius,
+                primary.Center.Y,
+                primary.Center.Z);
+            Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, Math.PI / 2);
+            Vector satelliteAbsoluteVelocity = satelliteRelativeVelocity + primary.Velocity;
+            satellite.Velocity = satelliteAbsoluteVelocity;
         }
     }
 }

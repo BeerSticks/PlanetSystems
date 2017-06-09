@@ -48,6 +48,7 @@
     <Compile Include="Bodies\PlanetarySystem.cs" />
     <Compile Include="Bodies\Star.cs" />
     <Compile Include="Utilities\AstronomicalBody.cs" />
+    <Compile Include="Utilities\Contracts\IAstronomicalBody.cs" />
     <Compile Include="Utilities\Physics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Point.cs" />
