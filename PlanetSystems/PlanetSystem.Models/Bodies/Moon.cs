@@ -2,10 +2,11 @@
 using PlanetSystem.Models.Utilities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using PlanetSystem.Models.Utilities.Contracts;
 
 namespace PlanetSystem.Models.Bodies
 {
-    public partial class Moon : AstronomicalBody
+    public partial class Moon : AstronomicalBody, IAstronomicalBody
     {
         // Fields
         private Planet _planet;
@@ -27,7 +28,7 @@ namespace PlanetSystem.Models.Bodies
         }
 
         // Required from Entity Framework
-        private Moon() { }
+        public Moon() { }
 
         // Properties
         [Key]
@@ -54,23 +55,28 @@ namespace PlanetSystem.Models.Bodies
 
         public void AttachToPlanet(Planet planet)
         {
-            if (!IsAttached)
-            {
-                if (this.PlanetarySystem == planet.PlanetarySystem)
-                {
-                    this._planet = planet;
-                    this.PlanetarySystem = planet.PlanetarySystem;
-                    this.PlanetarySystemId = planet.PlanetarySystemId;
-                }
-                else
-                {
-                    throw new ArgumentException("Planetary system mismatch.");
-                }
-            }
-            else
-            {
-                throw new ArgumentException($"The moon {this.Name} is already attached to a planet.");
-            }
+            this.DetachFromPlanet();
+            this.Planet = planet;
+            this.PlanetarySystem = planet.PlanetarySystem;
+            //TODO: Implement enter orbit
+
+            //if (!IsAttached)
+            //{
+            //    if (this.PlanetarySystem == planet.PlanetarySystem)
+            //    {
+            //        this._planet = planet;
+            //        this.PlanetarySystem = planet.PlanetarySystem;
+            //        this.PlanetarySystemId = planet.PlanetarySystemId;
+            //    }
+            //    else
+            //    {
+            //        throw new ArgumentException("Planetary system mismatch.");
+            //    }
+            //}
+            //else
+            //{
+            //    throw new ArgumentException($"The moon {this.Name} is already attached to a planet.");
+            //}
         }
     }
 }

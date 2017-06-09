@@ -29,7 +29,7 @@ namespace PlanetSystem.Models.Bodies
         }
 
         // Required from Entity Framework
-        private Planet()
+        public Planet()
         {
             this._moons = new List<Moon>();
         }
@@ -53,36 +53,50 @@ namespace PlanetSystem.Models.Bodies
         }
 
         // Methods
-        public void AttachMoon(Moon moon)
+        public void AttachMoonByOrbitalRadius(Moon moon, double radius)
         {
-            if (this.PlanetarySystem == moon.PlanetarySystem)
+            if (!this.Moons.Contains(moon))
             {
-                if (!moon.IsAttached)
+                bool nameFound = false;
+                foreach (var m in this.Moons)
                 {
-                    if (_moons.IndexOf(moon) < 0)
+                    if (moon.Name == m.Name)
                     {
-                        _moons.Add(moon);
-                        moon.AttachToPlanet(this);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Moon already attached to this planet.");
+                        nameFound = true;
+                        break;
                     }
                 }
-                else
+
+                if (!nameFound)
                 {
-                    throw new ArgumentException("Moon is already attached to this or other planet.");
+                    this.Moons.Add(moon);
+                    moon.AttachToPlanet(this);
+                    Physics.EnterOrbitByGivenRadius(ref moon, this, radius);
                 }
-            }
-            else
-            {
-                throw new ArgumentException("Planetary system mismatch");
             }
         }
 
-        public void AttachMoons(ICollection<Moon> moons)
+        public void AttachMoonByOrbitalSpeed(Moon moon, double speed)
         {
-            moons.ToList().ForEach(m => this.AttachMoon(m));
+            if (!this.Moons.Contains(moon))
+            {
+                bool nameFound = false;
+                foreach (var m in this.Moons)
+                {
+                    if (moon.Name == m.Name)
+                    {
+                        nameFound = true;
+                        break;
+                    }
+                }
+
+                if (!nameFound)
+                {
+                    this.Moons.Add(moon);
+                    moon.AttachToPlanet(this);
+                    Physics.EnterOrbitByGivenSpeed(ref moon, this, speed);
+                }
+            }
         }
 
         public void DetachMoon(Moon moon)

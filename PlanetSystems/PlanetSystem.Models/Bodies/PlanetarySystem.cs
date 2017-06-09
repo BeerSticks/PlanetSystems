@@ -95,12 +95,22 @@ namespace PlanetSystem.Models.Bodies
             //TODO: Detach the old star and maybe reposition the new one to 0,0,0
         }
 
-        public void AddPlanet(Planet planet)
+        public void AddPlanetByOrbitalRadius(Planet planet, double radius)
         {
             this._planets.Add(planet);
             //this._bodies.Add(planet);
             this._star.Planets.Add(planet);
             planet.PlanetarySystem = this;
+            Physics.EnterOrbitByGivenRadius(ref planet, this.Star, radius);
+        }
+
+        public void AddPlanetByOrbitalSpeed(Planet planet, double speed)
+        {
+            this._planets.Add(planet);
+            //this._bodies.Add(planet);
+            this._star.Planets.Add(planet);
+            planet.PlanetarySystem = this;
+            Physics.EnterOrbitByGivenSpeed(ref planet, this.Star, speed);
         }
 
         public void RemovePlanet(Planet planet)
@@ -113,18 +123,32 @@ namespace PlanetSystem.Models.Bodies
             // TODO: clear planet's references to the system;
         }
 
-        public void AttachMoonToPlanet(Moon moon, Planet planet)
+        public void AttachMoonToPlanetByOrbitalRadius(Moon moon, Planet planet, double radius)
         {
             // TODO: Validations
             moon.DetachFromPlanet();
             moon.PlanetarySystem = this;
-            this._planets[this._planets.IndexOf(planet)].AttachMoon(moon);
+            this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalRadius(moon, radius);
+        }
+
+        public void AttachMoonToPlanetByOrbitalSpeed(Moon moon, Planet planet, double speed)
+        {
+            // TODO: Validations
+            moon.DetachFromPlanet();
+            moon.PlanetarySystem = this;
+            this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalSpeed(moon, speed);
+        }
+
+        public void DetachMoonFromPlanet(Moon moon, Planet planet)
+        {
+            // TODO: Implement
         }
 
         public void DetachMoonsFromPlanet(Planet planet)
         {
             // TODO: Implement
         }
+
 
         public void AddAsteroid(Asteroid asteroid)
         {

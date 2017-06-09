@@ -32,22 +32,24 @@ namespace PlanetSystem.Data
                     name: "Sun");
 
                 Planet earth = new Planet(
-                    center: new Point(150 * Math.Pow(10, 9), 0, 0),
+                    center: new Point(0, 0, 0),
                     mass: 5.972 * Math.Pow(10, 24),
                     radius: 5,
-                    velocity: new Vector(new Point(0, 29780, 0)),
+                    velocity: new Vector(new Point(0, 0, 0)),
                     name: "Earth");
                 Moon moon = new Moon(
-                    center: new Point(200 * Math.Pow(10, 9), 0, 0),
-                    mass: 1.972 * Math.Pow(10, 24),
+                    center: new Point(0, 0, 0),
+                    mass: 7.342 * Math.Pow(10, 22),
                     radius: 5,
-                    velocity: new Vector(new Point(0, 29780, 0)),
+                    velocity: new Vector(new Point(0, 0, 0)),
                     name: "Moon");
-                
+
 
                 solarSystem.SetStar(sun);
-                solarSystem.AddPlanet(earth);
-                solarSystem.AttachMoonToPlanet(moon, earth);
+                solarSystem.AddPlanetByOrbitalRadius(earth, 150 * Math.Pow(10, 9));
+                //solarSystem.AddPlanetByOrbitalSpeed(earth, 29780);
+                solarSystem.AttachMoonToPlanetByOrbitalRadius(moon, earth, 384000000);
+                solarSystem.AttachMoonToPlanetByOrbitalSpeed(moon, earth, 1022);
 
                 context.PlanetarySystems.Add(solarSystem);
                 context.Stars.Add(sun);
@@ -96,3 +98,24 @@ namespace PlanetSystem.Data
         }
     }
 }
+
+//PlanetarySystem solarSystem = new PlanetarySystem("Solar system");
+//Star sun = new Star(
+//    center: new Point(0, 0, 0),
+//    mass: 2 * Math.Pow(10, 30),
+//    radius: 5,
+//    velocity: new Vector(0, 0, 0),
+//    name: "Sun");
+
+//Planet earth = new Planet(
+//    center: new Point(150 * Math.Pow(10, 9), 0, 0),
+//    mass: 5.972 * Math.Pow(10, 24),
+//    radius: 5,
+//    velocity: new Vector(new Point(0, 29780, 0)),
+//    name: "Earth");
+//Moon moon = new Moon(
+//    center: new Point(384000000, 0, 0),
+//    mass: 7.342 * Math.Pow(10, 22),
+//    radius: 5,
+//    velocity: new Vector(new Point(0, 1022, 0)),
+//    name: "Moon");
