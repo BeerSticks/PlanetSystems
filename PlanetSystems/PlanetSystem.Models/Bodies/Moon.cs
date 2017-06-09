@@ -58,25 +58,6 @@ namespace PlanetSystem.Models.Bodies
             this.DetachFromPlanet();
             this.Planet = planet;
             this.PlanetarySystem = planet.PlanetarySystem;
-            //TODO: Implement enter orbit
-
-            //if (!IsAttached)
-            //{
-            //    if (this.PlanetarySystem == planet.PlanetarySystem)
-            //    {
-            //        this._planet = planet;
-            //        this.PlanetarySystem = planet.PlanetarySystem;
-            //        this.PlanetarySystemId = planet.PlanetarySystemId;
-            //    }
-            //    else
-            //    {
-            //        throw new ArgumentException("Planetary system mismatch.");
-            //    }
-            //}
-            //else
-            //{
-            //    throw new ArgumentException($"The moon {this.Name} is already attached to a planet.");
-            //}
         }
     }
 }

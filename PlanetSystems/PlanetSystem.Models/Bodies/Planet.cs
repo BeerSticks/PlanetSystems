@@ -109,6 +109,14 @@ namespace PlanetSystem.Models.Bodies
             }
         }
 
+        public void DetachMoons()
+        {
+            foreach (var moon in Moons)
+            {
+                DetachMoon(moon);
+            }
+        }
+
         private void InitCollections()
         {
             this._moons = new List<Moon>();
