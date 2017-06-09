@@ -123,25 +123,36 @@ namespace PlanetSystem.Models.Bodies
                 Moons.Remove(moon);
             }
 
-            planet.DetachMoons();
+            //planet.DetachMoons();
         }
 
-        public void AddMoonToPlanetByOrbitalRadius(Moon moon, Planet planet, double radius)
+        public void AddMoonByOrbitalRadius(Moon moon, Planet planet, double radius)
         {
-            // TODO: Validations
-            //moon.DetachFromPlanet();
+            moon.Planet = planet;
+            this._moons.Add(moon);
+            planet.Moons.Add(moon);
             moon.PlanetarySystem = this;
-            this.AddMoon(moon);
-            this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalRadius(moon, radius);
+            Physics.EnterOrbitByGivenRadius(ref moon, planet, radius);
+
+            //// TODO: Validations
+            ////moon.DetachFromPlanet();
+            //moon.PlanetarySystem = this;
+            //AddMoon(moon);
+            //this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalRadius(moon, radius);
         }
 
-        public void AddMoonToPlanetByOrbitalSpeed(Moon moon, Planet planet, double speed)
+        public void AddMoonByOrbitalSpeed(Moon moon, Planet planet, double speed)
         {
-            // TODO: Validations
-            //moon.DetachFromPlanet();
+            moon.Planet = planet;
+            this._moons.Add(moon);
+            planet.Moons.Add(moon);
             moon.PlanetarySystem = this;
-            this.AddMoon(moon);
-            this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalSpeed(moon, speed);
+            Physics.EnterOrbitByGivenRadius(ref moon, planet, speed);
+            //// TODO: Validations
+            ////moon.DetachFromPlanet();
+            //moon.PlanetarySystem = this;
+            //this.AddMoon(moon);
+            //this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalSpeed(moon, speed);
         }
 
         private void AddMoon(Moon moon)
@@ -155,14 +166,14 @@ namespace PlanetSystem.Models.Bodies
 
         public void DetachMoonFromPlanet(Moon moon, Planet planet)
         {
-            planet.DetachMoon(moon);
+            //planet.DetachMoon(moon);
         }
 
         public void DetachMoonsFromPlanet(Planet planet)
         {
             foreach (var moon in planet.Moons)
             {
-                planet.DetachMoon(moon);
+                //planet.DetachMoon(moon);
             }
         }
 

@@ -18,10 +18,12 @@ namespace PlanetSystem.Data
             //Database.SavePlanetarySystem(solarSystem);
             //var otherSystem = GetOtherSystem();
             //Database.SavePlanetarySystem(otherSystem);
+            //Database.DeletePlanetarySystem("Solar system");
+            //Database.DeletePlanetarySystem("Other system");
 
             //var solarSystem = Database.LoadPlanetarySystem("Solar system");
             //var otherSystem = Database.LoadPlanetarySystem("Other system");
-            
+
             Console.WriteLine("Done");
             Console.ReadLine();
         }
@@ -51,7 +53,7 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "Moon");
-            solarSystem.AddMoonToPlanetByOrbitalSpeed(moon, earth, 1022);
+            solarSystem.AddMoonByOrbitalSpeed(moon, earth, 1022);
 
             Asteroid someAsteroid = new Asteroid(
                 center: new Point(380 * Math.Pow(10, 13), 4560, 7867860),
@@ -97,7 +99,7 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "Some Aiur moon");
-            otherSystem.AddMoonToPlanetByOrbitalSpeed(someAuirMoon, aiur, 220);
+            otherSystem.AddMoonByOrbitalSpeed(someAuirMoon, aiur, 220);
 
             Planet notAiur = new Planet(
                 center: new Point(0, 0, 0),
@@ -107,13 +109,13 @@ namespace PlanetSystem.Data
                 name: "NotAiur");
             otherSystem.AddPlanetByOrbitalRadius(notAiur, 15 * Math.Pow(10, 9));
 
-            Moon floatingBrick = new Moon(
-                center: new Point(0, 0, 0),
-                mass: 2121.123 * Math.Pow(10, 16),
-                radius: 5,
-                velocity: new Vector(new Point(0, 0, 0)),
-                name: "FoatingBrick");
-            otherSystem.AddMoonToPlanetByOrbitalSpeed(floatingBrick, notAiur, 1520);
+            //Moon floatingBrick = new Moon(
+            //    center: new Point(0, 0, 0),
+            //    mass: 2121.123 * Math.Pow(10, 16),
+            //    radius: 5,
+            //    velocity: new Vector(new Point(0, 0, 0)),
+            //    name: "FoatingBrick");
+            //otherSystem.AddMoonByOrbitalSpeed(floatingBrick, notAiur, 1520);
 
             Moon aDamnSubmarine = new Moon(
                 center: new Point(0, 0, 0),
@@ -121,7 +123,7 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "a damn submarine");
-            otherSystem.AddMoonToPlanetByOrbitalSpeed(aDamnSubmarine, notAiur, 999);
+            otherSystem.AddMoonByOrbitalSpeed(aDamnSubmarine, notAiur, 999);
 
             Asteroid someOtherAsteroid = new Asteroid(
                 center: new Point(-250 * Math.Pow(10, 17), -874560, 565784),
@@ -170,7 +172,7 @@ namespace PlanetSystem.Data
                 solarSystem.SetStar(sun);
                 solarSystem.AddPlanetByOrbitalRadius(earth, 150 * Math.Pow(10, 9));
                 //solarSystem.AddPlanetByOrbitalSpeed(earth, 29780);
-                solarSystem.AddMoonToPlanetByOrbitalRadius(moon, earth, 384000000);
+                solarSystem.AddMoonByOrbitalRadius(moon, earth, 384000000);
                 //solarSystem.AttachMoonToPlanetByOrbitalSpeed(moon, earth, 1022);
 
                 context.PlanetarySystems.Add(solarSystem);

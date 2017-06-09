@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanetSystem.Data
 {
@@ -49,8 +47,7 @@ namespace PlanetSystem.Data
                 planetarySystem = context.PlanetarySystems
                     .Where(ps => ps.Name == name)
                     .Include(ps => ps.Star)
-                    .Include(ps => ps.Planets)
-                    .Include(ps => ps.Moons)
+                    .Include(ps => ps.Planets.Select(pl => pl.Moons))
                     .Include(ps => ps.Asteroids)
                     .Include(ps => ps.ArtificialObjects)
                     .FirstOrDefault();
@@ -88,6 +85,8 @@ namespace PlanetSystem.Data
                 using (var context = new SqlServerContext())
                 {
                     var planetarySystem = LoadPlanetarySystem(name);
+                    // bat shit crazy loading. the line bellow is just to trigger some loading to prevent errors
+                    context.PlanetarySystems.Attach(planetarySystem);
                     context.Asteroids.RemoveRange(planetarySystem.Asteroids);
                     context.ArtificialObjects.RemoveRange(planetarySystem.ArtificialObjects);
                     context.Moons.RemoveRange(planetarySystem.Moons);
@@ -104,6 +103,5 @@ namespace PlanetSystem.Data
                 throw;
             }
         }
-
     }
 }
