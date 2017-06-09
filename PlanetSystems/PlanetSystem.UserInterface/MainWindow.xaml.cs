@@ -31,7 +31,7 @@ namespace PlanetSystem.UserInterface
             }
         }
 
-        private void ImportDataFromExcel(string excelFilePath)
+        private static void ImportDataFromExcel(string excelFilePath)
         {
             using (var con = new OleDbConnection())
             {
@@ -56,9 +56,9 @@ namespace PlanetSystem.UserInterface
                         comm.Connection = con;
 
                         // Import into Sql Server Database.
-                        var sqlConnString = "Data Source=.\\sqlexpress;" +
-                            "Initial Catalog=Bogdan;" +
-                            "Integrated Security=True";
+                        const string sqlConnString = "Data Source=.\\sqlexpress;" +
+                                                     "Initial Catalog=PlanetSystems;" +
+                                                     "Integrated Security=true";
                         using (var sqlCon = new SqlConnection(sqlConnString))
                         {
                             sqlCon.Open();
