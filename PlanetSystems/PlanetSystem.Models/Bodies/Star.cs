@@ -11,6 +11,7 @@ namespace PlanetSystem.Models.Bodies
         public Star(Point center, double mass, double radius, Vector velocity, string name)
             : base(center, mass, radius, velocity, name)
         {
+            Planets = new List<Planet>();
         }
 
         public Star(Point center, double mass, double radius, string name)
@@ -31,6 +32,6 @@ namespace PlanetSystem.Models.Bodies
         public int StarId { get; set; }       
         public virtual PlanetarySystem PlanetarySystem { get; set; }
 
-        public virtual ICollection<Planet> Planets { get { return PlanetarySystem.Planets; } }        
+        public virtual ICollection<Planet> Planets { get; set; }        
     }
 }

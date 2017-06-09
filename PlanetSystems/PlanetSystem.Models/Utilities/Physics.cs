@@ -121,7 +121,7 @@ namespace PlanetSystem.Models.Utilities
                 bodies[i].ApplyForce(gravityOnBody, secondsOfSimulation);
             }
         }
-
+        
         public static double GetRelativeTangentialSpeedForOrbit(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody)
         {
             double distance = GetDistanceBetweenPoints(orbitingBody.Center, orbitedBody.Center);
@@ -134,6 +134,21 @@ namespace PlanetSystem.Models.Utilities
             double requiredRadiusNotFixed = GravitationalConstant * orbitedBody.Mass / (relativeTangentialSpeed * relativeTangentialSpeed);
             double requiredRadiusFixed = requiredRadiusNotFixed * GravitationalConstantDecimalFix;
             return requiredRadiusFixed;
+        }
+
+        public static void EnterOrbitByGivenRadius(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody, double radius, 
+            Vector orbitAxis, double startingPointOffset)
+        {
+            // startingPointOffset == 0 => point with the highest x
+            // orbit axis - right hand rule
+            // TODO: Implement 
+        }
+
+        public static void EnterOrbitByGivenSpeed(AstronomicalBody orbitingBody, AstronomicalBody orbitedBody, double speed, 
+            Vector orbitAxis, double StartingPointOffset)
+        {
+            // orbit axis - right hand rule
+            // TODO: Implement 
         }
     }
 }

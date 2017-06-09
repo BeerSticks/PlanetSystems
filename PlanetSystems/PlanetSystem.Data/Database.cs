@@ -27,6 +27,20 @@ namespace PlanetSystem.Data
             return planetarySystemNames;
         }
 
+        public static void Clear()
+        {
+            using (var context = new SqlServerContext())
+            {
+                context.Asteroids.RemoveRange(context.Asteroids);
+                context.ArtificialObjects.RemoveRange(context.ArtificialObjects);
+                context.Moons.RemoveRange(context.Moons);
+                context.Planets.RemoveRange(context.Planets);
+                context.Stars.RemoveRange(context.Stars);
+                context.PlanetarySystems.RemoveRange(context.PlanetarySystems);
+                context.SaveChanges();
+            }
+        }
+
         public static PlanetarySystem LoadPlanetarySystem(string name)
         {
             PlanetarySystem planetarySystem;
@@ -34,10 +48,15 @@ namespace PlanetSystem.Data
             {
                 planetarySystem = context.PlanetarySystems
                     .Where(ps => ps.Name == name)
-                    .Include(ps => ps.Planets.Select(pl => pl.Moons))
+                    .Include(ps => ps.Star)
+                    //.Include(ps => ps.Planets.Select(pl => pl.Moons))
+                    .Include(ps => ps.Planets)
+                    .Include(ps => ps.Moons)
                     .Include(ps => ps.Asteroids)
                     .Include(ps => ps.ArtificialObjects)
                     .FirstOrDefault();
+
+                Console.WriteLine("dummy");
 
                 //planetarySystem = context.PlanetarySystems
                 //    .Where(ps => ps.Name == name)

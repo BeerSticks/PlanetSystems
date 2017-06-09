@@ -12,6 +12,7 @@ namespace PlanetSystem.Data
     {
         static void Main(string[] args)
         {
+            //Database.Clear();
             //TESTPopulateDb();
             //Database.LoadPlanetarySystem("Solar system");
             Console.WriteLine("Done");

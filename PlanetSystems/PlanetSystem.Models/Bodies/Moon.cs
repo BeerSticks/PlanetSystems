@@ -9,13 +9,11 @@ namespace PlanetSystem.Models.Bodies
     {
         // Fields
         private Planet _planet;
-        private bool _isAttached;
 
         // Constructors
         public Moon(Point center, double mass, double radius, Vector velocity, string name)
             : base(center, mass, radius, velocity, name)
         {
-            _isAttached = false;
         }
 
         public Moon(Point center, double mass, double radius, string name)
@@ -41,15 +39,17 @@ namespace PlanetSystem.Models.Bodies
 
         public int? PlanetId { get; set; }
         [ForeignKey("PlanetId")]
-        public virtual Planet Planet { get { return this._planet; } }
+        public virtual Planet Planet {
+            get { return this._planet; }
+            set { this._planet = value; }
+        }
 
-        public bool IsAttached { get { return this._isAttached; } }
+        public bool IsAttached { get { return this.Planet == null ? false : true; } }
 
         // Methods
         public void DetachFromPlanet()
         {
             this._planet = null;
-            this._isAttached = false;
         }
 
         public void AttachToPlanet(Planet planet)
@@ -59,7 +59,6 @@ namespace PlanetSystem.Models.Bodies
                 if (this.PlanetarySystem == planet.PlanetarySystem)
                 {
                     this._planet = planet;
-                    this._isAttached = true;
                     this.PlanetarySystem = planet.PlanetarySystem;
                     this.PlanetarySystemId = planet.PlanetarySystemId;
                 }
