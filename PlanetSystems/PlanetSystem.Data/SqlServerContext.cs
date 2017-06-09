@@ -12,6 +12,11 @@ namespace PlanetSystem.Data
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Fluent API must be implemented
+        }
+
         //public virtual DbSet<Vector> Vectors { get; set; }
 
         //public virtual DbSet<Point> Points { get; set; }
