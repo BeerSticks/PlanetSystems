@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlanetSystem.Models.Bodies
 {
-    public partial class ArtificialObject : Utilities.AstronomicalBody
+    public partial class ArtificialObject : AstronomicalBody
     {
         // Constructors
         public ArtificialObject(Point center, double mass, double radius, Vector velocity, string name)

@@ -6,7 +6,7 @@ using PlanetSystem.Models.Utilities.Contracts;
 
 namespace PlanetSystem.Models.Bodies
 {
-    public partial class Moon : Utilities.AstronomicalBody, IAstronomicalBody
+    public partial class Moon : AstronomicalBody, IAstronomicalBody
     {
         // Fields
         private Planet _planet;

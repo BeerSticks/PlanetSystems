@@ -173,7 +173,7 @@ namespace PlanetSystem.Models.Bodies
         #endregion
 
         #region Other
-        public void AdvanceTime(List<Utilities.AstronomicalBody> bodiesInAccount, double seconds)
+        public void AdvanceTime(List<AstronomicalBody> bodiesInAccount, double seconds)
         {
             Physics.SimulateGravitationalInteraction(ref bodiesInAccount, seconds);
         }
@@ -186,9 +186,9 @@ namespace PlanetSystem.Models.Bodies
             this._artificialObjects = new List<ArtificialObject>();
         }
 
-        public List<Utilities.AstronomicalBody> GetAllBodies()
+        public List<AstronomicalBody> GetAllBodies()
         {
-            List<Utilities.AstronomicalBody> bodies = new List<Utilities.AstronomicalBody>();
+            List<AstronomicalBody> bodies = new List<AstronomicalBody>();
             bodies.Add(this.Star);
             foreach (var planet in this.Planets)
             {

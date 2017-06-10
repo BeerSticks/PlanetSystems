@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PlanetSystem.Models.Bodies
 {
-    public partial class Planet : Utilities.AstronomicalBody
+    public partial class Planet : AstronomicalBody
     {
         // Constructors
         public Planet(Point center, double mass, double radius, Vector velocity, string name)
