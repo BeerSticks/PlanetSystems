@@ -43,14 +43,13 @@ namespace PlanetSystem.Models.Utilities
             }
             set
             {
-                if (value.Length > 0)
+                if (value.Length > 0 && value.Length <= 40)
                 {
                     this._name = value;
-
                 }
                 else
                 {
-                    throw new ArgumentException("Name can not be an empty string");
+                    throw new ArgumentException("Name length must be in the range of 1 to 40 character");
                 }
             }
         }

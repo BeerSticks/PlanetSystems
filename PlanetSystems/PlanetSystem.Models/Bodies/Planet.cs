@@ -9,8 +9,6 @@ namespace PlanetSystem.Models.Bodies
 {
     public partial class Planet : AstronomicalBody
     {
-        // Fields 
-        private List<Moon> _moons;
         // Constructors
         public Planet(Point center, double mass, double radius, Vector velocity, string name)
             : base(center, mass, radius, velocity, name)
@@ -31,7 +29,7 @@ namespace PlanetSystem.Models.Bodies
         // Required from Entity Framework
         public Planet()
         {
-            this._moons = new List<Moon>();
+            InitCollections();
         }
 
         // Properties
@@ -48,75 +46,49 @@ namespace PlanetSystem.Models.Bodies
 
         public virtual ICollection<Moon> Moons { get; set; }
 
-        // Methods
-        //public void AttachMoonByOrbitalRadius(Moon moon, double radius)
-        //{
-        //    if (!this.Moons.Contains(moon))
-        //    {
-        //        bool nameFound = false;
-        //        foreach (var m in this.Moons)
-        //        {
-        //            if (moon.Name == m.Name)
-        //            {
-        //                nameFound = true;
-        //                break;
-        //            }
-        //        }
+        public void AddMoonByOrbitalRadius(Moon moon, double radius)
+        {
+            RemoveMoon(moon.Name);
+            this.Moons.Add(moon);
+            moon.AttachToPlanet(this);
+            Physics.EnterOrbitByGivenRadius(ref moon, this, radius);
+        }
+        public void AddMoonByOrbitalSpeed(Moon moon, double speed)
+        {
+            RemoveMoon(moon.Name);
+            this.Moons.Add(moon);
+            moon.AttachToPlanet(this);
+            Physics.EnterOrbitByGivenRadius(ref moon, this, speed);
+        }
 
-        //        if (!nameFound)
-        //        {
-        //            this.Moons.Add(moon);
-        //            moon.AttachToPlanet(this);
-        //            Physics.EnterOrbitByGivenRadius(ref moon, this, radius);
-        //        }
-        //    }
-        //}
+        public void RemoveMoon(string name)
+        {
+            var moonQuery = from m in this.Moons
+                            where m.Name == name
+                            select m;
+            var moon = moonQuery.FirstOrDefault();
+            if (moon != null)
+            {
+                this.Moons.Remove(moon);
+                moon.DetachFromPlanet();
+            }
+        }
 
-        //public void AttachMoonByOrbitalSpeed(Moon moon, double speed)
-        //{
-        //    if (!this.Moons.Contains(moon))
-        //    {
-        //        bool nameFound = false;
-        //        foreach (var m in this.Moons)
-        //        {
-        //            if (moon.Name == m.Name)
-        //            {
-        //                nameFound = true;
-        //                break;
-        //            }
-        //        }
+        public void RemoveAllMoons()
+        {
+            this.Moons.ToList().ForEach(m => RemoveMoon(m.Name));
+        }
 
-        //        if (!nameFound)
-        //        {
-        //            this.Moons.Add(moon);
-        //            moon.AttachToPlanet(this);
-        //            Physics.EnterOrbitByGivenSpeed(ref moon, this, speed);
-        //        }
-        //    }
-        //}
-
-        //public void DetachMoon(Moon moon)
-        //{
-        //    int index = _moons.IndexOf(moon);
-        //    if (index >= 0)
-        //    {
-        //        moon.DetachFromPlanet();
-        //        _moons.Remove(moon);
-        //    }
-        //}
-
-        //public void DetachMoons()
-        //{
-        //    foreach (var moon in Moons)
-        //    {
-        //        DetachMoon(moon);
-        //    }
-        //}
-
+        public void Attach(PlanetarySystem planetarySystem)
+        {
+            RemoveAllMoons();            
+            this.PlanetarySystem = planetarySystem;
+            this.Moons = new List<Moon>();
+        }
+        
         private void InitCollections()
         {
             this.Moons = new List<Moon>();
-            this._moons = new List<Moon>();
         }
     }
 }

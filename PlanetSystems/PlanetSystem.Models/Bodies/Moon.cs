@@ -45,16 +45,22 @@ namespace PlanetSystem.Models.Bodies
         public bool IsAttached { get { return this.Planet == null ? false : true; } }
 
         // Methods
-        //public void DetachFromPlanet()
-        //{
-        //    this._planet = null;
-        //}
+        public void DetachFromPlanet()
+        {
+            this._planet = null;
+        }
+        
+        public void AttachToPlanet(Planet planet)
+        {
+            this.DetachFromPlanet();
+            this.Planet = planet;
+            this.PlanetarySystem = planet.PlanetarySystem;
+        }
 
-        //public void AttachToPlanet(Planet planet)
-        //{
-        //    this.DetachFromPlanet();
-        //    this.Planet = planet;
-        //    this.PlanetarySystem = planet.PlanetarySystem;
-        //}
+        public void DetachFromPlanetarySystem()
+        {
+            DetachFromPlanet();
+            this.PlanetarySystem = null;
+        }
     }
 }
