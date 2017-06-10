@@ -11,7 +11,6 @@ namespace PlanetSystem.Models.Bodies
         public Star(Point center, double mass, double radius, Vector velocity, string name)
             : base(center, mass, radius, velocity, name)
         {
-            Planets = new List<Planet>();
         }
 
         public Star(Point center, double mass, double radius, string name)
@@ -29,9 +28,33 @@ namespace PlanetSystem.Models.Bodies
 
         // Properties
         [Key, ForeignKey("PlanetarySystem")]
-        public int StarId { get; set; }       
+        public int StarId { get; set; }
         public virtual PlanetarySystem PlanetarySystem { get; set; }
 
-        public virtual ICollection<Planet> Planets { get; set; }        
+        public virtual ICollection<Planet> Planets
+        {
+            get
+            {
+                if (PlanetarySystem != null)
+                {
+                    return PlanetarySystem.Planets;
+                }
+                else
+                {
+                    return new List<Planet>();
+                }
+            }
+        }
+
+        // Methods 
+        public void Attach(PlanetarySystem planetarySystem)
+        {
+            this.PlanetarySystem = planetarySystem;
+        }
+
+        public void Detach()
+        {
+            this.PlanetarySystem = null;
+        }
     }
 }

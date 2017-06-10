@@ -28,6 +28,14 @@ namespace PlanetSystem.Models.Utilities
             BuildFromCartesianInput(endPoint);
         }
 
+        public Vector(Point startPoint, Point endPoint)
+            : this(new Point(
+                    endPoint.X - startPoint.X,
+                    endPoint.Y - startPoint.Y,
+                    endPoint.Z - startPoint.Z))
+        {
+        }
+
         public Vector(double length, double theta, double phi)
         {
             BuildFromSphericalInput(length, theta, phi);

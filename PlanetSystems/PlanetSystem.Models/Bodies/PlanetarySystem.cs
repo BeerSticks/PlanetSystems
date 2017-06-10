@@ -13,7 +13,6 @@ namespace PlanetSystem.Models.Bodies
         private string _name;
         private Star _star;
         private List<Planet> _planets;
-        private List<Moon> _moons;
         private List<Asteroid> _asteroids;
         private List<ArtificialObject> _artificialObjects;
         //private List<AstronomicalBody> _bodies;
@@ -32,8 +31,10 @@ namespace PlanetSystem.Models.Bodies
         }
 
         // Properties
+        #region Properties
         [Key]
         public int PlanetarySystemId { get; set; }
+
         [Required]
         public string Name
         {
@@ -43,14 +44,13 @@ namespace PlanetSystem.Models.Bodies
             }
             set
             {
-                if (value.Length > 0)
+                if (value.Length > 0 && value.Length <= 40)
                 {
                     this._name = value;
-
                 }
                 else
                 {
-                    throw new ArgumentException("Name can not be an empty string");
+                    throw new ArgumentException("Name length must be in the range of 1 to 40 character");
                 }
             }
         }
@@ -67,8 +67,7 @@ namespace PlanetSystem.Models.Bodies
         }
         public virtual ICollection<Moon> Moons
         {
-            get { return this._moons; }
-            set { this._moons = (List<Moon>)value; }
+            get { return GetMoons(); }
         }
 
         public virtual ICollection<Asteroid> Asteroids
@@ -81,131 +80,99 @@ namespace PlanetSystem.Models.Bodies
             get { return this._artificialObjects; }
             set { this._artificialObjects = (List<ArtificialObject>)value; }
         }
-
-        // Dont put Bodies List in Database.
-        //[NotMapped]
-        //public ICollection<AstronomicalBody> Bodies { get { return _bodies.AsReadOnly(); } }
-
+        #endregion
+            
         // Methods
+        #region Stars
         public void SetStar(Star star)
         {
-            //this._star = star;
+            if (this.Star != null)
+            {
+                this.Star.Detach();
+            }
+            star.Attach(this);
             this.Star = star;
-            //this._bodies.Add(star);
-            star.PlanetarySystem = this;
-            //TODO: Detach the old star and maybe reposition the new one to 0,0,0
         }
+        #endregion
 
+        #region Planets
         public void AddPlanetByOrbitalRadius(Planet planet, double radius)
         {
-            this._planets.Add(planet);
-            //this._bodies.Add(planet);
-            this._star.Planets.Add(planet);
-            planet.PlanetarySystem = this;
+            this.Planets.Add(planet);
+            planet.Attach(this);
             Physics.EnterOrbitByGivenRadius(ref planet, this.Star, radius);
         }
 
         public void AddPlanetByOrbitalSpeed(Planet planet, double speed)
         {
-            this._planets.Add(planet);
-            //this._bodies.Add(planet);
-            this._star.Planets.Add(planet);
-            planet.PlanetarySystem = this;
+            this.Planets.Add(planet);
+            planet.Attach(this);
             Physics.EnterOrbitByGivenSpeed(ref planet, this.Star, speed);
         }
 
-        public void RemovePlanet(Planet planet)
+        public void RemovePlanet(string name)
         {
-            this._planets.Remove(planet);
-            this._star.Planets.Remove(planet);
-            planet.PlanetarySystem = null;
-            foreach (var moon in planet.Moons)
+            var planetQuery = from p in this.Planets
+                              where p.Name == name
+                              select p;
+            var planet = planetQuery.FirstOrDefault();
+            if (planet != null)
             {
-                Moons.Remove(moon);
+                planet.RemoveAllMoons();
+            }
+        }
+        #endregion
+
+        #region Moons
+        private List<Moon> GetMoons()
+        {
+            List<Moon> moons = new List<Moon>();
+            foreach (var p in this.Planets)
+            {
+                moons.AddRange(p.Moons);
             }
 
-            //planet.DetachMoons();
+            return moons;
         }
 
         public void AddMoonByOrbitalRadius(Moon moon, Planet planet, double radius)
         {
-            moon.Planet = planet;
-            this._moons.Add(moon);
-            planet.Moons.Add(moon);
-            moon.PlanetarySystem = this;
-            Physics.EnterOrbitByGivenRadius(ref moon, planet, radius);
-
-            //// TODO: Validations
-            ////moon.DetachFromPlanet();
-            //moon.PlanetarySystem = this;
-            //AddMoon(moon);
-            //this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalRadius(moon, radius);
+            planet.AddMoonByOrbitalRadius(moon, radius);
         }
 
         public void AddMoonByOrbitalSpeed(Moon moon, Planet planet, double speed)
         {
-            moon.Planet = planet;
-            this._moons.Add(moon);
-            planet.Moons.Add(moon);
-            moon.PlanetarySystem = this;
-            Physics.EnterOrbitByGivenRadius(ref moon, planet, speed);
-            //// TODO: Validations
-            ////moon.DetachFromPlanet();
-            //moon.PlanetarySystem = this;
-            //this.AddMoon(moon);
-            //this._planets[this._planets.IndexOf(planet)].AttachMoonByOrbitalSpeed(moon, speed);
+            planet.AddMoonByOrbitalSpeed(moon, speed);
         }
+        #endregion
 
-        private void AddMoon(Moon moon)
-        {
-            int index = this._moons.IndexOf(moon);
-            if (index < 0)
-            {
-                this.Moons.Add(moon);
-            }
-        }
-
-        public void DetachMoonFromPlanet(Moon moon, Planet planet)
-        {
-            //planet.DetachMoon(moon);
-        }
-
-        public void DetachMoonsFromPlanet(Planet planet)
-        {
-            foreach (var moon in planet.Moons)
-            {
-                //planet.DetachMoon(moon);
-            }
-        }
-
+        #region Asteroids and ArtificialObjects
         public void AddAsteroid(Asteroid asteroid)
         {
             this._asteroids.Add(asteroid);
-            //this._bodies.Add(asteroid);
             asteroid.PlanetarySystem = this;
         }
 
         public void RemoveAsteroid(Asteroid asteroid)
         {
             this._asteroids.Remove(asteroid);
-            //this._bodies.Remove(asteroid);
             asteroid.PlanetarySystem = null;
         }
 
         public void AddArtificialObject(ArtificialObject artificialObject)
         {
             this._artificialObjects.Add(artificialObject);
-            //this._bodies.Add(artificialObject);
             artificialObject.PlanetarySystem = this;
         }
 
         public void RemoveArtificialObject(ArtificialObject artificialObject)
         {
             this._artificialObjects.Remove(artificialObject);
-            //this._bodies.Remove(artificialObject);
             artificialObject.PlanetarySystem = null;
         }
+        #endregion
 
+        #region Other
         public void AdvanceTime(List<AstronomicalBody> bodiesInAccount, double seconds)
         {
             Physics.SimulateGravitationalInteraction(ref bodiesInAccount, seconds);
@@ -214,10 +181,9 @@ namespace PlanetSystem.Models.Bodies
         private void InitCollections()
         {
             this._planets = new List<Planet>();
-            this._moons = new List<Moon>();
+            //this._moons = new List<Moon>();
             this._asteroids = new List<Asteroid>();
             this._artificialObjects = new List<ArtificialObject>();
-            //this._bodies = new List<AstronomicalBody>();
         }
 
         public List<AstronomicalBody> GetAllBodies()
@@ -245,5 +211,7 @@ namespace PlanetSystem.Models.Bodies
             }
             return bodies;
         }
+        #endregion
+
     }
 }
