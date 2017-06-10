@@ -11,7 +11,7 @@ namespace PlanetSystem.Models.Bodies
     {
         // Fields
         private string _name;
-        private AstronomicalBody _star;
+        private Star _star;
         private List<Planet> _planets;
         private List<Asteroid> _asteroids;
         private List<ArtificialObject> _artificialObjects;
@@ -55,7 +55,7 @@ namespace PlanetSystem.Models.Bodies
             }
         }
 
-        public virtual AstronomicalBody Star
+        public virtual Star Star
         {
             get { return this._star; }
             set { this._star = value; }
@@ -84,7 +84,7 @@ namespace PlanetSystem.Models.Bodies
             
         // Methods
         #region Stars
-        public void SetStar(AstronomicalBody star)
+        public void SetStar(Star star)
         {
             if (this.Star != null)
             {

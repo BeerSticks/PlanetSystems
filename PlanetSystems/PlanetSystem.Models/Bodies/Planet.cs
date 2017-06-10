@@ -42,7 +42,7 @@ namespace PlanetSystem.Models.Bodies
 
         public int? StarId;
         [ForeignKey("StarId")]
-        public virtual AstronomicalBody Star { get { return PlanetarySystem.Star; } }
+        public virtual Star Star { get { return PlanetarySystem.Star; } }
 
         public virtual ICollection<Moon> Moons { get; set; }
 

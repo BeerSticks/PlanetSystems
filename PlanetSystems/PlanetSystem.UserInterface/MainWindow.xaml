@@ -4,19 +4,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="862.712"
+        Title="MainWindow" Height="706.508" Width="1015.22"
         Background="Azure" ResizeMode="NoResize">
 
-    <Grid HorizontalAlignment="Left" Height="408" VerticalAlignment="Top" Width="789" Margin="36,28,0,0">
+    <Grid HorizontalAlignment="Left" Height="643" VerticalAlignment="Top" Width="993" Margin="10,10,0,0">
         <Button x:Name="btnLoadFromFile" Width="130" 
                 Height="30" 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
-                Margin="20,20,0,0" Click="btnLoadFromFile_Click" Content="Load from Excel"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="444" Margin="319,20,0,0" CanUserResizeColumns="False" CanUserReorderColumns="False"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="27" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" Margin="20,155,0,0" FontSize="14" FontWeight="Bold"/>
-        <Label x:Name="label" Content="Enter name of planetary system to update:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,124,0,0" Width="254"/>
-        <Button x:Name="btnUpdate" Content="UPDATE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="20,213,0,0" Height="51" Click="btnUpdate_Click"/>
-        <Button x:Name="buttonExit" Content="Exit Program" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="627,358,0,0" Height="40" Click="buttonExit_Click"/>
+                Margin="69,44,0,0" Click="btnLoadFromFile_Click" Content="Load From File"/>
+        <DataGrid x:Name="dataGridFromFile" HorizontalAlignment="Left" Height="227" VerticalAlignment="Top" Width="663" Margin="291,56,0,0" CanUserResizeColumns="False" CanUserReorderColumns="False"/>
+        <Button x:Name="btnUpdate" Content="UPDATE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="69,247,0,0" Height="36" Click="btnUpdate_Click"/>
+        <Button x:Name="buttonExit" Content="Exit Program" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="818,587,0,0" Height="40" Click="buttonExit_Click"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Margin="20,211,0,0" Height="22"/>
+        <Label x:Name="label1" Content="Choose planetary system to update:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,177,0,0" Width="234" FontSize="14"/>
+        <DataGrid x:Name="dataGridStars" HorizontalAlignment="Left" Height="227" VerticalAlignment="Top" Width="663" Margin="291,336,0,0"/>
+        <Label x:Name="label" Content="Objects loaded from file" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,22,0,0" Width="186" FontSize="14"/>
+        <Label x:Name="label2" Content="Stars from Database" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,302,0,0" Width="133" FontSize="14"/>
     </Grid>
 </Window>

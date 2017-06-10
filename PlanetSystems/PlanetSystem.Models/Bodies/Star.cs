@@ -2,30 +2,29 @@
 using PlanetSystem.Models.Utilities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Serialization;
 
 namespace PlanetSystem.Models.Bodies
 {
-    public class AstronomicalBody : Utilities.AstronomicalBody
+    public class Star : AstronomicalBody
     {
         // Constructors
-        public AstronomicalBody(Point center, double mass, double radius, Vector velocity, string name)
+        public Star(Point center, double mass, double radius, Vector velocity, string name)
             : base(center, mass, radius, velocity, name)
         {
         }
 
-        public AstronomicalBody(Point center, double mass, double radius, string name)
+        public Star(Point center, double mass, double radius, string name)
             : this(center, mass, radius, new Vector(new Point(0, 0, 0)), name)
         {
         }
 
-        public AstronomicalBody(AstronomicalBody star)
+        public Star(Star star)
             : this(star.Center, star.Mass, star.Radius, star.Velocity, star.Name)
         {
         }
 
         // Required from Entity Framework
-        private AstronomicalBody() { }
+        private Star() { }
 
         // Properties
         [Key, ForeignKey("PlanetarySystem")]

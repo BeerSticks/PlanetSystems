@@ -6,8 +6,6 @@ using System.IO;
 using Excel;
 using PlanetSystem.Data;
 using System.Linq;
-using System.Xml.Serialization;
-using System.Collections.Generic;
 
 namespace PlanetSystem.UserInterface
 {
@@ -48,21 +46,18 @@ namespace PlanetSystem.UserInterface
                     default:
                         break;
                 }
+
+                using (var ctx = new SqlServerContext())
+                {
+                    comboBox.ItemsSource = ctx.PlanetarySystems.Select(ps => ps.Name).ToList();
+                    comboBox.SelectedIndex = 0;
+                    dataGridStars.ItemsSource = ctx.Stars.ToList();
+                }
             }
         }
 
         private void ImportDataFromXml(string xmlFilePath)
         {
-            //List<Star> stars = new List<Star>();
-            //XmlSerializer serializer = new XmlSerializer(typeof(List<Star>), new XmlRootAttribute("Stars"));
-
-            //using (FileStream stream = File.Open(xmlFilePath, FileMode.Open, FileAccess.Read))
-            //{
-            //    stars = serializer.Deserialize(stream) as List<Star>;
-            //}
-
-            //dataGrid.ItemsSource = stars;
-
             DataSet ds = new DataSet();
 
             using (FileStream stream = File.Open(xmlFilePath, FileMode.Open))
@@ -70,14 +65,13 @@ namespace PlanetSystem.UserInterface
                 try
                 {
                     ds.ReadXml(stream);
-                    dataGrid.ItemsSource = ds.Tables[0].AsDataView();
+                    dataGridFromFile.ItemsSource = ds.Tables[0].AsDataView();
                 }
                 catch (Exception ex)
                 {
                     System.Windows.MessageBox.Show(ex.Message);
                 }
             }
-
         }
 
         private void ImportDataFromJson(string filePath)
@@ -105,7 +99,7 @@ namespace PlanetSystem.UserInterface
                 DataSet result = excelReader.AsDataSet();
                 DataTable sheet1 = result.Tables[0];
 
-                dataGrid.ItemsSource = sheet1.AsDataView();
+                dataGridFromFile.ItemsSource = sheet1.AsDataView();
 
                 excelReader.Close();
             }
@@ -113,28 +107,28 @@ namespace PlanetSystem.UserInterface
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGrid.SelectedItem == null)
+            if (dataGridFromFile.SelectedItem == null)
             {
                 System.Windows.MessageBox.Show("No row selected!");
                 return;
             }
 
-            if (textBox.Text == null)
+            if (comboBox.Text == null)
             {
                 System.Windows.MessageBox.Show("Planetary system name not specified!");
                 return;
             }
 
-            DataRowView row = (DataRowView)dataGrid.SelectedItem;
+            DataRowView row = (DataRowView)dataGridFromFile.SelectedItem;
 
             using (var ctx = new SqlServerContext())
             {
-                var solarSystem = ctx.PlanetarySystems.FirstOrDefault(ps => ps.Name == textBox.Text);
+                var solarSystem = ctx.PlanetarySystems.FirstOrDefault(ps => ps.Name == comboBox.Text);
 
                 if (solarSystem == null)
                 {
-                    System.Windows.MessageBox.Show(string.Format("Planetary system with name '{0}' not found!", textBox.Text));
-                    textBox.Text = null;
+                    System.Windows.MessageBox.Show(string.Format("Planetary system with name '{0}' not found!", comboBox.Text));
+                    comboBox.Text = null;
                     return;
                 }
 
@@ -145,6 +139,13 @@ namespace PlanetSystem.UserInterface
                 starToUpdate.Radius = Convert.ToDouble(row[2]);
 
                 ctx.SaveChanges();
+            }
+
+            // Update ItemsSource
+            using (var ctx = new SqlServerContext())
+            {
+                dataGridStars.ItemsSource = null;
+                dataGridStars.ItemsSource = ctx.Stars.ToList();
             }
 
             System.Windows.MessageBox.Show("Update finished!");
