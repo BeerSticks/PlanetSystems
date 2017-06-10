@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Stars>
+  <Star>
+    <Name>Canis Majoris</Name>
+    <Mass>59670000000000000000000000000000</Mass>
+    <Radius>988300000</Radius>
+  </Star>
+  <Star>
+    <Name>Mu Cephei</Name>
+    <Mass>38190000000000000000000000000000</Mass>
+    <Radius>720400000</Radius>
+  </Star>
+  <Star>
+    <Name>Sun</Name>
+    <Mass>1989000000000000000000000000000</Mass>
+    <Radius>695700</Radius>
+  </Star>
+</Stars>

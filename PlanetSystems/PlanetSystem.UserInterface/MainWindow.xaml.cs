@@ -6,6 +6,8 @@ using System.IO;
 using Excel;
 using PlanetSystem.Data;
 using System.Linq;
+using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace PlanetSystem.UserInterface
 {
@@ -22,38 +24,91 @@ namespace PlanetSystem.UserInterface
         private void btnLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Excel files (*.xls, *xlsx)|*.xls;*.xlsx|" +
+            openFileDialog.Filter = "XML files (*.xml)|*.xml|" +
+                                    "Excel files (*.xls, *xlsx)|*.xls;*.xlsx|" +
                                     "JSON files (*.json)|*.json|" +
-                                    "XML files (*.xml)|*.xml|" +
                                     "All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var filePath = openFileDialog.FileName;
-                ImportDataFromExcel(filePath);
+
+                String fileExtension = Path.GetExtension(filePath);
+                switch (fileExtension)
+                {
+                    case ".xlsx":
+                    case ".xls":
+                        ImportDataFromExcel(filePath);
+                        break;
+                    case ".json":
+                        ImportDataFromJson(filePath);
+                        break;
+                    case ".xml":
+                        ImportDataFromXml(filePath);
+                        break;
+                    default:
+                        break;
+                }
             }
+        }
+
+        private void ImportDataFromXml(string xmlFilePath)
+        {
+            //List<Star> stars = new List<Star>();
+            //XmlSerializer serializer = new XmlSerializer(typeof(List<Star>), new XmlRootAttribute("Stars"));
+
+            //using (FileStream stream = File.Open(xmlFilePath, FileMode.Open, FileAccess.Read))
+            //{
+            //    stars = serializer.Deserialize(stream) as List<Star>;
+            //}
+
+            //dataGrid.ItemsSource = stars;
+
+            DataSet ds = new DataSet();
+
+            using (FileStream stream = File.Open(xmlFilePath, FileMode.Open))
+            {
+                try
+                {
+                    ds.ReadXml(stream);
+                    dataGrid.ItemsSource = ds.Tables[0].AsDataView();
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message);
+                }
+            }
+
+        }
+
+        private void ImportDataFromJson(string filePath)
+        {
+            throw new NotImplementedException();
         }
 
         private void ImportDataFromExcel(string excelFilePath)
         {
-            FileStream stream = File.Open(excelFilePath, FileMode.Open, FileAccess.Read);
-            String fileExtension = Path.GetExtension(excelFilePath);
-            IExcelDataReader excelReader = null;
-
-            if (fileExtension == ".xlsx")
+            using (FileStream stream = File.Open(excelFilePath, FileMode.Open, FileAccess.Read))
             {
-                excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                String fileExtension = Path.GetExtension(excelFilePath);
+                IExcelDataReader excelReader = null;
+
+                if (fileExtension == ".xlsx")
+                {
+                    excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                }
+                else if (fileExtension == ".xls")
+                {
+                    excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
+                }
+
+                excelReader.IsFirstRowAsColumnNames = true;
+                DataSet result = excelReader.AsDataSet();
+                DataTable sheet1 = result.Tables[0];
+
+                dataGrid.ItemsSource = sheet1.AsDataView();
+
+                excelReader.Close();
             }
-            else if (fileExtension == ".xls")
-            {
-                excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
-            }
-
-            DataSet result = excelReader.AsDataSet();
-            DataTable sheet1 = result.Tables[0];
-
-            dataGrid.ItemsSource = sheet1.AsDataView();
-
-            excelReader.Close();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)

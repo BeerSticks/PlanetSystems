@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PlanetSystem.Models.Bodies
 {
-    public partial class Asteroid : AstronomicalBody
+    public partial class Asteroid : Utilities.AstronomicalBody
     {
         // Constructors
         public Asteroid(Point center, double mass, double radius, Vector velocity, string name)

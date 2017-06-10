@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PlanetSystem.Models.Bodies
 {
-    public partial class Planet : AstronomicalBody
+    public partial class Planet : Utilities.AstronomicalBody
     {
         // Constructors
         public Planet(Point center, double mass, double radius, Vector velocity, string name)
@@ -42,7 +42,7 @@ namespace PlanetSystem.Models.Bodies
 
         public int? StarId;
         [ForeignKey("StarId")]
-        public virtual Star Star { get { return PlanetarySystem.Star; } }
+        public virtual AstronomicalBody Star { get { return PlanetarySystem.Star; } }
 
         public virtual ICollection<Moon> Moons { get; set; }
 

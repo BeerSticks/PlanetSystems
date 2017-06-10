@@ -31,7 +31,7 @@ namespace PlanetSystem.Data
         static PlanetarySystem GetSolarSystem()
         {
             PlanetarySystem solarSystem = new PlanetarySystem("Solar system");
-            Star sun = new Star(
+            Models.Bodies.AstronomicalBody sun = new Models.Bodies.AstronomicalBody(
                 center: new Point(0, 0, 0),
                 mass: 2 * Math.Pow(10, 30),
                 radius: 5,
@@ -77,7 +77,7 @@ namespace PlanetSystem.Data
         static PlanetarySystem GetOtherSystem()
         {
             PlanetarySystem otherSystem = new PlanetarySystem("Other system");
-            Star sun = new Star(
+            Models.Bodies.AstronomicalBody sun = new Models.Bodies.AstronomicalBody(
                 center: new Point(0, 0, 0),
                 mass: 2 * Math.Pow(10, 34),
                 radius: 5,
@@ -148,7 +148,7 @@ namespace PlanetSystem.Data
             using (SqlServerContext context = new SqlServerContext())
             {
                 PlanetarySystem solarSystem = new PlanetarySystem("Solar system");
-                Star sun = new Star(
+                Models.Bodies.AstronomicalBody sun = new Models.Bodies.AstronomicalBody(
                     center: new Point(0, 0, 0),
                     mass: 2 * Math.Pow(10, 30),
                     radius: 5,
@@ -201,7 +201,7 @@ namespace PlanetSystem.Data
                         where st.StarId == planetarySystem.PlanetarySystemId
                         select st;
 
-                var star = starquery.FirstOrDefault<Star>();
+                var star = starquery.FirstOrDefault();
                 Console.WriteLine("STAR------");
                 Console.WriteLine($"name {star.Name}");
                 Console.WriteLine($"mass {star.Mass}");

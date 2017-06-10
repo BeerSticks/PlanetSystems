@@ -11,7 +11,7 @@ namespace PlanetSystem.Models.Bodies
     {
         // Fields
         private string _name;
-        private Star _star;
+        private AstronomicalBody _star;
         private List<Planet> _planets;
         private List<Asteroid> _asteroids;
         private List<ArtificialObject> _artificialObjects;
@@ -55,7 +55,7 @@ namespace PlanetSystem.Models.Bodies
             }
         }
 
-        public virtual Star Star
+        public virtual AstronomicalBody Star
         {
             get { return this._star; }
             set { this._star = value; }
@@ -84,7 +84,7 @@ namespace PlanetSystem.Models.Bodies
             
         // Methods
         #region Stars
-        public void SetStar(Star star)
+        public void SetStar(AstronomicalBody star)
         {
             if (this.Star != null)
             {
@@ -173,7 +173,7 @@ namespace PlanetSystem.Models.Bodies
         #endregion
 
         #region Other
-        public void AdvanceTime(List<AstronomicalBody> bodiesInAccount, double seconds)
+        public void AdvanceTime(List<Utilities.AstronomicalBody> bodiesInAccount, double seconds)
         {
             Physics.SimulateGravitationalInteraction(ref bodiesInAccount, seconds);
         }
@@ -186,9 +186,9 @@ namespace PlanetSystem.Models.Bodies
             this._artificialObjects = new List<ArtificialObject>();
         }
 
-        public List<AstronomicalBody> GetAllBodies()
+        public List<Utilities.AstronomicalBody> GetAllBodies()
         {
-            List<AstronomicalBody> bodies = new List<AstronomicalBody>();
+            List<Utilities.AstronomicalBody> bodies = new List<Utilities.AstronomicalBody>();
             bodies.Add(this.Star);
             foreach (var planet in this.Planets)
             {

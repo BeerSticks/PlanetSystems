@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="862.712"
-        Background="Azure">
+        Background="Azure" ResizeMode="NoResize">
 
     <Grid HorizontalAlignment="Left" Height="408" VerticalAlignment="Top" Width="789" Margin="36,28,0,0">
         <Button x:Name="btnLoadFromFile" Width="130" 
@@ -13,7 +13,7 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
                 Margin="20,20,0,0" Click="btnLoadFromFile_Click" Content="Load from Excel"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="444" Margin="319,20,0,0"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="444" Margin="319,20,0,0" CanUserResizeColumns="False" CanUserReorderColumns="False"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="27" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" Margin="20,155,0,0" FontSize="14" FontWeight="Bold"/>
         <Label x:Name="label" Content="Enter name of planetary system to update:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,124,0,0" Width="254"/>
         <Button x:Name="btnUpdate" Content="UPDATE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="20,213,0,0" Height="51" Click="btnUpdate_Click"/>
