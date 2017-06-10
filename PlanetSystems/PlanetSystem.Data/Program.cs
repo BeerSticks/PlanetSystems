@@ -12,10 +12,10 @@ namespace PlanetSystem.Data
     {
         static void Main(string[] args)
         {
-            //Database.Clear();
+            Database.Clear();
 
-            //var solarSystem = GetSolarSystem();
-            //Database.SavePlanetarySystem(solarSystem);
+            var solarSystem = GetSolarSystem();
+            Database.SavePlanetarySystem(solarSystem);
             //var otherSystem = GetOtherSystem();
             //Database.SavePlanetarySystem(otherSystem);
             //Database.DeletePlanetarySystem("Solar system");
@@ -109,13 +109,13 @@ namespace PlanetSystem.Data
                 name: "NotAiur");
             otherSystem.AddPlanetByOrbitalRadius(notAiur, 15 * Math.Pow(10, 9));
 
-            Moon floatingBrick = new Moon(
-                center: new Point(0, 0, 0),
-                mass: 2121.123 * Math.Pow(10, 16),
-                radius: 5,
-                velocity: new Vector(new Point(0, 0, 0)),
-                name: "FoatingBrick");
-            otherSystem.AddMoonByOrbitalSpeed(floatingBrick, notAiur, 1520);
+            //Moon floatingBrick = new Moon(
+            //    center: new Point(0, 0, 0),
+            //    mass: 2121.123 * Math.Pow(10, 16),
+            //    radius: 5,
+            //    velocity: new Vector(new Point(0, 0, 0)),
+            //    name: "FoatingBrick");
+            //otherSystem.AddMoonByOrbitalSpeed(floatingBrick, notAiur, 1520);
 
             Moon aDamnSubmarine = new Moon(
                 center: new Point(0, 0, 0),
