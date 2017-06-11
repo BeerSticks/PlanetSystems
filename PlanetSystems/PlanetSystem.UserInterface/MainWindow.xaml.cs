@@ -143,14 +143,11 @@ namespace PlanetSystem.UserInterface
                 starToUpdate.Radius = Convert.ToDouble(row[2]);
 
                 ctx.SaveChanges();
-            }
 
-            // Update ItemsSource
-            using (var ctx = new SqlServerContext())
-            {
+                // Update ItemsSource.
                 dataGridStars.ItemsSource = null;
                 dataGridStars.ItemsSource = ctx.Stars.ToList();
-            }
+            }            
 
             System.Windows.MessageBox.Show("Update finished!");
         }
