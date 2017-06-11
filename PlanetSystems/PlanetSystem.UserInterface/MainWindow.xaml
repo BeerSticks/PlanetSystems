@@ -4,22 +4,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="706.508" Width="1015.22"
+        Title="MainWindow" Height="706.508" Width="991.757"
         Background="Azure" ResizeMode="NoResize">
 
-    <Grid HorizontalAlignment="Left" Height="643" VerticalAlignment="Top" Width="993" Margin="10,10,0,0">
+    <Grid HorizontalAlignment="Left" Height="643" VerticalAlignment="Top" Width="972" Margin="10">
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/solar_system.jpg"/>
+        </Grid.Background>
         <Button x:Name="btnLoadFromFile" Width="130" 
                 Height="30" 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
                 Margin="69,44,0,0" Click="btnLoadFromFile_Click" Content="Load From File"/>
-        <DataGrid x:Name="dataGridFromFile" HorizontalAlignment="Left" Height="227" VerticalAlignment="Top" Width="663" Margin="291,56,0,0" CanUserResizeColumns="False" CanUserReorderColumns="False"/>
+        <DataGrid x:Name="dataGridFromFile" HorizontalAlignment="Left" Height="227" VerticalAlignment="Top" Width="663" Margin="275,56,0,0" CanUserResizeColumns="False" CanUserReorderColumns="False"/>
         <Button x:Name="btnUpdate" Content="UPDATE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="69,247,0,0" Height="36" Click="btnUpdate_Click"/>
-        <Button x:Name="buttonExit" Content="Exit Program" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="818,587,0,0" Height="40" Click="buttonExit_Click"/>
+        <Button x:Name="buttonExit" Content="EXIT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Margin="802,581,0,0" Height="40" Click="buttonExit_Click"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Margin="20,211,0,0" Height="22"/>
-        <Label x:Name="label1" Content="Choose planetary system to update:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,177,0,0" Width="234" FontSize="14"/>
-        <DataGrid x:Name="dataGridStars" HorizontalAlignment="Left" Height="227" VerticalAlignment="Top" Width="663" Margin="291,336,0,0"/>
-        <Label x:Name="label" Content="Objects loaded from file" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,22,0,0" Width="186" FontSize="14"/>
-        <Label x:Name="label2" Content="Stars from Database" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,302,0,0" Width="133" FontSize="14"/>
+        <Label x:Name="label1" Content="Choose planetary system to update:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,177,0,0" Width="250" FontSize="14" Foreground="#FF00D1FF" FontWeight="Bold"/>
+        <DataGrid x:Name="dataGridStars" HorizontalAlignment="Left" Height="227" VerticalAlignment="Top" Width="663" Margin="275,336,0,0"/>
+        <Label x:Name="label" Content="Objects from file" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,27,0,0" Width="264" FontSize="14" Foreground="#FF00D1FF" FontWeight="Bold"/>
+        <Label x:Name="label2" Content="Stars from Database" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,307,0,0" Width="214" FontSize="14" Foreground="#FF00D1FF" FontWeight="Bold"/>
     </Grid>
 </Window>

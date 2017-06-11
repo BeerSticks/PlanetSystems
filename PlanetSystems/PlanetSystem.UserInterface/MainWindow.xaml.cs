@@ -6,6 +6,7 @@ using System.IO;
 using Excel;
 using PlanetSystem.Data;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace PlanetSystem.UserInterface
 {
@@ -74,9 +75,12 @@ namespace PlanetSystem.UserInterface
             }
         }
 
-        private void ImportDataFromJson(string filePath)
+        private void ImportDataFromJson(string jsonFilePath)
         {
-            throw new NotImplementedException();
+            string json = File.ReadAllText(jsonFilePath);
+            DataTable table = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
+
+            dataGridFromFile.ItemsSource = table.AsDataView();
         }
 
         private void ImportDataFromExcel(string excelFilePath)
