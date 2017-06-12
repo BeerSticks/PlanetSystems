@@ -542,6 +542,7 @@ namespace GeneralUI
             }
             catch (Exception exc)
             {
+                Console.WriteLine(exc.Message);
             }
         }
     }
