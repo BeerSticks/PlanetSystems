@@ -12,17 +12,19 @@ namespace PlanetSystem.Data
     {
         static void Main(string[] args)
         {
-            Database.Clear();
+            //Database.Clear();
 
-            var solarSystem = GetSolarSystem();
-            Database.SavePlanetarySystem(solarSystem);
+            //var solarSystem = GetSolarSystem();
+            //Database.SavePlanetarySystem(solarSystem);
             //var otherSystem = GetOtherSystem();
             //Database.SavePlanetarySystem(otherSystem);
             //Database.DeletePlanetarySystem("Solar system");
             //Database.DeletePlanetarySystem("Other system");
 
             //var solarSystem = Database.LoadPlanetarySystem("Solar system");
-            //var otherSystem = Database.LoadPlanetarySystem("Other system");
+            var otherSystem = Database.LoadPlanetarySystem("Other system");
+
+            Console.WriteLine(otherSystem.Name);
 
             Console.WriteLine("Done");
             Console.ReadLine();
