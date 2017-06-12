@@ -154,5 +154,11 @@ namespace PlanetSystem.UserInterface
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void btnCreatePdfReport_Click(object sender, RoutedEventArgs e)
+        {
+            ReportsGenerators.CreateReport.CreatePDFReport("somename");
+
+        }
     }
 }

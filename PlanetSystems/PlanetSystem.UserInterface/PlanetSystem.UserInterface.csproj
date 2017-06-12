@@ -132,6 +132,10 @@
       <Project>{4efd5b47-2913-4cc1-8716-3f16cd526303}</Project>
       <Name>PlanetSystem.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReportsGenerators\ReportsGenerators.csproj">
+      <Project>{078ac86a-9deb-44dc-944c-f0f436f5861d}</Project>
+      <Name>ReportsGenerators</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\stars.xml" />

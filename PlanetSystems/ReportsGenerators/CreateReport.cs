@@ -2,6 +2,7 @@
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Windows.Forms;
 
 namespace ReportsGenerators
 {
@@ -15,7 +16,7 @@ namespace ReportsGenerators
         public static void CreatePDFReport(string reportName)
         {
             FileStream fs = new FileStream(reportName, FileMode.Create, FileAccess.Write, FileShare.None);
-            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            Document doc = new Document(PageSize.LETTER, 10, 10, 42, 35);
             PdfWriter writer = PdfWriter.GetInstance(doc, fs);
             doc.Open();
 
@@ -32,9 +33,29 @@ namespace ReportsGenerators
             table.AddCell(new Phrase("test"));
             table.AddCell(new Phrase("test"));
             doc.Add(table);
-            iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance("planet.png");
+            Image image = Image.GetInstance("planet.png");
             doc.Add(image);
             doc.Close();
+        }
+
+        public static void CreatePdfReportFromDataGridView(DataGridView dgv)
+        {
+            PdfPTable table = new PdfPTable(dgv.Columns.Count);
+
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                table.AddCell(new Phrase(dgv.Columns[i].HeaderText));
+            }
+
+            table.HeaderRows = 1;
+
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                for (int j = 0; j < dgv.Columns.Count; j++)
+                {
+
+                }
+            }
         }
     }
 }
