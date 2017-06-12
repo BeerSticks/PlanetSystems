@@ -16,7 +16,7 @@ namespace PlanetSystem.Models.Utilities
         public AstronomicalBody(Point center, double mass, double radius, Vector velocity, string name)
             : base(center, radius)
         {
-            Velocity = velocity;
+            Velocity = new Vector(velocity);
             Mass = mass;
             Name = name;
         }

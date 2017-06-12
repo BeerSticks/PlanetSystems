@@ -52,6 +52,7 @@
     <Compile Include="Utilities\MathUtilities.cs" />
     <Compile Include="Utilities\Physics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Plane.cs" />
     <Compile Include="Utilities\Point.cs" />
     <Compile Include="Utilities\Sphere.cs" />
     <Compile Include="Utilities\Vector.cs" />

@@ -155,6 +155,16 @@ namespace PlanetSystem.Models.Utilities
             return resultingVector;
         }
 
+        public static Vector operator -(Vector vector1, Vector vector2)
+        {
+            double x = vector1.X - vector2.X;
+            double y = vector1.Y - vector2.Y;
+            double z = vector1.Z - vector2.Z;
+            Vector resultingVector = new Vector(new Point(x, y, z));
+
+            return resultingVector;
+        }
+
         public static Vector operator /(Vector vector, double divisor)
         {
             if (divisor == 0)

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.PropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.saveBodyChangesButton = new System.Windows.Forms.Button();
             this.velocityGroupBox = new System.Windows.Forms.GroupBox();
             this.velPhiLabel = new System.Windows.Forms.Label();
             this.velThetaLabel = new System.Windows.Forms.Label();
@@ -79,32 +80,58 @@
             this.createNewTypeBox = new System.Windows.Forms.ComboBox();
             this.createNewButton = new System.Windows.Forms.Button();
             this.createNewNameBox = new System.Windows.Forms.TextBox();
-            this.saveBodyChangesButton = new System.Windows.Forms.Button();
             this.createNewGroupBox = new System.Windows.Forms.GroupBox();
-            this.createNewPrimeSelectionBox = new System.Windows.Forms.ComboBox();
-            this.orbitGroupBox = new System.Windows.Forms.GroupBox();
-            this.orbitPrimeLabel = new System.Windows.Forms.Label();
-            this.orbitByRadiusRadio = new System.Windows.Forms.RadioButton();
-            this.orbitBySpeedRadio = new System.Windows.Forms.RadioButton();
-            this.orbitalTypeCoiceLabel = new System.Windows.Forms.Label();
-            this.orbitalParameterBox = new System.Windows.Forms.TextBox();
-            this.orbitalParameterEBox = new System.Windows.Forms.TextBox();
-            this.orbitalParameterELabel = new System.Windows.Forms.Label();
+            this.createNewNameLabel = new System.Windows.Forms.Label();
             this.createNewMassBox = new System.Windows.Forms.TextBox();
+            this.orbitGroupBox = new System.Windows.Forms.GroupBox();
+            this.orbitalParameterELabel = new System.Windows.Forms.Label();
+            this.orbitalParameterEBox = new System.Windows.Forms.TextBox();
+            this.orbitalParameterBox = new System.Windows.Forms.TextBox();
+            this.orbitalTypeCoiceLabel = new System.Windows.Forms.Label();
+            this.orbitBySpeedRadio = new System.Windows.Forms.RadioButton();
+            this.orbitByRadiusRadio = new System.Windows.Forms.RadioButton();
+            this.orbitPrimeLabel = new System.Windows.Forms.Label();
+            this.createNewPrimeSelectionBox = new System.Windows.Forms.ComboBox();
             this.createNewMassELabel = new System.Windows.Forms.Label();
             this.createNewMassLabel = new System.Windows.Forms.Label();
             this.createNewMassEBox = new System.Windows.Forms.TextBox();
             this.createNewRadiusELabel = new System.Windows.Forms.Label();
             this.createNewRadiusEBox = new System.Windows.Forms.TextBox();
-            this.createNewRadiusBox = new System.Windows.Forms.TextBox();
             this.createNewRadiusLabel = new System.Windows.Forms.Label();
-            this.createNewNameLabel = new System.Windows.Forms.Label();
+            this.createNewRadiusBox = new System.Windows.Forms.TextBox();
+            this.simulationGroupBox = new System.Windows.Forms.GroupBox();
+            this.clearGraphButton = new System.Windows.Forms.Button();
+            this.planeLabel = new System.Windows.Forms.Label();
+            this.planeBox = new System.Windows.Forms.ComboBox();
+            this.generateReport = new System.Windows.Forms.Button();
+            this.simulateButton = new System.Windows.Forms.Button();
+            this.stepDurationEBox = new System.Windows.Forms.TextBox();
+            this.stepDurationELabel = new System.Windows.Forms.Label();
+            this.secondsPerStepLabel = new System.Windows.Forms.Label();
+            this.stepsCountLabel = new System.Windows.Forms.Label();
+            this.stepDurationBox = new System.Windows.Forms.TextBox();
+            this.stepsCountBox = new System.Windows.Forms.TextBox();
+            this.canvasPanel = new System.Windows.Forms.Panel();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.revertButton = new System.Windows.Forms.Button();
+            this.setOrbitGroupBox = new System.Windows.Forms.GroupBox();
+            this.setOrbitButon = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.setOrbitParameterEBox = new System.Windows.Forms.TextBox();
+            this.setOrbitParameterBox = new System.Windows.Forms.TextBox();
+            this.setOrbitLabel = new System.Windows.Forms.Label();
+            this.setOrbitSpeedRadio = new System.Windows.Forms.RadioButton();
+            this.setOrbitRadiusRadio = new System.Windows.Forms.RadioButton();
+            this.setOrbitPrimeLabel = new System.Windows.Forms.Label();
+            this.setOrbitPrimeBox = new System.Windows.Forms.ComboBox();
             this.PropertiesGroupBox.SuspendLayout();
             this.velocityGroupBox.SuspendLayout();
             this.positionGroupBox.SuspendLayout();
             this.generalInfoGroupBox.SuspendLayout();
             this.createNewGroupBox.SuspendLayout();
             this.orbitGroupBox.SuspendLayout();
+            this.simulationGroupBox.SuspendLayout();
+            this.setOrbitGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // PropertiesGroupBox
@@ -120,6 +147,16 @@
             this.PropertiesGroupBox.TabIndex = 0;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Properties";
+            // 
+            // saveBodyChangesButton
+            // 
+            this.saveBodyChangesButton.Location = new System.Drawing.Point(7, 471);
+            this.saveBodyChangesButton.Name = "saveBodyChangesButton";
+            this.saveBodyChangesButton.Size = new System.Drawing.Size(250, 23);
+            this.saveBodyChangesButton.TabIndex = 17;
+            this.saveBodyChangesButton.Text = "Save changes to body";
+            this.saveBodyChangesButton.UseVisualStyleBackColor = true;
+            this.saveBodyChangesButton.Click += new System.EventHandler(this.saveBodyChangesButton_Click);
             // 
             // velocityGroupBox
             // 
@@ -542,7 +579,7 @@
             // listboxOfPlanetarySystems
             // 
             this.listboxOfPlanetarySystems.FormattingEnabled = true;
-            this.listboxOfPlanetarySystems.Location = new System.Drawing.Point(63, 440);
+            this.listboxOfPlanetarySystems.Location = new System.Drawing.Point(64, 440);
             this.listboxOfPlanetarySystems.Name = "listboxOfPlanetarySystems";
             this.listboxOfPlanetarySystems.Size = new System.Drawing.Size(120, 95);
             this.listboxOfPlanetarySystems.TabIndex = 2;
@@ -552,7 +589,7 @@
             // 
             this.loadButton.Location = new System.Drawing.Point(12, 12);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(75, 23);
+            this.loadButton.Size = new System.Drawing.Size(61, 23);
             this.loadButton.TabIndex = 3;
             this.loadButton.Text = "Load";
             this.loadButton.UseVisualStyleBackColor = true;
@@ -560,9 +597,9 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(93, 12);
+            this.saveButton.Location = new System.Drawing.Point(79, 12);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(54, 23);
             this.saveButton.TabIndex = 4;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -579,9 +616,9 @@
             // 
             // createNewButton
             // 
-            this.createNewButton.Location = new System.Drawing.Point(18, 259);
+            this.createNewButton.Location = new System.Drawing.Point(12, 286);
             this.createNewButton.Name = "createNewButton";
-            this.createNewButton.Size = new System.Drawing.Size(223, 23);
+            this.createNewButton.Size = new System.Drawing.Size(223, 24);
             this.createNewButton.TabIndex = 6;
             this.createNewButton.Text = "Create";
             this.createNewButton.UseVisualStyleBackColor = true;
@@ -593,16 +630,6 @@
             this.createNewNameBox.Name = "createNewNameBox";
             this.createNewNameBox.Size = new System.Drawing.Size(188, 20);
             this.createNewNameBox.TabIndex = 7;
-            // 
-            // saveBodyChangesButton
-            // 
-            this.saveBodyChangesButton.Location = new System.Drawing.Point(7, 471);
-            this.saveBodyChangesButton.Name = "saveBodyChangesButton";
-            this.saveBodyChangesButton.Size = new System.Drawing.Size(250, 23);
-            this.saveBodyChangesButton.TabIndex = 17;
-            this.saveBodyChangesButton.Text = "Save changes";
-            this.saveBodyChangesButton.UseVisualStyleBackColor = true;
-            this.saveBodyChangesButton.Click += new System.EventHandler(this.saveBodyChangesButton_Click);
             // 
             // createNewGroupBox
             // 
@@ -621,18 +648,27 @@
             this.createNewGroupBox.Controls.Add(this.createNewRadiusBox);
             this.createNewGroupBox.Location = new System.Drawing.Point(550, 41);
             this.createNewGroupBox.Name = "createNewGroupBox";
-            this.createNewGroupBox.Size = new System.Drawing.Size(254, 289);
+            this.createNewGroupBox.Size = new System.Drawing.Size(254, 319);
             this.createNewGroupBox.TabIndex = 8;
             this.createNewGroupBox.TabStop = false;
             this.createNewGroupBox.Text = "Create new object";
             // 
-            // createNewPrimeSelectionBox
+            // createNewNameLabel
             // 
-            this.createNewPrimeSelectionBox.FormattingEnabled = true;
-            this.createNewPrimeSelectionBox.Location = new System.Drawing.Point(49, 17);
-            this.createNewPrimeSelectionBox.Name = "createNewPrimeSelectionBox";
-            this.createNewPrimeSelectionBox.Size = new System.Drawing.Size(168, 21);
-            this.createNewPrimeSelectionBox.TabIndex = 8;
+            this.createNewNameLabel.AutoSize = true;
+            this.createNewNameLabel.Location = new System.Drawing.Point(15, 25);
+            this.createNewNameLabel.Name = "createNewNameLabel";
+            this.createNewNameLabel.Size = new System.Drawing.Size(35, 13);
+            this.createNewNameLabel.TabIndex = 28;
+            this.createNewNameLabel.Text = "Name";
+            // 
+            // createNewMassBox
+            // 
+            this.createNewMassBox.Location = new System.Drawing.Point(53, 80);
+            this.createNewMassBox.Name = "createNewMassBox";
+            this.createNewMassBox.Size = new System.Drawing.Size(107, 20);
+            this.createNewMassBox.TabIndex = 23;
+            this.createNewMassBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
             // 
             // orbitGroupBox
             // 
@@ -646,19 +682,54 @@
             this.orbitGroupBox.Controls.Add(this.createNewPrimeSelectionBox);
             this.orbitGroupBox.Location = new System.Drawing.Point(18, 132);
             this.orbitGroupBox.Name = "orbitGroupBox";
-            this.orbitGroupBox.Size = new System.Drawing.Size(223, 121);
+            this.orbitGroupBox.Size = new System.Drawing.Size(223, 148);
             this.orbitGroupBox.TabIndex = 9;
             this.orbitGroupBox.TabStop = false;
             this.orbitGroupBox.Text = "Orbit";
             // 
-            // orbitPrimeLabel
+            // orbitalParameterELabel
             // 
-            this.orbitPrimeLabel.AutoSize = true;
-            this.orbitPrimeLabel.Location = new System.Drawing.Point(7, 20);
-            this.orbitPrimeLabel.Name = "orbitPrimeLabel";
-            this.orbitPrimeLabel.Size = new System.Drawing.Size(36, 13);
-            this.orbitPrimeLabel.TabIndex = 9;
-            this.orbitPrimeLabel.Text = "Prime:";
+            this.orbitalParameterELabel.AutoSize = true;
+            this.orbitalParameterELabel.Location = new System.Drawing.Point(139, 98);
+            this.orbitalParameterELabel.Name = "orbitalParameterELabel";
+            this.orbitalParameterELabel.Size = new System.Drawing.Size(14, 13);
+            this.orbitalParameterELabel.TabIndex = 15;
+            this.orbitalParameterELabel.Text = "E";
+            // 
+            // orbitalParameterEBox
+            // 
+            this.orbitalParameterEBox.Location = new System.Drawing.Point(159, 95);
+            this.orbitalParameterEBox.Name = "orbitalParameterEBox";
+            this.orbitalParameterEBox.Size = new System.Drawing.Size(58, 20);
+            this.orbitalParameterEBox.TabIndex = 14;
+            this.orbitalParameterEBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
+            // 
+            // orbitalParameterBox
+            // 
+            this.orbitalParameterBox.Location = new System.Drawing.Point(10, 95);
+            this.orbitalParameterBox.Name = "orbitalParameterBox";
+            this.orbitalParameterBox.Size = new System.Drawing.Size(123, 20);
+            this.orbitalParameterBox.TabIndex = 13;
+            this.orbitalParameterBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // orbitalTypeCoiceLabel
+            // 
+            this.orbitalTypeCoiceLabel.AutoSize = true;
+            this.orbitalTypeCoiceLabel.Location = new System.Drawing.Point(26, 60);
+            this.orbitalTypeCoiceLabel.Name = "orbitalTypeCoiceLabel";
+            this.orbitalTypeCoiceLabel.Size = new System.Drawing.Size(100, 13);
+            this.orbitalTypeCoiceLabel.TabIndex = 12;
+            this.orbitalTypeCoiceLabel.Text = "Enter orbit by orbital";
+            // 
+            // orbitBySpeedRadio
+            // 
+            this.orbitBySpeedRadio.AutoSize = true;
+            this.orbitBySpeedRadio.Location = new System.Drawing.Point(132, 67);
+            this.orbitBySpeedRadio.Name = "orbitBySpeedRadio";
+            this.orbitBySpeedRadio.Size = new System.Drawing.Size(56, 17);
+            this.orbitBySpeedRadio.TabIndex = 11;
+            this.orbitBySpeedRadio.Text = "Speed";
+            this.orbitBySpeedRadio.UseVisualStyleBackColor = true;
             // 
             // orbitByRadiusRadio
             // 
@@ -672,57 +743,22 @@
             this.orbitByRadiusRadio.Text = "Radius";
             this.orbitByRadiusRadio.UseVisualStyleBackColor = true;
             // 
-            // orbitBySpeedRadio
+            // orbitPrimeLabel
             // 
-            this.orbitBySpeedRadio.AutoSize = true;
-            this.orbitBySpeedRadio.Location = new System.Drawing.Point(132, 67);
-            this.orbitBySpeedRadio.Name = "orbitBySpeedRadio";
-            this.orbitBySpeedRadio.Size = new System.Drawing.Size(56, 17);
-            this.orbitBySpeedRadio.TabIndex = 11;
-            this.orbitBySpeedRadio.Text = "Speed";
-            this.orbitBySpeedRadio.UseVisualStyleBackColor = true;
+            this.orbitPrimeLabel.AutoSize = true;
+            this.orbitPrimeLabel.Location = new System.Drawing.Point(7, 20);
+            this.orbitPrimeLabel.Name = "orbitPrimeLabel";
+            this.orbitPrimeLabel.Size = new System.Drawing.Size(36, 13);
+            this.orbitPrimeLabel.TabIndex = 9;
+            this.orbitPrimeLabel.Text = "Prime:";
             // 
-            // orbitalTypeCoiceLabel
+            // createNewPrimeSelectionBox
             // 
-            this.orbitalTypeCoiceLabel.AutoSize = true;
-            this.orbitalTypeCoiceLabel.Location = new System.Drawing.Point(26, 60);
-            this.orbitalTypeCoiceLabel.Name = "orbitalTypeCoiceLabel";
-            this.orbitalTypeCoiceLabel.Size = new System.Drawing.Size(100, 13);
-            this.orbitalTypeCoiceLabel.TabIndex = 12;
-            this.orbitalTypeCoiceLabel.Text = "Enter orbit by orbital";
-            // 
-            // orbitalParameterBox
-            // 
-            this.orbitalParameterBox.Location = new System.Drawing.Point(10, 95);
-            this.orbitalParameterBox.Name = "orbitalParameterBox";
-            this.orbitalParameterBox.Size = new System.Drawing.Size(123, 20);
-            this.orbitalParameterBox.TabIndex = 13;
-            this.orbitalParameterBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
-            // 
-            // orbitalParameterEBox
-            // 
-            this.orbitalParameterEBox.Location = new System.Drawing.Point(159, 95);
-            this.orbitalParameterEBox.Name = "orbitalParameterEBox";
-            this.orbitalParameterEBox.Size = new System.Drawing.Size(58, 20);
-            this.orbitalParameterEBox.TabIndex = 14;
-            this.orbitalParameterEBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
-            // 
-            // orbitalParameterELabel
-            // 
-            this.orbitalParameterELabel.AutoSize = true;
-            this.orbitalParameterELabel.Location = new System.Drawing.Point(139, 98);
-            this.orbitalParameterELabel.Name = "orbitalParameterELabel";
-            this.orbitalParameterELabel.Size = new System.Drawing.Size(14, 13);
-            this.orbitalParameterELabel.TabIndex = 15;
-            this.orbitalParameterELabel.Text = "E";
-            // 
-            // createNewMassBox
-            // 
-            this.createNewMassBox.Location = new System.Drawing.Point(53, 80);
-            this.createNewMassBox.Name = "createNewMassBox";
-            this.createNewMassBox.Size = new System.Drawing.Size(107, 20);
-            this.createNewMassBox.TabIndex = 23;
-            this.createNewMassBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            this.createNewPrimeSelectionBox.FormattingEnabled = true;
+            this.createNewPrimeSelectionBox.Location = new System.Drawing.Point(49, 17);
+            this.createNewPrimeSelectionBox.Name = "createNewPrimeSelectionBox";
+            this.createNewPrimeSelectionBox.Size = new System.Drawing.Size(168, 21);
+            this.createNewPrimeSelectionBox.TabIndex = 8;
             // 
             // createNewMassELabel
             // 
@@ -767,14 +803,6 @@
             this.createNewRadiusEBox.TabIndex = 26;
             this.createNewRadiusEBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
             // 
-            // createNewRadiusBox
-            // 
-            this.createNewRadiusBox.Location = new System.Drawing.Point(53, 106);
-            this.createNewRadiusBox.Name = "createNewRadiusBox";
-            this.createNewRadiusBox.Size = new System.Drawing.Size(107, 20);
-            this.createNewRadiusBox.TabIndex = 25;
-            this.createNewRadiusBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
-            // 
             // createNewRadiusLabel
             // 
             this.createNewRadiusLabel.AutoSize = true;
@@ -784,20 +812,270 @@
             this.createNewRadiusLabel.TabIndex = 21;
             this.createNewRadiusLabel.Text = "Radius";
             // 
-            // createNewNameLabel
+            // createNewRadiusBox
             // 
-            this.createNewNameLabel.AutoSize = true;
-            this.createNewNameLabel.Location = new System.Drawing.Point(15, 25);
-            this.createNewNameLabel.Name = "createNewNameLabel";
-            this.createNewNameLabel.Size = new System.Drawing.Size(35, 13);
-            this.createNewNameLabel.TabIndex = 28;
-            this.createNewNameLabel.Text = "Name";
+            this.createNewRadiusBox.Location = new System.Drawing.Point(53, 106);
+            this.createNewRadiusBox.Name = "createNewRadiusBox";
+            this.createNewRadiusBox.Size = new System.Drawing.Size(107, 20);
+            this.createNewRadiusBox.TabIndex = 25;
+            this.createNewRadiusBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // simulationGroupBox
+            // 
+            this.simulationGroupBox.Controls.Add(this.clearGraphButton);
+            this.simulationGroupBox.Controls.Add(this.planeLabel);
+            this.simulationGroupBox.Controls.Add(this.planeBox);
+            this.simulationGroupBox.Controls.Add(this.generateReport);
+            this.simulationGroupBox.Controls.Add(this.simulateButton);
+            this.simulationGroupBox.Controls.Add(this.stepDurationEBox);
+            this.simulationGroupBox.Controls.Add(this.stepDurationELabel);
+            this.simulationGroupBox.Controls.Add(this.secondsPerStepLabel);
+            this.simulationGroupBox.Controls.Add(this.stepsCountLabel);
+            this.simulationGroupBox.Controls.Add(this.stepDurationBox);
+            this.simulationGroupBox.Controls.Add(this.stepsCountBox);
+            this.simulationGroupBox.Location = new System.Drawing.Point(810, 457);
+            this.simulationGroupBox.Name = "simulationGroupBox";
+            this.simulationGroupBox.Size = new System.Drawing.Size(418, 99);
+            this.simulationGroupBox.TabIndex = 9;
+            this.simulationGroupBox.TabStop = false;
+            this.simulationGroupBox.Text = "Simulation";
+            // 
+            // clearGraphButton
+            // 
+            this.clearGraphButton.Location = new System.Drawing.Point(314, 19);
+            this.clearGraphButton.Name = "clearGraphButton";
+            this.clearGraphButton.Size = new System.Drawing.Size(98, 35);
+            this.clearGraphButton.TabIndex = 34;
+            this.clearGraphButton.Text = "Clear canvas";
+            this.clearGraphButton.UseVisualStyleBackColor = true;
+            this.clearGraphButton.Click += new System.EventHandler(this.clearGraphButton_Click);
+            // 
+            // planeLabel
+            // 
+            this.planeLabel.AutoSize = true;
+            this.planeLabel.Location = new System.Drawing.Point(15, 74);
+            this.planeLabel.Name = "planeLabel";
+            this.planeLabel.Size = new System.Drawing.Size(84, 13);
+            this.planeLabel.TabIndex = 33;
+            this.planeLabel.Text = "Plane of graphic";
+            // 
+            // planeBox
+            // 
+            this.planeBox.FormattingEnabled = true;
+            this.planeBox.Location = new System.Drawing.Point(105, 71);
+            this.planeBox.Name = "planeBox";
+            this.planeBox.Size = new System.Drawing.Size(130, 21);
+            this.planeBox.TabIndex = 32;
+            this.planeBox.SelectedIndexChanged += new System.EventHandler(this.planeBox_SelectedIndexChanged);
+            // 
+            // generateReport
+            // 
+            this.generateReport.Location = new System.Drawing.Point(241, 55);
+            this.generateReport.Name = "generateReport";
+            this.generateReport.Size = new System.Drawing.Size(171, 37);
+            this.generateReport.TabIndex = 31;
+            this.generateReport.Text = "Generate report";
+            this.generateReport.UseVisualStyleBackColor = true;
+            // 
+            // simulateButton
+            // 
+            this.simulateButton.Location = new System.Drawing.Point(241, 19);
+            this.simulateButton.Name = "simulateButton";
+            this.simulateButton.Size = new System.Drawing.Size(67, 35);
+            this.simulateButton.TabIndex = 30;
+            this.simulateButton.Text = "Simulate";
+            this.simulateButton.UseVisualStyleBackColor = true;
+            this.simulateButton.Click += new System.EventHandler(this.simulateButton_Click);
+            // 
+            // stepDurationEBox
+            // 
+            this.stepDurationEBox.Location = new System.Drawing.Point(186, 45);
+            this.stepDurationEBox.Name = "stepDurationEBox";
+            this.stepDurationEBox.Size = new System.Drawing.Size(49, 20);
+            this.stepDurationEBox.TabIndex = 29;
+            this.stepDurationEBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
+            // 
+            // stepDurationELabel
+            // 
+            this.stepDurationELabel.AutoSize = true;
+            this.stepDurationELabel.Location = new System.Drawing.Point(166, 48);
+            this.stepDurationELabel.Name = "stepDurationELabel";
+            this.stepDurationELabel.Size = new System.Drawing.Size(14, 13);
+            this.stepDurationELabel.TabIndex = 28;
+            this.stepDurationELabel.Text = "E";
+            // 
+            // secondsPerStepLabel
+            // 
+            this.secondsPerStepLabel.AutoSize = true;
+            this.secondsPerStepLabel.Location = new System.Drawing.Point(12, 48);
+            this.secondsPerStepLabel.Name = "secondsPerStepLabel";
+            this.secondsPerStepLabel.Size = new System.Drawing.Size(70, 13);
+            this.secondsPerStepLabel.TabIndex = 3;
+            this.secondsPerStepLabel.Text = "Step duration";
+            // 
+            // stepsCountLabel
+            // 
+            this.stepsCountLabel.AutoSize = true;
+            this.stepsCountLabel.Location = new System.Drawing.Point(7, 22);
+            this.stepsCountLabel.Name = "stepsCountLabel";
+            this.stepsCountLabel.Size = new System.Drawing.Size(75, 13);
+            this.stepsCountLabel.TabIndex = 2;
+            this.stepsCountLabel.Text = "Count of steps";
+            // 
+            // stepDurationBox
+            // 
+            this.stepDurationBox.Location = new System.Drawing.Point(88, 45);
+            this.stepDurationBox.Name = "stepDurationBox";
+            this.stepDurationBox.Size = new System.Drawing.Size(72, 20);
+            this.stepDurationBox.TabIndex = 1;
+            this.stepDurationBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // stepsCountBox
+            // 
+            this.stepsCountBox.Location = new System.Drawing.Point(88, 19);
+            this.stepsCountBox.Name = "stepsCountBox";
+            this.stepsCountBox.Size = new System.Drawing.Size(147, 20);
+            this.stepsCountBox.TabIndex = 0;
+            // 
+            // canvasPanel
+            // 
+            this.canvasPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvasPanel.Location = new System.Drawing.Point(810, 41);
+            this.canvasPanel.Name = "canvasPanel";
+            this.canvasPanel.Size = new System.Drawing.Size(418, 410);
+            this.canvasPanel.TabIndex = 10;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(139, 12);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(64, 23);
+            this.deleteButton.TabIndex = 11;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // revertButton
+            // 
+            this.revertButton.Location = new System.Drawing.Point(209, 12);
+            this.revertButton.Name = "revertButton";
+            this.revertButton.Size = new System.Drawing.Size(62, 23);
+            this.revertButton.TabIndex = 35;
+            this.revertButton.Text = "Revert";
+            this.revertButton.UseVisualStyleBackColor = true;
+            this.revertButton.Click += new System.EventHandler(this.revertButton_Click);
+            // 
+            // setOrbitGroupBox
+            // 
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitButon);
+            this.setOrbitGroupBox.Controls.Add(this.label1);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitParameterEBox);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitParameterBox);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitLabel);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitSpeedRadio);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitRadiusRadio);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitPrimeLabel);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitPrimeBox);
+            this.setOrbitGroupBox.Location = new System.Drawing.Point(550, 366);
+            this.setOrbitGroupBox.Name = "setOrbitGroupBox";
+            this.setOrbitGroupBox.Size = new System.Drawing.Size(254, 169);
+            this.setOrbitGroupBox.TabIndex = 36;
+            this.setOrbitGroupBox.TabStop = false;
+            this.setOrbitGroupBox.Text = "Set orbit";
+            // 
+            // setOrbitButon
+            // 
+            this.setOrbitButon.Location = new System.Drawing.Point(10, 121);
+            this.setOrbitButon.Name = "setOrbitButon";
+            this.setOrbitButon.Size = new System.Drawing.Size(238, 23);
+            this.setOrbitButon.TabIndex = 16;
+            this.setOrbitButon.Text = "Set orbit";
+            this.setOrbitButon.UseVisualStyleBackColor = true;
+            this.setOrbitButon.Click += new System.EventHandler(this.setOrbitButon_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(170, 98);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(14, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "E";
+            // 
+            // setOrbitParameterEBox
+            // 
+            this.setOrbitParameterEBox.Location = new System.Drawing.Point(190, 95);
+            this.setOrbitParameterEBox.Name = "setOrbitParameterEBox";
+            this.setOrbitParameterEBox.Size = new System.Drawing.Size(58, 20);
+            this.setOrbitParameterEBox.TabIndex = 14;
+            this.setOrbitParameterEBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
+            // 
+            // setOrbitParameterBox
+            // 
+            this.setOrbitParameterBox.Location = new System.Drawing.Point(10, 95);
+            this.setOrbitParameterBox.Name = "setOrbitParameterBox";
+            this.setOrbitParameterBox.Size = new System.Drawing.Size(154, 20);
+            this.setOrbitParameterBox.TabIndex = 13;
+            this.setOrbitParameterBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // setOrbitLabel
+            // 
+            this.setOrbitLabel.AutoSize = true;
+            this.setOrbitLabel.Location = new System.Drawing.Point(60, 58);
+            this.setOrbitLabel.Name = "setOrbitLabel";
+            this.setOrbitLabel.Size = new System.Drawing.Size(100, 13);
+            this.setOrbitLabel.TabIndex = 12;
+            this.setOrbitLabel.Text = "Enter orbit by orbital";
+            // 
+            // setOrbitSpeedRadio
+            // 
+            this.setOrbitSpeedRadio.AutoSize = true;
+            this.setOrbitSpeedRadio.Location = new System.Drawing.Point(169, 67);
+            this.setOrbitSpeedRadio.Name = "setOrbitSpeedRadio";
+            this.setOrbitSpeedRadio.Size = new System.Drawing.Size(56, 17);
+            this.setOrbitSpeedRadio.TabIndex = 11;
+            this.setOrbitSpeedRadio.Text = "Speed";
+            this.setOrbitSpeedRadio.UseVisualStyleBackColor = true;
+            // 
+            // setOrbitRadiusRadio
+            // 
+            this.setOrbitRadiusRadio.AutoSize = true;
+            this.setOrbitRadiusRadio.Checked = true;
+            this.setOrbitRadiusRadio.Location = new System.Drawing.Point(169, 44);
+            this.setOrbitRadiusRadio.Name = "setOrbitRadiusRadio";
+            this.setOrbitRadiusRadio.Size = new System.Drawing.Size(58, 17);
+            this.setOrbitRadiusRadio.TabIndex = 10;
+            this.setOrbitRadiusRadio.TabStop = true;
+            this.setOrbitRadiusRadio.Text = "Radius";
+            this.setOrbitRadiusRadio.UseVisualStyleBackColor = true;
+            // 
+            // setOrbitPrimeLabel
+            // 
+            this.setOrbitPrimeLabel.AutoSize = true;
+            this.setOrbitPrimeLabel.Location = new System.Drawing.Point(7, 20);
+            this.setOrbitPrimeLabel.Name = "setOrbitPrimeLabel";
+            this.setOrbitPrimeLabel.Size = new System.Drawing.Size(44, 13);
+            this.setOrbitPrimeLabel.TabIndex = 9;
+            this.setOrbitPrimeLabel.Text = "Primary:";
+            // 
+            // setOrbitPrimeBox
+            // 
+            this.setOrbitPrimeBox.FormattingEnabled = true;
+            this.setOrbitPrimeBox.Location = new System.Drawing.Point(57, 17);
+            this.setOrbitPrimeBox.Name = "setOrbitPrimeBox";
+            this.setOrbitPrimeBox.Size = new System.Drawing.Size(191, 21);
+            this.setOrbitPrimeBox.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 611);
+            this.ClientSize = new System.Drawing.Size(1240, 561);
+            this.Controls.Add(this.setOrbitGroupBox);
+            this.Controls.Add(this.revertButton);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.canvasPanel);
+            this.Controls.Add(this.simulationGroupBox);
             this.Controls.Add(this.createNewGroupBox);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.loadButton);
@@ -821,6 +1099,10 @@
             this.createNewGroupBox.PerformLayout();
             this.orbitGroupBox.ResumeLayout(false);
             this.orbitGroupBox.PerformLayout();
+            this.simulationGroupBox.ResumeLayout(false);
+            this.simulationGroupBox.PerformLayout();
+            this.setOrbitGroupBox.ResumeLayout(false);
+            this.setOrbitGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -898,6 +1180,31 @@
         private System.Windows.Forms.Label createNewRadiusLabel;
         private System.Windows.Forms.TextBox createNewRadiusBox;
         private System.Windows.Forms.Label createNewNameLabel;
+        private System.Windows.Forms.GroupBox simulationGroupBox;
+        private System.Windows.Forms.TextBox stepDurationEBox;
+        private System.Windows.Forms.Label stepDurationELabel;
+        private System.Windows.Forms.Label secondsPerStepLabel;
+        private System.Windows.Forms.Label stepsCountLabel;
+        private System.Windows.Forms.TextBox stepDurationBox;
+        private System.Windows.Forms.TextBox stepsCountBox;
+        private System.Windows.Forms.Button generateReport;
+        private System.Windows.Forms.Button simulateButton;
+        private System.Windows.Forms.Panel canvasPanel;
+        private System.Windows.Forms.Label planeLabel;
+        private System.Windows.Forms.ComboBox planeBox;
+        private System.Windows.Forms.Button clearGraphButton;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button revertButton;
+        private System.Windows.Forms.GroupBox setOrbitGroupBox;
+        private System.Windows.Forms.Button setOrbitButon;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox setOrbitParameterEBox;
+        private System.Windows.Forms.TextBox setOrbitParameterBox;
+        private System.Windows.Forms.Label setOrbitLabel;
+        private System.Windows.Forms.RadioButton setOrbitSpeedRadio;
+        private System.Windows.Forms.RadioButton setOrbitRadiusRadio;
+        private System.Windows.Forms.Label setOrbitPrimeLabel;
+        private System.Windows.Forms.ComboBox setOrbitPrimeBox;
     }
 }
 

@@ -24,7 +24,7 @@ namespace PlanetSystem.Models.Bodies
         }
 
         // Required from Entity Framework
-        private ArtificialObject() { }
+        public ArtificialObject() { }
 
         // Properties
         [Key]

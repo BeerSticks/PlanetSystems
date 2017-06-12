@@ -46,19 +46,27 @@ namespace PlanetSystem.Models.Bodies
 
         public virtual ICollection<Moon> Moons { get; set; }
 
-        public void AddMoonByOrbitalRadius(Moon moon, double radius)
+        public void AddMoonByOrbitalRadius(Moon moon, double radius, double coveredAngle)
         {
             RemoveMoon(moon.Name);
             this.Moons.Add(moon);
             moon.AttachToPlanet(this);
-            Physics.EnterOrbitByGivenRadius(ref moon, this, radius);
+            Physics.EnterOrbitByGivenRadius(ref moon, this, radius, coveredAngle);
         }
-        public void AddMoonByOrbitalSpeed(Moon moon, double speed)
+
+        public void AddMoonByOrbitalSpeed(Moon moon, double speed, double coveredAngle)
         {
             RemoveMoon(moon.Name);
             this.Moons.Add(moon);
             moon.AttachToPlanet(this);
-            Physics.EnterOrbitByGivenRadius(ref moon, this, speed);
+            Physics.EnterOrbitByGivenSpeed(ref moon, this, speed, coveredAngle);
+        }
+
+        public void AddMoonNOTORBITALSAFE(Moon moon)
+        {
+            RemoveMoon(moon.Name);
+            this.Moons.Add(moon);
+            moon.AttachToPlanet(this);
         }
 
         public void RemoveMoon(string name)

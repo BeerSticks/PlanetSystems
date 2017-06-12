@@ -1,6 +1,8 @@
-﻿using PlanetSystem.Models.Utilities.Contracts;
+﻿using PlanetSystem.Models.Bodies;
+using PlanetSystem.Models.Utilities.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PlanetSystem.Models.Utilities
 {
@@ -73,7 +75,7 @@ namespace PlanetSystem.Models.Utilities
             return velocityVector;
         }
 
-        public static AstronomicalBody AddVelocityToBody(ref AstronomicalBody body, Vector velocity)
+        public static AstronomicalBody AddVelocityToBody<T>(ref T body, Vector velocity) where T : AstronomicalBody, new()
         {
             body.Velocity += velocity;
             return new AstronomicalBody(body);
@@ -122,7 +124,7 @@ namespace PlanetSystem.Models.Utilities
                 bodies[i].ApplyForce(gravityOnBody, secondsOfSimulation);
             }
         }
-        
+
         public static double GetRelativeTangentialSpeedForOrbit(AstronomicalBody satellite, AstronomicalBody primary)
         {
             double distance = GetDistanceBetweenPoints(satellite.Center, primary.Center);
@@ -137,24 +139,29 @@ namespace PlanetSystem.Models.Utilities
             return requiredRadiusFixed;
         }
 
-        public static void EnterOrbitByGivenRadius<T>(ref T satellite, AstronomicalBody primary, double radius
+        public static void EnterOrbitByGivenRadius<T>(ref T satellite, AstronomicalBody primary, double radius, double coveredAngle
             /*Vector orbitAxis, double startingPointOffset*/) where T : AstronomicalBody, new()
         {
             // startingPointOffset == 0 => point with the highest x
             // orbit axis - right hand rule
             // TODO: Implement orbital axis and startingPointOffset
-            
+
             satellite.Center = new Point(
                 primary.Center.X + radius,
                 primary.Center.Y,
                 primary.Center.Z);
             double relativeTangentialSpeed = GetRelativeTangentialSpeedForOrbit(satellite, primary);
             Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, Math.PI / 2);
+            if (satellite is Moon)
+            {
+                satelliteRelativeVelocity = satelliteRelativeVelocity.GetOpposite();
+            }
+
             Vector satelliteAbsoluteVelocity = satelliteRelativeVelocity + primary.Velocity;
             satellite.Velocity = satelliteAbsoluteVelocity;
         }
 
-        public static void EnterOrbitByGivenSpeed<T>(ref T satellite, AstronomicalBody primary, double relativeTangentialSpeed
+        public static void EnterOrbitByGivenSpeed<T>(ref T satellite, AstronomicalBody primary, double relativeTangentialSpeed, double coveredAngle
             /*Vector orbitAxis, double StartingPointOffset*/) where T : AstronomicalBody, new()
         {
             // startingPointOffset == 0 => point with the highest x
@@ -166,8 +173,36 @@ namespace PlanetSystem.Models.Utilities
                 primary.Center.Y,
                 primary.Center.Z);
             Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, Math.PI / 2);
+            if (satellite is Moon)
+            {
+                satelliteRelativeVelocity = satelliteRelativeVelocity.GetOpposite();
+            }
+
             Vector satelliteAbsoluteVelocity = satelliteRelativeVelocity + primary.Velocity;
             satellite.Velocity = satelliteAbsoluteVelocity;
+        }
+
+        public static double GetGreatestDistance(ICollection<AstronomicalBody> bodies, out Point middle)
+        {
+            double greatestDistance = 0;
+            middle = new Point(0, 0, 0);
+            Point pointBuffer = new Point(0, 0, 0);
+
+            bodies.ToList().ForEach(b1 =>
+            {
+                bodies.ToList().ForEach(b2 =>
+                {
+                    var currentDistance = Physics.GetDistanceBetweenPoints(b1.Center, b2.Center);
+                    if (currentDistance > greatestDistance)
+                    {
+                        greatestDistance = currentDistance;
+                        pointBuffer = Point.GetAverage(new List<Point> { b1.Center, b2.Center });
+                    }
+                });
+            });
+
+            middle = pointBuffer;
+            return greatestDistance;
         }
     }
 }
