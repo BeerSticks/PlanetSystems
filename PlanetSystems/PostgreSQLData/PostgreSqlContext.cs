@@ -14,6 +14,8 @@ namespace PostgreSQLData
         {
         }
 
-        public virtual DbSet<TestClass> Tests { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        
+        public virtual DbSet<OwnPlanetarySystem> OwnPlanetarySystems { get; set; }
     }
 }

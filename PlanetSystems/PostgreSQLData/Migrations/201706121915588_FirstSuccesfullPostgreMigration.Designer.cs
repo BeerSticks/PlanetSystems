@@ -7,13 +7,13 @@ namespace PostgreSQLData.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class FirstSuccessfullPostgreMigration : IMigrationMetadata
+    public sealed partial class FirstSuccesfullPostgreMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FirstSuccessfullPostgreMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FirstSuccesfullPostgreMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706091539035_FirstSuccessfullPostgreMigration"; }
+            get { return "201706121915588_FirstSuccesfullPostgreMigration"; }
         }
         
         string IMigrationMetadata.Source

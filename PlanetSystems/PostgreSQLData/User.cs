@@ -7,16 +7,19 @@ using System.Threading.Tasks;
 
 namespace PostgreSQLData
 {
-    public partial class TestClass
+    public partial class User
     {
-        public TestClass()
+        public User()
         {
-
+            this.OwnPlanetarySystems = new HashSet<OwnPlanetarySystem>();
         }
 
         [Key]
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public virtual ICollection<OwnPlanetarySystem> OwnPlanetarySystems { get; set; }
+
     }
 }

@@ -64,23 +64,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201706091539035_FirstSuccessfullPostgreMigration.cs" />
-    <Compile Include="Migrations\201706091539035_FirstSuccessfullPostgreMigration.Designer.cs">
-      <DependentUpon>201706091539035_FirstSuccessfullPostgreMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201706121915588_FirstSuccesfullPostgreMigration.cs" />
+    <Compile Include="Migrations\201706121915588_FirstSuccesfullPostgreMigration.Designer.cs">
+      <DependentUpon>201706121915588_FirstSuccesfullPostgreMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="OwnPlanetarySystem.cs" />
     <Compile Include="PostgreSqlContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestClass.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706091539035_FirstSuccessfullPostgreMigration.resx">
-      <DependentUpon>201706091539035_FirstSuccessfullPostgreMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706121915588_FirstSuccesfullPostgreMigration.resx">
+      <DependentUpon>201706121915588_FirstSuccesfullPostgreMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
