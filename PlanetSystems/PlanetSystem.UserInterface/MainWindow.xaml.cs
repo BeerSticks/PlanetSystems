@@ -44,8 +44,6 @@ namespace PlanetSystem.UserInterface
                     case ".xml":
                         ImportDataFromXml(filePath);
                         break;
-                    default:
-                        break;
                 }
 
                 using (var ctx = new SqlServerContext())
@@ -78,7 +76,7 @@ namespace PlanetSystem.UserInterface
         private void ImportDataFromJson(string jsonFilePath)
         {
             string json = File.ReadAllText(jsonFilePath);
-            DataTable table = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
+            DataTable table = (DataTable)JsonConvert.DeserializeObject(json, typeof(DataTable));
 
             dataGridFromFile.ItemsSource = table.AsDataView();
         }
