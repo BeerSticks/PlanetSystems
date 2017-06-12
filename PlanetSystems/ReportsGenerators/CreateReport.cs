@@ -34,11 +34,8 @@ namespace ReportsGenerators
             table.AddCell(new Phrase("test"));
             doc.Add(table);
 
-<<<<<<< HEAD
             Image image = Image.GetInstance("images\\planet.png");
-=======
-            iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance("C:\\Users\\Darin-PC\\Desktop\\PlanetSystems\\PlanetSystems\\ReportsGenerators\\images\\planet.png");
->>>>>>> 50f46779293fed951d453a68e00d9ca653388d40
+            //Image image = Image.GetInstance("C:\\Users\\Darin-PC\\Desktop\\PlanetSystems\\PlanetSystems\\ReportsGenerators\\images\\planet.png");
 
             doc.Add(image);
             doc.Close();
