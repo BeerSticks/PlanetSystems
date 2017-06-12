@@ -81,7 +81,7 @@ namespace PlanetSystem.Models.Bodies
             set { this._artificialObjects = (List<ArtificialObject>)value; }
         }
         #endregion
-            
+
         // Methods
         #region Stars
         public void SetStar(Star star)
@@ -96,18 +96,18 @@ namespace PlanetSystem.Models.Bodies
         #endregion
 
         #region Planets
-        public void AddPlanetByOrbitalRadius(Planet planet, double radius)
+        public void AddPlanetByOrbitalRadius(Planet planet, double radius, double coveredAngle)
         {
             this.Planets.Add(planet);
             planet.Attach(this);
-            Physics.EnterOrbitByGivenRadius(ref planet, this.Star, radius);
+            Physics.EnterOrbitByGivenRadius(ref planet, this.Star, radius, coveredAngle);
         }
 
-        public void AddPlanetByOrbitalSpeed(Planet planet, double speed)
+        public void AddPlanetByOrbitalSpeed(Planet planet, double speed, double coveredAngle)
         {
             this.Planets.Add(planet);
             planet.Attach(this);
-            Physics.EnterOrbitByGivenSpeed(ref planet, this.Star, speed);
+            Physics.EnterOrbitByGivenSpeed(ref planet, this.Star, speed, coveredAngle);
         }
 
         public void RemovePlanet(string name)
@@ -119,6 +119,7 @@ namespace PlanetSystem.Models.Bodies
             if (planet != null)
             {
                 planet.RemoveAllMoons();
+                this.Planets.Remove(planet);
             }
         }
         #endregion
@@ -135,14 +136,16 @@ namespace PlanetSystem.Models.Bodies
             return moons;
         }
 
-        public void AddMoonByOrbitalRadius(Moon moon, Planet planet, double radius)
+        public void AddMoonByOrbitalRadius(Moon moon, Planet planet, double radius, double coveredAngle)
         {
-            planet.AddMoonByOrbitalRadius(moon, radius);
+            planet.AddMoonByOrbitalRadius(moon, radius, coveredAngle);
         }
 
-        public void AddMoonByOrbitalSpeed(Moon moon, Planet planet, double speed)
+        public void AddMoonByOrbitalSpeed(Moon moon, Planet planet, double speed, double coveredAngle)
         {
-            planet.AddMoonByOrbitalSpeed(moon, speed);
+            var dummy = planet;
+            var dummy2 = moon;
+            planet.AddMoonByOrbitalSpeed(moon, speed, coveredAngle);
         }
         #endregion
 
@@ -159,6 +162,18 @@ namespace PlanetSystem.Models.Bodies
             asteroid.PlanetarySystem = null;
         }
 
+        public void RemoveAsteroid(string name)
+        {
+            var asteroidQuery = from a in this.Asteroids
+                                where a.Name == name
+                                select a;
+            var asteroid = asteroidQuery.FirstOrDefault();
+            if (asteroid != null)
+            {
+                RemoveAsteroid(asteroid);
+            }
+        }
+
         public void AddArtificialObject(ArtificialObject artificialObject)
         {
             this._artificialObjects.Add(artificialObject);
@@ -170,6 +185,19 @@ namespace PlanetSystem.Models.Bodies
             this._artificialObjects.Remove(artificialObject);
             artificialObject.PlanetarySystem = null;
         }
+
+        public void RemoveArtificialObject(string name)
+        {
+            var artObjQuery = from a in this.ArtificialObjects
+                              where a.Name == name
+                              select a;
+            var artObj = artObjQuery.FirstOrDefault();
+            if (artObj != null)
+            {
+                RemoveArtificialObject(artObj);
+            }
+        }
+
         #endregion
 
         #region Other
@@ -211,7 +239,57 @@ namespace PlanetSystem.Models.Bodies
             }
             return bodies;
         }
+
+        public List<Point> GetAllPositions()
+        {
+            List<Point> positions = new List<Point>();
+            GetAllBodies().ToList().ForEach(b => positions.Add(b.Center));
+            return positions;
+        }
         #endregion
 
+        #region CLONING
+        public PlanetarySystem Clone()
+        {
+            PlanetarySystem clone = new PlanetarySystem(this.Name);
+            Star cloneStar = new Star(this.Star);
+            clone.SetStar(cloneStar);
+
+            this.Planets.ToList().ForEach(pl =>
+            {
+                Planet clonePlanet = new Planet(pl);
+                clone.AddPlanetNOTORBITALSAFE(clonePlanet);
+                pl.Moons.ToList().ForEach(m =>
+                {
+                    Moon cloneMoon = new Moon(m);
+                    pl.AddMoonNOTORBITALSAFE(cloneMoon);
+                });
+            });
+
+            this.Asteroids.ToList().ForEach(a =>
+            {
+                Asteroid cloneAsteroid = new Asteroid(a);
+                clone.AddAsteroid(cloneAsteroid);
+            });
+
+            this.ArtificialObjects.ToList().ForEach(artObj =>
+            {
+                ArtificialObject cloneArtObj = new ArtificialObject(artObj);
+                clone.AddArtificialObject(cloneArtObj);
+            });
+
+            return clone;
+        }
+        public void AddPlanetNOTORBITALSAFE(Planet planet)
+        {
+            this.Planets.Add(planet);
+            planet.Attach(this);
+        }
+
+        public void AddMoonNOTORBITALSAFE(Moon moon, Planet planet)
+        {
+            planet.AddMoonNOTORBITALSAFE(moon);
+        }
+        #endregion
     }
 }

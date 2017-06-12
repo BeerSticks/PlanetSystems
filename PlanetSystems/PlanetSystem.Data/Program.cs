@@ -22,12 +22,36 @@ namespace PlanetSystem.Data
             //Database.DeletePlanetarySystem("Other system");
 
             //var solarSystem = Database.LoadPlanetarySystem("Solar system");
-            var otherSystem = Database.LoadPlanetarySystem("Other system");
-
-            Console.WriteLine(otherSystem.Name);
+            //var otherSystem = Database.LoadPlanetarySystem("Other system");
+            //TESTClone(otherSystem);
 
             Console.WriteLine("Done");
             Console.ReadLine();
+        }
+
+        static void TESTClone(PlanetarySystem systemToClone)
+        {
+            var clone = systemToClone.Clone();
+            clone.Name += "CLONE";
+            clone.Star.Name += "CLONE";
+            clone.Planets.ToList().ForEach(p => p.Name += "CLONE");
+            clone.Moons.ToList().ForEach(m => m.Name += "CLONE");
+            clone.Asteroids.ToList().ForEach(a => a.Name += "CLONE");
+            clone.Moons.ToList().ForEach(art => art.Name += "CLONE");
+
+            Console.WriteLine(systemToClone.Name);
+            Console.WriteLine(systemToClone.Star.Name);
+            systemToClone.Planets.ToList().ForEach(p => Console.WriteLine(p.Name));
+            systemToClone.Moons.ToList().ForEach(m => Console.WriteLine(m.Name));
+            systemToClone.Asteroids.ToList().ForEach(a => Console.WriteLine(a.Name));
+            systemToClone.ArtificialObjects.ToList().ForEach(art => Console.WriteLine(art.Name));
+            Console.WriteLine();
+            Console.WriteLine(clone.Name);
+            Console.WriteLine(clone.Star.Name);
+            clone.Planets.ToList().ForEach(p => Console.WriteLine(p.Name));
+            clone.Moons.ToList().ForEach(m => Console.WriteLine(m.Name));
+            clone.Asteroids.ToList().ForEach(a => Console.WriteLine(a.Name));
+            clone.ArtificialObjects.ToList().ForEach(art => Console.WriteLine(art.Name));
         }
 
         static PlanetarySystem GetSolarSystem()
@@ -47,31 +71,31 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "Earth");
-            solarSystem.AddPlanetByOrbitalRadius(earth, 150 * Math.Pow(10, 9));
+            solarSystem.AddPlanetByOrbitalRadius(earth, 150 * Math.Pow(10, 9), 0);
 
-            Moon moon = new Moon(
-                center: new Point(0, 0, 0),
-                mass: 7.342 * Math.Pow(10, 22),
-                radius: 5,
-                velocity: new Vector(new Point(0, 0, 0)),
-                name: "Moon");
-            solarSystem.AddMoonByOrbitalSpeed(moon, earth, 1022);
+            //Moon moon = new Moon(
+            //    center: new Point(0, 0, 0),
+            //    mass: 7.342 * Math.Pow(10, 22),
+            //    radius: 5,
+            //    velocity: new Vector(new Point(0, 0, 0)),
+            //    name: "Moon");
+            //solarSystem.AddMoonByOrbitalSpeed(moon, earth, 1022);
 
-            Asteroid someAsteroid = new Asteroid(
-                center: new Point(380 * Math.Pow(10, 13), 4560, 7867860),
-                mass: 7987,
-                radius: 5,
-                velocity: new Vector(new Point(-456, 645, 6)),
-                name: "someAsteroid");
-            solarSystem.AddAsteroid(someAsteroid);
+            //Asteroid someAsteroid = new Asteroid(
+            //    center: new Point(380 * Math.Pow(10, 13), 4560, 7867860),
+            //    mass: 7987,
+            //    radius: 5,
+            //    velocity: new Vector(new Point(-456, 645, 6)),
+            //    name: "someAsteroid");
+            //solarSystem.AddAsteroid(someAsteroid);
 
-            ArtificialObject something = new ArtificialObject(
-                center: new Point( -456786, 1568790, 12370),
-                mass: 2000,
-                radius: 5,
-                velocity: new Vector(new Point(620, -82, 894)),
-                name: "something");
-            solarSystem.AddArtificialObject(something);
+            //ArtificialObject something = new ArtificialObject(
+            //    center: new Point( -456786, 1568790, 12370),
+            //    mass: 2000,
+            //    radius: 5,
+            //    velocity: new Vector(new Point(620, -82, 894)),
+            //    name: "something");
+            //solarSystem.AddArtificialObject(something);
 
             return solarSystem;
         }
@@ -93,7 +117,7 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "Aiur");
-            otherSystem.AddPlanetByOrbitalRadius(aiur, 75 * Math.Pow(10, 9));
+            otherSystem.AddPlanetByOrbitalRadius(aiur, 75 * Math.Pow(10, 9), 0);
 
             Moon someAuirMoon = new Moon(
                 center: new Point(0, 0, 0),
@@ -101,7 +125,7 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "Some Aiur moon");
-            otherSystem.AddMoonByOrbitalSpeed(someAuirMoon, aiur, 220);
+            otherSystem.AddMoonByOrbitalSpeed(someAuirMoon, aiur, 220, 0);
 
             Planet notAiur = new Planet(
                 center: new Point(0, 0, 0),
@@ -109,7 +133,7 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "NotAiur");
-            otherSystem.AddPlanetByOrbitalRadius(notAiur, 15 * Math.Pow(10, 9));
+            otherSystem.AddPlanetByOrbitalRadius(notAiur, 15 * Math.Pow(10, 9), 0);
 
             //Moon floatingBrick = new Moon(
             //    center: new Point(0, 0, 0),
@@ -125,7 +149,7 @@ namespace PlanetSystem.Data
                 radius: 5,
                 velocity: new Vector(new Point(0, 0, 0)),
                 name: "a damn submarine");
-            otherSystem.AddMoonByOrbitalSpeed(aDamnSubmarine, notAiur, 999);
+            otherSystem.AddMoonByOrbitalSpeed(aDamnSubmarine, notAiur, 999, 0);
 
             Asteroid someOtherAsteroid = new Asteroid(
                 center: new Point(-250 * Math.Pow(10, 17), -874560, 565784),
@@ -172,9 +196,9 @@ namespace PlanetSystem.Data
 
 
                 solarSystem.SetStar(sun);
-                solarSystem.AddPlanetByOrbitalRadius(earth, 150 * Math.Pow(10, 9));
+                solarSystem.AddPlanetByOrbitalRadius(earth, 150 * Math.Pow(10, 9), 0);
                 //solarSystem.AddPlanetByOrbitalSpeed(earth, 29780);
-                solarSystem.AddMoonByOrbitalRadius(moon, earth, 384000000);
+                solarSystem.AddMoonByOrbitalRadius(moon, earth, 384000000, 0);
                 //solarSystem.AttachMoonToPlanetByOrbitalSpeed(moon, earth, 1022);
 
                 context.PlanetarySystems.Add(solarSystem);

@@ -15,7 +15,7 @@ namespace PlanetSystem.Models.Utilities
 
         protected Sphere(Point center, double radius)
         {
-            this.Center = center;
+            this.Center = new Point(center);
             this.Radius = radius;
         }
         

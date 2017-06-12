@@ -28,7 +28,7 @@ namespace PlanetSystem.Models.Bodies
         }
 
         // Required from Entity Framework
-        private Asteroid() { }
+        public Asteroid() { }
 
         // Properties
         [Key]
