@@ -32,6 +32,7 @@ namespace ReportsGenerators
             table.AddCell(new Phrase("test"));
             table.AddCell(new Phrase("test"));
             doc.Add(table);
+            iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance("C:\\Users\\Darin-PC\\Desktop\\PlanetSystems\\PlanetSystems\\ReportsGenerators\\images\\planet.png");
             doc.Add(image);
             doc.Close();
         }
