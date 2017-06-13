@@ -985,6 +985,7 @@
             this.stepsCountBox.Name = "stepsCountBox";
             this.stepsCountBox.Size = new System.Drawing.Size(147, 20);
             this.stepsCountBox.TabIndex = 0;
+            this.stepsCountBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
             // 
             // canvasPanel
             // 
