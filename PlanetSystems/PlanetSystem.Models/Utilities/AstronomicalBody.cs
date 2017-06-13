@@ -31,7 +31,7 @@ namespace PlanetSystem.Models.Utilities
         {
         }
 
-        protected AstronomicalBody() { }
+        public AstronomicalBody() { }
 
         // Properties
 

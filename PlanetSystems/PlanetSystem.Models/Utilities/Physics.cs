@@ -147,11 +147,11 @@ namespace PlanetSystem.Models.Utilities
             // TODO: Implement orbital axis and startingPointOffset
 
             satellite.Center = new Point(
-                primary.Center.X + radius,
-                primary.Center.Y,
+                primary.Center.X + (radius * Math.Cos(coveredAngle)),
+                primary.Center.Y + (radius * Math.Sin(coveredAngle)),
                 primary.Center.Z);
             double relativeTangentialSpeed = GetRelativeTangentialSpeedForOrbit(satellite, primary);
-            Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, Math.PI / 2);
+            Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, (Math.PI / 2) + coveredAngle);
             if (satellite is Moon)
             {
                 satelliteRelativeVelocity = satelliteRelativeVelocity.GetOpposite();
@@ -169,10 +169,10 @@ namespace PlanetSystem.Models.Utilities
             // TODO: Implement orbital axis and startingPointOffset
             double radius = GetRadiusOfOrbit(satellite, primary, relativeTangentialSpeed);
             satellite.Center = new Point(
-                primary.Center.X + radius,
-                primary.Center.Y,
+                primary.Center.X + (radius * Math.Cos(coveredAngle)),
+                primary.Center.Y + (radius * Math.Sin(coveredAngle)),
                 primary.Center.Z);
-            Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, Math.PI / 2);
+            Vector satelliteRelativeVelocity = new Vector(relativeTangentialSpeed, Math.PI / 2, (Math.PI / 2) + coveredAngle);
             if (satellite is Moon)
             {
                 satelliteRelativeVelocity = satelliteRelativeVelocity.GetOpposite();

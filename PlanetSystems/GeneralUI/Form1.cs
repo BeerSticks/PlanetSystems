@@ -19,6 +19,7 @@ namespace GeneralUI
         PlanetarySystem currentPlanetarySystem;
         AstronomicalBody selectedBody;
         Plane planeOfGraph = Plane.XY;
+        double scaleFactor = 0;
 
         public Form1()
         {
@@ -276,33 +277,47 @@ namespace GeneralUI
             listboxOfPlanetarySystems.Visible = false;
             listboxOfPlanetarySystems.Items.Clear();
             planetarySystemTreeView.Visible = true;
+            SetScale();
             Backup();
         }
 
         private void loadButton_Click(object sender, EventArgs e)
         {
-            planetarySystemTreeView.Visible = false;
-            listboxOfPlanetarySystems.Visible = true;
-            ClearPropertiesControls();
-            ClearCreateNewSection();
-            LoadPlanetarySystemNamesToList();
+            try
+            {
+                planetarySystemTreeView.Visible = false;
+                listboxOfPlanetarySystems.Visible = true;
+                ClearPropertiesControls();
+                ClearCreateNewSection();
+                LoadPlanetarySystemNamesToList();
+            }
+            catch (Exception exc)
+            {
+            }
         }
 
-        private void saveBodyChangesButton_Click(object sender, EventArgs e)
+        private void saveBodyChangesButton_Click(object sender, EventArgs eventArgs)
         {
-            selectedBody.Name = nameBox.Text;
-            selectedBody.Mass = MathUtilities.ParseFromExpNotation(double.Parse(massBox.Text), int.Parse(massEBox.Text));
-            selectedBody.Radius = MathUtilities.ParseFromExpNotation(double.Parse(radiusBox.Text), int.Parse(radiusEBox.Text));
+            try
+            {
+                selectedBody.Name = nameBox.Text;
+                selectedBody.Mass = MathUtilities.ParseFromExpNotation(double.Parse(massBox.Text), int.Parse(massEBox.Text));
+                selectedBody.Radius = MathUtilities.ParseFromExpNotation(double.Parse(radiusBox.Text), int.Parse(radiusEBox.Text));
 
-            selectedBody.Center.X = MathUtilities.ParseFromExpNotation(double.Parse(posXBox.Text), int.Parse(posXEBox.Text));
-            selectedBody.Center.Y = MathUtilities.ParseFromExpNotation(double.Parse(posYBox.Text), int.Parse(posYEBox.Text));
-            selectedBody.Center.Z = MathUtilities.ParseFromExpNotation(double.Parse(posZBox.Text), int.Parse(posZEBox.Text));
+                selectedBody.Center.X = MathUtilities.ParseFromExpNotation(double.Parse(posXBox.Text), int.Parse(posXEBox.Text));
+                selectedBody.Center.Y = MathUtilities.ParseFromExpNotation(double.Parse(posYBox.Text), int.Parse(posYEBox.Text));
+                selectedBody.Center.Z = MathUtilities.ParseFromExpNotation(double.Parse(posZBox.Text), int.Parse(posZEBox.Text));
 
-            selectedBody.Velocity.X = double.Parse(velXBox.Text);
-            selectedBody.Velocity.Y = double.Parse(velYBox.Text);
-            selectedBody.Velocity.Z = double.Parse(velZBox.Text);
+                selectedBody.Velocity.X = double.Parse(velXBox.Text);
+                selectedBody.Velocity.Y = double.Parse(velYBox.Text);
+                selectedBody.Velocity.Z = double.Parse(velZBox.Text);
 
-            Backup();
+                Backup();
+            }
+            catch (Exception exc)
+            {
+            }
+ 
         }
 
         #region Auto Update Velocity
@@ -384,8 +399,15 @@ namespace GeneralUI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            Database.SavePlanetarySystem(currentPlanetarySystem);
-            Backup();
+            try
+            {
+                Database.SavePlanetarySystem(currentPlanetarySystem);
+                Backup();
+            }
+            catch (Exception exc)
+            {
+            }
+  
         }
 
         private void createNewTypeBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -496,142 +518,162 @@ namespace GeneralUI
 
         private void createNewButton_Click(object sender, EventArgs e)
         {
-            ClearCreateNewSection();
-            //try
-            //{
-            double coveredAngle = 0;
-            double mass = MathUtilities.ParseFromExpNotation(double.Parse(createNewMassBox.Text), int.Parse(createNewMassEBox.Text));
-            double radius = MathUtilities.ParseFromExpNotation(double.Parse(createNewRadiusBox.Text), int.Parse(createNewRadiusEBox.Text));
-            double orbitalParameter = 0;
             try
             {
-                orbitalParameter = MathUtilities.ParseFromExpNotation(double.Parse(orbitalParameterBox.Text), int.Parse(orbitalParameterEBox.Text));
+                ClearCreateNewSection();
+                double coveredAngle = 0;
+                try
+                {
+                    coveredAngle = double.Parse(createNewCoveredAngleBox.Text);
+                }
+                catch (Exception exc)
+                { }
+
+                double mass = 0;
+                double radius = 0;
+                double orbitalParameter = 0;
+                if (createNewTypeBox.SelectedIndex != 0)
+                {
+                    mass = MathUtilities.ParseFromExpNotation(double.Parse(createNewMassBox.Text), int.Parse(createNewMassEBox.Text));
+                    radius = MathUtilities.ParseFromExpNotation(double.Parse(createNewRadiusBox.Text), int.Parse(createNewRadiusEBox.Text));
+                    orbitalParameter = MathUtilities.ParseFromExpNotation(double.Parse(orbitalParameterBox.Text), int.Parse(orbitalParameterEBox.Text));
+                }
+
+                switch (createNewTypeBox.SelectedIndex)
+                {
+                    case 0:
+                        currentPlanetarySystem = new PlanetarySystem(createNewNameBox.Text);
+                        Star star = new Star(
+                            new PlanetSystem.Models.Utilities.Point(0, 0, 0),
+                            1,
+                            1,
+                            createNewNameBox.Text + "\' star");
+                        currentPlanetarySystem.SetStar(star);
+                        break;
+                    case 1:
+                        Planet planet = new Planet(
+                            new PlanetSystem.Models.Utilities.Point(0, 0, 0),
+                            mass,
+                            radius,
+                            createNewNameBox.Text);
+
+                        if (orbitByRadiusRadio.Checked)
+                        {
+                            currentPlanetarySystem.AddPlanetByOrbitalRadius(
+                                planet,
+                                orbitalParameter,
+                                coveredAngle);
+                        }
+                        else
+                        {
+                            currentPlanetarySystem.AddPlanetByOrbitalSpeed(
+                                planet,
+                                orbitalParameter,
+                                coveredAngle);
+                        }
+                        break;
+                    case 2:
+                        string planetName = createNewPrimeSelectionBox.Text;
+                        var primeQuery = from p in currentPlanetarySystem.Planets
+                                         where p.Name == planetName
+                                         select p;
+                        var prime = primeQuery.FirstOrDefault();
+                        Moon moon = new Moon(
+                            new PlanetSystem.Models.Utilities.Point(0, 0, 0),
+                            mass,
+                            radius,
+                            createNewNameBox.Text);
+
+                        if (orbitByRadiusRadio.Checked)
+                        {
+                            currentPlanetarySystem.AddMoonByOrbitalRadius(
+                                moon,
+                                prime,
+                                orbitalParameter,
+                                coveredAngle);
+                        }
+                        else
+                        {
+                            currentPlanetarySystem.AddMoonByOrbitalSpeed(
+                                moon,
+                                prime,
+                                orbitalParameter,
+                                coveredAngle);
+                        }
+                        break;
+                    case 3:
+                        Asteroid asteroid = new Asteroid(
+                            new PlanetSystem.Models.Utilities.Point(0, 0, 0),
+                            mass,
+                            radius,
+                            createNewNameBox.Text);
+                        currentPlanetarySystem.AddAsteroid(asteroid);
+                        break;
+                    case 4:
+                        ArtificialObject artObj = new ArtificialObject(new PlanetSystem.Models.Utilities.Point(0, 0, 0),
+                            mass,
+                            radius,
+                            createNewNameBox.Text);
+                        currentPlanetarySystem.AddArtificialObject(artObj);
+                        break;
+                }
+                LoadPlanetarySystemToTree(currentPlanetarySystem);
+                Backup();
             }
-            catch (Exception)
+            catch (Exception exc)
             {
             }
-
-            switch (createNewTypeBox.SelectedIndex)
-            {
-                case 0:
-                    currentPlanetarySystem = new PlanetarySystem(createNewNameBox.Text);
-                    Star star = new Star(
-                        new PlanetSystem.Models.Utilities.Point(0, 0, 0),
-                        1,
-                        1,
-                        createNewNameBox.Text + "\' star");
-                    currentPlanetarySystem.SetStar(star);
-                    break;
-                case 1:
-                    Planet planet = new Planet(
-                        new PlanetSystem.Models.Utilities.Point(0, 0, 0),
-                        mass,
-                        radius,
-                        createNewNameBox.Text);
-
-                    if (orbitByRadiusRadio.Checked)
-                    {
-                        currentPlanetarySystem.AddPlanetByOrbitalRadius(
-                            planet,
-                            orbitalParameter,
-                            coveredAngle);
-                    }
-                    else
-                    {
-                        currentPlanetarySystem.AddPlanetByOrbitalSpeed(
-                            planet,
-                            orbitalParameter,
-                            coveredAngle);
-                    }
-                    break;
-                case 2:
-                    string planetName = createNewPrimeSelectionBox.Text;
-                    var primeQuery = from p in currentPlanetarySystem.Planets
-                                     where p.Name == planetName
-                                     select p;
-                    var prime = primeQuery.FirstOrDefault();
-                    Moon moon = new Moon(
-                        new PlanetSystem.Models.Utilities.Point(0, 0, 0),
-                        mass,
-                        radius,
-                        createNewNameBox.Text);
-
-                    if (orbitByRadiusRadio.Checked)
-                    {
-                        currentPlanetarySystem.AddMoonByOrbitalRadius(
-                            moon,
-                            prime,
-                            orbitalParameter,
-                            coveredAngle);
-                    }
-                    else
-                    {
-                        currentPlanetarySystem.AddMoonByOrbitalSpeed(
-                            moon,
-                            prime,
-                            orbitalParameter,
-                            coveredAngle);
-                    }
-                    break;
-                case 3:
-                    Asteroid asteroid = new Asteroid(
-                        new PlanetSystem.Models.Utilities.Point(0, 0, 0),
-                        mass,
-                        radius,
-                        createNewNameBox.Text);
-                    currentPlanetarySystem.AddAsteroid(asteroid);
-                    break;
-                case 4:
-                    ArtificialObject artObj = new ArtificialObject(new PlanetSystem.Models.Utilities.Point(0, 0, 0),
-                        mass,
-                        radius,
-                        createNewNameBox.Text);
-                    currentPlanetarySystem.AddArtificialObject(artObj);
-                    break;
-            }
-            LoadPlanetarySystemToTree(currentPlanetarySystem);
-            Backup();
-            //}
-            //catch (Exception exc)
-            //{
-            //}
         }
 
         private void simulateButton_Click(object sender, EventArgs e)
         {
-            var stepCount = int.Parse(stepsCountBox.Text);
-            var stepDuration = double.Parse(stepDurationBox.Text);
-            List<List<PlanetSystem.Models.Utilities.Point>> positions = new List<List<PlanetSystem.Models.Utilities.Point>>();
-            var startingPositions = currentPlanetarySystem.GetAllPositions();
-            startingPositions.ForEach(p => p = new PlanetSystem.Models.Utilities.Point(p)); //=============
-            positions.Add(startingPositions);
-
-            double greatestDistance;
-            PlanetSystem.Models.Utilities.Point centerPointCandidate = new PlanetSystem.Models.Utilities.Point(0, 0, 0);
-            greatestDistance = Physics.GetGreatestDistance(currentPlanetarySystem.GetAllBodies(), out centerPointCandidate);
-
-            PlanetSystem.Models.Utilities.Point centerPoint = new PlanetSystem.Models.Utilities.Point(0, 0, 0);
-
-            for (int i = 0; i < stepCount; i++)
+            try
             {
-                currentPlanetarySystem.AdvanceTime(currentPlanetarySystem.GetAllBodies(), stepDuration);
-                var currentPositions = currentPlanetarySystem.GetAllPositions();
-                currentPositions.ForEach(p => p = new PlanetSystem.Models.Utilities.Point(p));
-                positions.Add(currentPositions);
-                var currentDistance = Physics.GetGreatestDistance(currentPlanetarySystem.GetAllBodies(), out centerPointCandidate);
-                if (currentDistance > greatestDistance)
-                {
-                    greatestDistance = currentDistance;
-                    centerPoint = new PlanetSystem.Models.Utilities.Point(centerPointCandidate);
-                }
-            }
+                var stepCount = int.Parse(stepsCountBox.Text);
+                var stepDuration = double.Parse(stepDurationBox.Text);
+                List<List<PlanetSystem.Models.Utilities.Point>> positions = new List<List<PlanetSystem.Models.Utilities.Point>>();
+                var startingPositions = currentPlanetarySystem.GetAllPositions();
+                startingPositions.ForEach(p => p = new PlanetSystem.Models.Utilities.Point(p));
+                positions.Add(startingPositions);
 
-            var curves = GetCurvesFromPositions(positions);
-            curves = ScalePositions(curves, greatestDistance, canvasPanel.Width);
-            var drawableCurves = ConvertToDrawableCurves(curves, planeOfGraph,
-                new System.Drawing.Point(canvasPanel.Width / 2, canvasPanel.Height / 2));
-            DrawCurves(drawableCurves);
-            Refresh();
+                double greatestDistance;
+                PlanetSystem.Models.Utilities.Point centerPointCandidate = new PlanetSystem.Models.Utilities.Point(0, 0, 0);
+                greatestDistance = Physics.GetGreatestDistance(currentPlanetarySystem.GetAllBodies(), out centerPointCandidate);
+
+                PlanetSystem.Models.Utilities.Point centerPoint = new PlanetSystem.Models.Utilities.Point(0, 0, 0);
+
+                for (int i = 0; i < stepCount; i++)
+                {
+                    currentPlanetarySystem.AdvanceTime(currentPlanetarySystem.GetAllBodies(), stepDuration);
+                    var currentPositions = currentPlanetarySystem.GetAllPositions();
+                    currentPositions.ForEach(p => p = new PlanetSystem.Models.Utilities.Point(p));
+                    positions.Add(currentPositions);
+                    var currentDistance = Physics.GetGreatestDistance(currentPlanetarySystem.GetAllBodies(), out centerPointCandidate);
+                    if (currentDistance > greatestDistance)
+                    {
+                        greatestDistance = currentDistance;
+                        centerPoint = new PlanetSystem.Models.Utilities.Point(centerPointCandidate);
+                    }
+                }
+
+                var curves = GetCurvesFromPositions(positions);
+                curves = ScalePositions(curves, greatestDistance, canvasPanel.Width);
+                var drawableCurves = ConvertToDrawableCurves(curves, planeOfGraph,
+                    new System.Drawing.Point(canvasPanel.Width / 2, canvasPanel.Height / 2));
+                DrawCurves(drawableCurves);
+                Refresh();
+            }
+            catch (Exception exc)
+            {
+            }
+        }
+
+        private void SetScale()
+        {
+            PlanetSystem.Models.Utilities.Point dummy = new PlanetSystem.Models.Utilities.Point(0,0,0);
+            var bodies = currentPlanetarySystem.GetAllBodies();
+            double greatestDistance = Physics.GetGreatestDistance(bodies, out dummy);
+            scaleFactor = canvasPanel.Width / (greatestDistance * 2.5);
         }
 
         private List<List<PlanetSystem.Models.Utilities.Point>> GetCurvesFromPositions(List<List<PlanetSystem.Models.Utilities.Point>> positions)
@@ -694,7 +736,7 @@ namespace GeneralUI
         private void CenterPositions(
             ref List<List<PlanetSystem.Models.Utilities.Point>> positions,
             PlanetSystem.Models.Utilities.Point centerPoint)
-        {
+        {          
             positions.ForEach(l => { PlanetSystem.Models.Utilities.Point.OffsetBy(l, centerPoint.GetOpposite()); });
         }
 
@@ -702,7 +744,6 @@ namespace GeneralUI
             double greatestDistance,
             double width)
         {
-            double scaleFactor = width / (greatestDistance * 5);
             positions.ForEach(l =>
             {
                 l.ForEach(p =>
@@ -712,8 +753,6 @@ namespace GeneralUI
                     p.Z = p.Z * scaleFactor;
                 });
             });
-            var asd = positions;
-            var hehue = positions;
             return positions;
         }
 
@@ -834,6 +873,12 @@ namespace GeneralUI
             try
             {
                 double coveredAngle = 0;
+                try
+                {
+                    coveredAngle = double.Parse(setOrbitCoveredAngleBox.Text);
+                }
+                catch (Exception exc)
+                { }
                 double orbitParameter = MathUtilities.ParseFromExpNotation(
                     double.Parse(setOrbitParameterBox.Text),
                     int.Parse(setOrbitParameterEBox.Text));
@@ -847,6 +892,30 @@ namespace GeneralUI
                         if (setOrbitRadiusRadio.Checked)
                         {
                             Physics.EnterOrbitByGivenRadius(ref planet, currentPlanetarySystem.Star, orbitParameter, coveredAngle);
+                        }
+                        else
+                        {
+                            Physics.EnterOrbitByGivenSpeed(ref planet, currentPlanetarySystem.Star, orbitParameter, coveredAngle);
+                        }
+                        Vector deltaVelocity = planet.Velocity - startingVelocity;
+                        PlanetSystem.Models.Utilities.Point deltaPoint = planet.Center - startingPoint;
+                        planet.Moons.ToList().ForEach(m =>
+                        {
+                            Physics.AddVelocityToBody(ref m, deltaVelocity);
+                            m.Center = new PlanetSystem.Models.Utilities.Point(
+                                m.Center.X + deltaPoint.X,
+                                m.Center.Y + deltaPoint.Y,
+                                m.Center.X + deltaPoint.Z
+                                );
+                        });
+                    }
+                    else
+                    {
+                        Vector startingVelocity = new Vector(planet.Velocity);
+                        PlanetSystem.Models.Utilities.Point startingPoint = new PlanetSystem.Models.Utilities.Point(planet.Center);
+                        if (setOrbitRadiusRadio.Checked)
+                        {
+                            Physics.EnterOrbitByGivenSpeed(ref planet, currentPlanetarySystem.Star, orbitParameter, coveredAngle);
                         }
                         else
                         {
@@ -913,11 +982,33 @@ namespace GeneralUI
                         Physics.EnterOrbitByGivenSpeed(ref artificialObject, primary, orbitParameter, coveredAngle);
                     }
                 }
+                else
+                {
+                    var bodies = currentPlanetarySystem.GetAllBodies();
+                    var primaryQuery = from p in bodies
+                                       where p.Name == setOrbitPrimeBox.SelectedText
+                                       select p;
+
+                    AstronomicalBody primary = primaryQuery.FirstOrDefault();
+                    if (setOrbitRadiusRadio.Checked)
+                    {
+                        Physics.EnterOrbitByGivenRadius(ref selectedBody, primary, orbitParameter, coveredAngle);
+                    }
+                    else
+                    {
+                        Physics.EnterOrbitByGivenSpeed(ref selectedBody, primary, orbitParameter, coveredAngle);
+                    }
+                }
+                Refresh();
             }
             catch (Exception exc)
             {
-                Console.WriteLine(exc.Message);
             }
+        }
+
+        private void rescaleButton_Click(object sender, EventArgs e)
+        {
+            SetScale();
         }
     }
 }

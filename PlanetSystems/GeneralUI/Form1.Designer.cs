@@ -124,6 +124,11 @@
             this.setOrbitRadiusRadio = new System.Windows.Forms.RadioButton();
             this.setOrbitPrimeLabel = new System.Windows.Forms.Label();
             this.setOrbitPrimeBox = new System.Windows.Forms.ComboBox();
+            this.createNewCoveredAngleLabel = new System.Windows.Forms.Label();
+            this.createNewCoveredAngleBox = new System.Windows.Forms.TextBox();
+            this.setOrbitCoveredAngleBox = new System.Windows.Forms.TextBox();
+            this.setOrbitCoveredAngleLabel = new System.Windows.Forms.Label();
+            this.rescaleButton = new System.Windows.Forms.Button();
             this.PropertiesGroupBox.SuspendLayout();
             this.velocityGroupBox.SuspendLayout();
             this.positionGroupBox.SuspendLayout();
@@ -141,9 +146,9 @@
             this.PropertiesGroupBox.Controls.Add(this.positionGroupBox);
             this.PropertiesGroupBox.Controls.Add(this.massEBox);
             this.PropertiesGroupBox.Controls.Add(this.generalInfoGroupBox);
-            this.PropertiesGroupBox.Location = new System.Drawing.Point(277, 41);
+            this.PropertiesGroupBox.Location = new System.Drawing.Point(277, 12);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(267, 502);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(267, 515);
             this.PropertiesGroupBox.TabIndex = 0;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Properties";
@@ -152,7 +157,7 @@
             // 
             this.saveBodyChangesButton.Location = new System.Drawing.Point(7, 471);
             this.saveBodyChangesButton.Name = "saveBodyChangesButton";
-            this.saveBodyChangesButton.Size = new System.Drawing.Size(250, 23);
+            this.saveBodyChangesButton.Size = new System.Drawing.Size(250, 38);
             this.saveBodyChangesButton.TabIndex = 17;
             this.saveBodyChangesButton.Text = "Save changes to body";
             this.saveBodyChangesButton.UseVisualStyleBackColor = true;
@@ -174,7 +179,7 @@
             this.velocityGroupBox.Controls.Add(this.velXLabel);
             this.velocityGroupBox.Location = new System.Drawing.Point(6, 286);
             this.velocityGroupBox.Name = "velocityGroupBox";
-            this.velocityGroupBox.Size = new System.Drawing.Size(251, 178);
+            this.velocityGroupBox.Size = new System.Drawing.Size(255, 178);
             this.velocityGroupBox.TabIndex = 16;
             this.velocityGroupBox.TabStop = false;
             this.velocityGroupBox.Text = "Velocity vector";
@@ -300,7 +305,7 @@
             this.positionGroupBox.Controls.Add(this.posXLabel);
             this.positionGroupBox.Location = new System.Drawing.Point(6, 180);
             this.positionGroupBox.Name = "positionGroupBox";
-            this.positionGroupBox.Size = new System.Drawing.Size(251, 100);
+            this.positionGroupBox.Size = new System.Drawing.Size(255, 100);
             this.positionGroupBox.TabIndex = 15;
             this.positionGroupBox.TabStop = false;
             this.positionGroupBox.Text = "Position";
@@ -434,7 +439,7 @@
             this.generalInfoGroupBox.Controls.Add(this.nameLabel);
             this.generalInfoGroupBox.Location = new System.Drawing.Point(6, 19);
             this.generalInfoGroupBox.Name = "generalInfoGroupBox";
-            this.generalInfoGroupBox.Size = new System.Drawing.Size(251, 155);
+            this.generalInfoGroupBox.Size = new System.Drawing.Size(255, 155);
             this.generalInfoGroupBox.TabIndex = 0;
             this.generalInfoGroupBox.TabStop = false;
             this.generalInfoGroupBox.Text = "General Info";
@@ -572,14 +577,14 @@
             // 
             this.planetarySystemTreeView.Location = new System.Drawing.Point(12, 41);
             this.planetarySystemTreeView.Name = "planetarySystemTreeView";
-            this.planetarySystemTreeView.Size = new System.Drawing.Size(259, 470);
+            this.planetarySystemTreeView.Size = new System.Drawing.Size(259, 486);
             this.planetarySystemTreeView.TabIndex = 1;
             this.planetarySystemTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.planetarySystemTreeView_AfterSelect);
             // 
             // listboxOfPlanetarySystems
             // 
             this.listboxOfPlanetarySystems.FormattingEnabled = true;
-            this.listboxOfPlanetarySystems.Location = new System.Drawing.Point(64, 440);
+            this.listboxOfPlanetarySystems.Location = new System.Drawing.Point(158, 442);
             this.listboxOfPlanetarySystems.Name = "listboxOfPlanetarySystems";
             this.listboxOfPlanetarySystems.Size = new System.Drawing.Size(120, 95);
             this.listboxOfPlanetarySystems.TabIndex = 2;
@@ -646,7 +651,7 @@
             this.createNewGroupBox.Controls.Add(this.createNewRadiusEBox);
             this.createNewGroupBox.Controls.Add(this.createNewRadiusLabel);
             this.createNewGroupBox.Controls.Add(this.createNewRadiusBox);
-            this.createNewGroupBox.Location = new System.Drawing.Point(550, 41);
+            this.createNewGroupBox.Location = new System.Drawing.Point(550, 12);
             this.createNewGroupBox.Name = "createNewGroupBox";
             this.createNewGroupBox.Size = new System.Drawing.Size(254, 319);
             this.createNewGroupBox.TabIndex = 8;
@@ -672,6 +677,8 @@
             // 
             // orbitGroupBox
             // 
+            this.orbitGroupBox.Controls.Add(this.createNewCoveredAngleBox);
+            this.orbitGroupBox.Controls.Add(this.createNewCoveredAngleLabel);
             this.orbitGroupBox.Controls.Add(this.orbitalParameterELabel);
             this.orbitGroupBox.Controls.Add(this.orbitalParameterEBox);
             this.orbitGroupBox.Controls.Add(this.orbitalParameterBox);
@@ -680,9 +687,9 @@
             this.orbitGroupBox.Controls.Add(this.orbitByRadiusRadio);
             this.orbitGroupBox.Controls.Add(this.orbitPrimeLabel);
             this.orbitGroupBox.Controls.Add(this.createNewPrimeSelectionBox);
-            this.orbitGroupBox.Location = new System.Drawing.Point(18, 132);
+            this.orbitGroupBox.Location = new System.Drawing.Point(6, 132);
             this.orbitGroupBox.Name = "orbitGroupBox";
-            this.orbitGroupBox.Size = new System.Drawing.Size(223, 148);
+            this.orbitGroupBox.Size = new System.Drawing.Size(242, 148);
             this.orbitGroupBox.TabIndex = 9;
             this.orbitGroupBox.TabStop = false;
             this.orbitGroupBox.Text = "Orbit";
@@ -700,7 +707,7 @@
             // 
             this.orbitalParameterEBox.Location = new System.Drawing.Point(159, 95);
             this.orbitalParameterEBox.Name = "orbitalParameterEBox";
-            this.orbitalParameterEBox.Size = new System.Drawing.Size(58, 20);
+            this.orbitalParameterEBox.Size = new System.Drawing.Size(76, 20);
             this.orbitalParameterEBox.TabIndex = 14;
             this.orbitalParameterEBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
             // 
@@ -822,6 +829,7 @@
             // 
             // simulationGroupBox
             // 
+            this.simulationGroupBox.Controls.Add(this.rescaleButton);
             this.simulationGroupBox.Controls.Add(this.clearGraphButton);
             this.simulationGroupBox.Controls.Add(this.planeLabel);
             this.simulationGroupBox.Controls.Add(this.planeBox);
@@ -833,7 +841,7 @@
             this.simulationGroupBox.Controls.Add(this.stepsCountLabel);
             this.simulationGroupBox.Controls.Add(this.stepDurationBox);
             this.simulationGroupBox.Controls.Add(this.stepsCountBox);
-            this.simulationGroupBox.Location = new System.Drawing.Point(810, 457);
+            this.simulationGroupBox.Location = new System.Drawing.Point(810, 428);
             this.simulationGroupBox.Name = "simulationGroupBox";
             this.simulationGroupBox.Size = new System.Drawing.Size(418, 99);
             this.simulationGroupBox.TabIndex = 9;
@@ -842,9 +850,9 @@
             // 
             // clearGraphButton
             // 
-            this.clearGraphButton.Location = new System.Drawing.Point(314, 19);
+            this.clearGraphButton.Location = new System.Drawing.Point(303, 14);
             this.clearGraphButton.Name = "clearGraphButton";
-            this.clearGraphButton.Size = new System.Drawing.Size(98, 35);
+            this.clearGraphButton.Size = new System.Drawing.Size(109, 35);
             this.clearGraphButton.TabIndex = 34;
             this.clearGraphButton.Text = "Clear canvas";
             this.clearGraphButton.UseVisualStyleBackColor = true;
@@ -870,18 +878,18 @@
             // 
             // generateReport
             // 
-            this.generateReport.Location = new System.Drawing.Point(241, 55);
+            this.generateReport.Location = new System.Drawing.Point(303, 55);
             this.generateReport.Name = "generateReport";
-            this.generateReport.Size = new System.Drawing.Size(171, 37);
+            this.generateReport.Size = new System.Drawing.Size(109, 37);
             this.generateReport.TabIndex = 31;
             this.generateReport.Text = "Generate report";
             this.generateReport.UseVisualStyleBackColor = true;
             // 
             // simulateButton
             // 
-            this.simulateButton.Location = new System.Drawing.Point(241, 19);
+            this.simulateButton.Location = new System.Drawing.Point(241, 55);
             this.simulateButton.Name = "simulateButton";
-            this.simulateButton.Size = new System.Drawing.Size(67, 35);
+            this.simulateButton.Size = new System.Drawing.Size(56, 37);
             this.simulateButton.TabIndex = 30;
             this.simulateButton.Text = "Simulate";
             this.simulateButton.UseVisualStyleBackColor = true;
@@ -940,7 +948,7 @@
             // canvasPanel
             // 
             this.canvasPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.canvasPanel.Location = new System.Drawing.Point(810, 41);
+            this.canvasPanel.Location = new System.Drawing.Point(810, 12);
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.Size = new System.Drawing.Size(418, 410);
             this.canvasPanel.TabIndex = 10;
@@ -967,6 +975,8 @@
             // 
             // setOrbitGroupBox
             // 
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitCoveredAngleBox);
+            this.setOrbitGroupBox.Controls.Add(this.setOrbitCoveredAngleLabel);
             this.setOrbitGroupBox.Controls.Add(this.setOrbitButon);
             this.setOrbitGroupBox.Controls.Add(this.label1);
             this.setOrbitGroupBox.Controls.Add(this.setOrbitParameterEBox);
@@ -976,18 +986,18 @@
             this.setOrbitGroupBox.Controls.Add(this.setOrbitRadiusRadio);
             this.setOrbitGroupBox.Controls.Add(this.setOrbitPrimeLabel);
             this.setOrbitGroupBox.Controls.Add(this.setOrbitPrimeBox);
-            this.setOrbitGroupBox.Location = new System.Drawing.Point(550, 366);
+            this.setOrbitGroupBox.Location = new System.Drawing.Point(550, 337);
             this.setOrbitGroupBox.Name = "setOrbitGroupBox";
-            this.setOrbitGroupBox.Size = new System.Drawing.Size(254, 169);
+            this.setOrbitGroupBox.Size = new System.Drawing.Size(254, 190);
             this.setOrbitGroupBox.TabIndex = 36;
             this.setOrbitGroupBox.TabStop = false;
             this.setOrbitGroupBox.Text = "Set orbit";
             // 
             // setOrbitButon
             // 
-            this.setOrbitButon.Location = new System.Drawing.Point(10, 121);
+            this.setOrbitButon.Location = new System.Drawing.Point(10, 147);
             this.setOrbitButon.Name = "setOrbitButon";
-            this.setOrbitButon.Size = new System.Drawing.Size(238, 23);
+            this.setOrbitButon.Size = new System.Drawing.Size(238, 37);
             this.setOrbitButon.TabIndex = 16;
             this.setOrbitButon.Text = "Set orbit";
             this.setOrbitButon.UseVisualStyleBackColor = true;
@@ -1066,11 +1076,55 @@
             this.setOrbitPrimeBox.Size = new System.Drawing.Size(191, 21);
             this.setOrbitPrimeBox.TabIndex = 8;
             // 
+            // createNewCoveredAngleLabel
+            // 
+            this.createNewCoveredAngleLabel.AutoSize = true;
+            this.createNewCoveredAngleLabel.Location = new System.Drawing.Point(30, 124);
+            this.createNewCoveredAngleLabel.Name = "createNewCoveredAngleLabel";
+            this.createNewCoveredAngleLabel.Size = new System.Drawing.Size(76, 13);
+            this.createNewCoveredAngleLabel.TabIndex = 16;
+            this.createNewCoveredAngleLabel.Text = "Covered angle";
+            // 
+            // createNewCoveredAngleBox
+            // 
+            this.createNewCoveredAngleBox.Location = new System.Drawing.Point(112, 121);
+            this.createNewCoveredAngleBox.Name = "createNewCoveredAngleBox";
+            this.createNewCoveredAngleBox.Size = new System.Drawing.Size(123, 20);
+            this.createNewCoveredAngleBox.TabIndex = 17;
+            this.createNewCoveredAngleBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // setOrbitCoveredAngleBox
+            // 
+            this.setOrbitCoveredAngleBox.Location = new System.Drawing.Point(125, 121);
+            this.setOrbitCoveredAngleBox.Name = "setOrbitCoveredAngleBox";
+            this.setOrbitCoveredAngleBox.Size = new System.Drawing.Size(123, 20);
+            this.setOrbitCoveredAngleBox.TabIndex = 19;
+            this.setOrbitCoveredAngleBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // setOrbitCoveredAngleLabel
+            // 
+            this.setOrbitCoveredAngleLabel.AutoSize = true;
+            this.setOrbitCoveredAngleLabel.Location = new System.Drawing.Point(32, 124);
+            this.setOrbitCoveredAngleLabel.Name = "setOrbitCoveredAngleLabel";
+            this.setOrbitCoveredAngleLabel.Size = new System.Drawing.Size(76, 13);
+            this.setOrbitCoveredAngleLabel.TabIndex = 18;
+            this.setOrbitCoveredAngleLabel.Text = "Covered angle";
+            // 
+            // rescaleButton
+            // 
+            this.rescaleButton.Location = new System.Drawing.Point(241, 14);
+            this.rescaleButton.Name = "rescaleButton";
+            this.rescaleButton.Size = new System.Drawing.Size(56, 35);
+            this.rescaleButton.TabIndex = 35;
+            this.rescaleButton.Text = "Rescale";
+            this.rescaleButton.UseVisualStyleBackColor = true;
+            this.rescaleButton.Click += new System.EventHandler(this.rescaleButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1240, 561);
+            this.ClientSize = new System.Drawing.Size(1240, 531);
             this.Controls.Add(this.setOrbitGroupBox);
             this.Controls.Add(this.revertButton);
             this.Controls.Add(this.deleteButton);
@@ -1205,6 +1259,11 @@
         private System.Windows.Forms.RadioButton setOrbitRadiusRadio;
         private System.Windows.Forms.Label setOrbitPrimeLabel;
         private System.Windows.Forms.ComboBox setOrbitPrimeBox;
+        private System.Windows.Forms.TextBox createNewCoveredAngleBox;
+        private System.Windows.Forms.Label createNewCoveredAngleLabel;
+        private System.Windows.Forms.TextBox setOrbitCoveredAngleBox;
+        private System.Windows.Forms.Label setOrbitCoveredAngleLabel;
+        private System.Windows.Forms.Button rescaleButton;
     }
 }
 
