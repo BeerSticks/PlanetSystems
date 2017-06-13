@@ -84,6 +84,9 @@
             this.createNewNameLabel = new System.Windows.Forms.Label();
             this.createNewMassBox = new System.Windows.Forms.TextBox();
             this.orbitGroupBox = new System.Windows.Forms.GroupBox();
+            this.orbitalParameterLabel = new System.Windows.Forms.Label();
+            this.createNewCoveredAngleBox = new System.Windows.Forms.TextBox();
+            this.createNewCoveredAngleLabel = new System.Windows.Forms.Label();
             this.orbitalParameterELabel = new System.Windows.Forms.Label();
             this.orbitalParameterEBox = new System.Windows.Forms.TextBox();
             this.orbitalParameterBox = new System.Windows.Forms.TextBox();
@@ -100,6 +103,7 @@
             this.createNewRadiusLabel = new System.Windows.Forms.Label();
             this.createNewRadiusBox = new System.Windows.Forms.TextBox();
             this.simulationGroupBox = new System.Windows.Forms.GroupBox();
+            this.rescaleButton = new System.Windows.Forms.Button();
             this.clearGraphButton = new System.Windows.Forms.Button();
             this.planeLabel = new System.Windows.Forms.Label();
             this.planeBox = new System.Windows.Forms.ComboBox();
@@ -115,6 +119,8 @@
             this.deleteButton = new System.Windows.Forms.Button();
             this.revertButton = new System.Windows.Forms.Button();
             this.setOrbitGroupBox = new System.Windows.Forms.GroupBox();
+            this.setOrbitCoveredAngleBox = new System.Windows.Forms.TextBox();
+            this.setOrbitCoveredAngleLabel = new System.Windows.Forms.Label();
             this.setOrbitButon = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.setOrbitParameterEBox = new System.Windows.Forms.TextBox();
@@ -124,11 +130,7 @@
             this.setOrbitRadiusRadio = new System.Windows.Forms.RadioButton();
             this.setOrbitPrimeLabel = new System.Windows.Forms.Label();
             this.setOrbitPrimeBox = new System.Windows.Forms.ComboBox();
-            this.createNewCoveredAngleLabel = new System.Windows.Forms.Label();
-            this.createNewCoveredAngleBox = new System.Windows.Forms.TextBox();
-            this.setOrbitCoveredAngleBox = new System.Windows.Forms.TextBox();
-            this.setOrbitCoveredAngleLabel = new System.Windows.Forms.Label();
-            this.rescaleButton = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.PropertiesGroupBox.SuspendLayout();
             this.velocityGroupBox.SuspendLayout();
             this.positionGroupBox.SuspendLayout();
@@ -594,7 +596,7 @@
             // 
             this.loadButton.Location = new System.Drawing.Point(12, 12);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(61, 23);
+            this.loadButton.Size = new System.Drawing.Size(44, 23);
             this.loadButton.TabIndex = 3;
             this.loadButton.Text = "Load";
             this.loadButton.UseVisualStyleBackColor = true;
@@ -602,9 +604,9 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(79, 12);
+            this.saveButton.Location = new System.Drawing.Point(62, 12);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(54, 23);
+            this.saveButton.Size = new System.Drawing.Size(44, 23);
             this.saveButton.TabIndex = 4;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -677,6 +679,7 @@
             // 
             // orbitGroupBox
             // 
+            this.orbitGroupBox.Controls.Add(this.orbitalParameterLabel);
             this.orbitGroupBox.Controls.Add(this.createNewCoveredAngleBox);
             this.orbitGroupBox.Controls.Add(this.createNewCoveredAngleLabel);
             this.orbitGroupBox.Controls.Add(this.orbitalParameterELabel);
@@ -694,10 +697,36 @@
             this.orbitGroupBox.TabStop = false;
             this.orbitGroupBox.Text = "Orbit";
             // 
+            // orbitalParameterLabel
+            // 
+            this.orbitalParameterLabel.AutoSize = true;
+            this.orbitalParameterLabel.Location = new System.Drawing.Point(9, 100);
+            this.orbitalParameterLabel.Name = "orbitalParameterLabel";
+            this.orbitalParameterLabel.Size = new System.Drawing.Size(40, 13);
+            this.orbitalParameterLabel.TabIndex = 18;
+            this.orbitalParameterLabel.Text = "Radius";
+            // 
+            // createNewCoveredAngleBox
+            // 
+            this.createNewCoveredAngleBox.Location = new System.Drawing.Point(112, 121);
+            this.createNewCoveredAngleBox.Name = "createNewCoveredAngleBox";
+            this.createNewCoveredAngleBox.Size = new System.Drawing.Size(123, 20);
+            this.createNewCoveredAngleBox.TabIndex = 17;
+            this.createNewCoveredAngleBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // createNewCoveredAngleLabel
+            // 
+            this.createNewCoveredAngleLabel.AutoSize = true;
+            this.createNewCoveredAngleLabel.Location = new System.Drawing.Point(30, 124);
+            this.createNewCoveredAngleLabel.Name = "createNewCoveredAngleLabel";
+            this.createNewCoveredAngleLabel.Size = new System.Drawing.Size(76, 13);
+            this.createNewCoveredAngleLabel.TabIndex = 16;
+            this.createNewCoveredAngleLabel.Text = "Covered angle";
+            // 
             // orbitalParameterELabel
             // 
             this.orbitalParameterELabel.AutoSize = true;
-            this.orbitalParameterELabel.Location = new System.Drawing.Point(139, 98);
+            this.orbitalParameterELabel.Location = new System.Drawing.Point(164, 98);
             this.orbitalParameterELabel.Name = "orbitalParameterELabel";
             this.orbitalParameterELabel.Size = new System.Drawing.Size(14, 13);
             this.orbitalParameterELabel.TabIndex = 15;
@@ -705,17 +734,17 @@
             // 
             // orbitalParameterEBox
             // 
-            this.orbitalParameterEBox.Location = new System.Drawing.Point(159, 95);
+            this.orbitalParameterEBox.Location = new System.Drawing.Point(184, 95);
             this.orbitalParameterEBox.Name = "orbitalParameterEBox";
-            this.orbitalParameterEBox.Size = new System.Drawing.Size(76, 20);
+            this.orbitalParameterEBox.Size = new System.Drawing.Size(51, 20);
             this.orbitalParameterEBox.TabIndex = 14;
             this.orbitalParameterEBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntegerForce);
             // 
             // orbitalParameterBox
             // 
-            this.orbitalParameterBox.Location = new System.Drawing.Point(10, 95);
+            this.orbitalParameterBox.Location = new System.Drawing.Point(51, 95);
             this.orbitalParameterBox.Name = "orbitalParameterBox";
-            this.orbitalParameterBox.Size = new System.Drawing.Size(123, 20);
+            this.orbitalParameterBox.Size = new System.Drawing.Size(107, 20);
             this.orbitalParameterBox.TabIndex = 13;
             this.orbitalParameterBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
             // 
@@ -749,15 +778,16 @@
             this.orbitByRadiusRadio.TabStop = true;
             this.orbitByRadiusRadio.Text = "Radius";
             this.orbitByRadiusRadio.UseVisualStyleBackColor = true;
+            this.orbitByRadiusRadio.CheckedChanged += new System.EventHandler(this.orbitByRadiusRadio_CheckedChanged);
             // 
             // orbitPrimeLabel
             // 
             this.orbitPrimeLabel.AutoSize = true;
             this.orbitPrimeLabel.Location = new System.Drawing.Point(7, 20);
             this.orbitPrimeLabel.Name = "orbitPrimeLabel";
-            this.orbitPrimeLabel.Size = new System.Drawing.Size(36, 13);
+            this.orbitPrimeLabel.Size = new System.Drawing.Size(41, 13);
             this.orbitPrimeLabel.TabIndex = 9;
-            this.orbitPrimeLabel.Text = "Prime:";
+            this.orbitPrimeLabel.Text = "Primary";
             // 
             // createNewPrimeSelectionBox
             // 
@@ -848,6 +878,16 @@
             this.simulationGroupBox.TabStop = false;
             this.simulationGroupBox.Text = "Simulation";
             // 
+            // rescaleButton
+            // 
+            this.rescaleButton.Location = new System.Drawing.Point(241, 14);
+            this.rescaleButton.Name = "rescaleButton";
+            this.rescaleButton.Size = new System.Drawing.Size(56, 35);
+            this.rescaleButton.TabIndex = 35;
+            this.rescaleButton.Text = "Rescale";
+            this.rescaleButton.UseVisualStyleBackColor = true;
+            this.rescaleButton.Click += new System.EventHandler(this.rescaleButton_Click);
+            // 
             // clearGraphButton
             // 
             this.clearGraphButton.Location = new System.Drawing.Point(303, 14);
@@ -884,6 +924,7 @@
             this.generateReport.TabIndex = 31;
             this.generateReport.Text = "Generate report";
             this.generateReport.UseVisualStyleBackColor = true;
+            this.generateReport.Click += new System.EventHandler(this.generateReport_Click);
             // 
             // simulateButton
             // 
@@ -955,9 +996,9 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(139, 12);
+            this.deleteButton.Location = new System.Drawing.Point(112, 12);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(64, 23);
+            this.deleteButton.Size = new System.Drawing.Size(47, 23);
             this.deleteButton.TabIndex = 11;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -965,9 +1006,9 @@
             // 
             // revertButton
             // 
-            this.revertButton.Location = new System.Drawing.Point(209, 12);
+            this.revertButton.Location = new System.Drawing.Point(165, 12);
             this.revertButton.Name = "revertButton";
-            this.revertButton.Size = new System.Drawing.Size(62, 23);
+            this.revertButton.Size = new System.Drawing.Size(49, 23);
             this.revertButton.TabIndex = 35;
             this.revertButton.Text = "Revert";
             this.revertButton.UseVisualStyleBackColor = true;
@@ -992,6 +1033,23 @@
             this.setOrbitGroupBox.TabIndex = 36;
             this.setOrbitGroupBox.TabStop = false;
             this.setOrbitGroupBox.Text = "Set orbit";
+            // 
+            // setOrbitCoveredAngleBox
+            // 
+            this.setOrbitCoveredAngleBox.Location = new System.Drawing.Point(125, 121);
+            this.setOrbitCoveredAngleBox.Name = "setOrbitCoveredAngleBox";
+            this.setOrbitCoveredAngleBox.Size = new System.Drawing.Size(123, 20);
+            this.setOrbitCoveredAngleBox.TabIndex = 19;
+            this.setOrbitCoveredAngleBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
+            // 
+            // setOrbitCoveredAngleLabel
+            // 
+            this.setOrbitCoveredAngleLabel.AutoSize = true;
+            this.setOrbitCoveredAngleLabel.Location = new System.Drawing.Point(32, 124);
+            this.setOrbitCoveredAngleLabel.Name = "setOrbitCoveredAngleLabel";
+            this.setOrbitCoveredAngleLabel.Size = new System.Drawing.Size(76, 13);
+            this.setOrbitCoveredAngleLabel.TabIndex = 18;
+            this.setOrbitCoveredAngleLabel.Text = "Covered angle";
             // 
             // setOrbitButon
             // 
@@ -1076,55 +1134,22 @@
             this.setOrbitPrimeBox.Size = new System.Drawing.Size(191, 21);
             this.setOrbitPrimeBox.TabIndex = 8;
             // 
-            // createNewCoveredAngleLabel
+            // refreshButton
             // 
-            this.createNewCoveredAngleLabel.AutoSize = true;
-            this.createNewCoveredAngleLabel.Location = new System.Drawing.Point(30, 124);
-            this.createNewCoveredAngleLabel.Name = "createNewCoveredAngleLabel";
-            this.createNewCoveredAngleLabel.Size = new System.Drawing.Size(76, 13);
-            this.createNewCoveredAngleLabel.TabIndex = 16;
-            this.createNewCoveredAngleLabel.Text = "Covered angle";
-            // 
-            // createNewCoveredAngleBox
-            // 
-            this.createNewCoveredAngleBox.Location = new System.Drawing.Point(112, 121);
-            this.createNewCoveredAngleBox.Name = "createNewCoveredAngleBox";
-            this.createNewCoveredAngleBox.Size = new System.Drawing.Size(123, 20);
-            this.createNewCoveredAngleBox.TabIndex = 17;
-            this.createNewCoveredAngleBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
-            // 
-            // setOrbitCoveredAngleBox
-            // 
-            this.setOrbitCoveredAngleBox.Location = new System.Drawing.Point(125, 121);
-            this.setOrbitCoveredAngleBox.Name = "setOrbitCoveredAngleBox";
-            this.setOrbitCoveredAngleBox.Size = new System.Drawing.Size(123, 20);
-            this.setOrbitCoveredAngleBox.TabIndex = 19;
-            this.setOrbitCoveredAngleBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberForce);
-            // 
-            // setOrbitCoveredAngleLabel
-            // 
-            this.setOrbitCoveredAngleLabel.AutoSize = true;
-            this.setOrbitCoveredAngleLabel.Location = new System.Drawing.Point(32, 124);
-            this.setOrbitCoveredAngleLabel.Name = "setOrbitCoveredAngleLabel";
-            this.setOrbitCoveredAngleLabel.Size = new System.Drawing.Size(76, 13);
-            this.setOrbitCoveredAngleLabel.TabIndex = 18;
-            this.setOrbitCoveredAngleLabel.Text = "Covered angle";
-            // 
-            // rescaleButton
-            // 
-            this.rescaleButton.Location = new System.Drawing.Point(241, 14);
-            this.rescaleButton.Name = "rescaleButton";
-            this.rescaleButton.Size = new System.Drawing.Size(56, 35);
-            this.rescaleButton.TabIndex = 35;
-            this.rescaleButton.Text = "Rescale";
-            this.rescaleButton.UseVisualStyleBackColor = true;
-            this.rescaleButton.Click += new System.EventHandler(this.rescaleButton_Click);
+            this.refreshButton.Location = new System.Drawing.Point(219, 12);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(52, 23);
+            this.refreshButton.TabIndex = 37;
+            this.refreshButton.Text = "Refresh";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1240, 531);
+            this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.setOrbitGroupBox);
             this.Controls.Add(this.revertButton);
             this.Controls.Add(this.deleteButton);
@@ -1264,6 +1289,8 @@
         private System.Windows.Forms.TextBox setOrbitCoveredAngleBox;
         private System.Windows.Forms.Label setOrbitCoveredAngleLabel;
         private System.Windows.Forms.Button rescaleButton;
+        private System.Windows.Forms.Label orbitalParameterLabel;
+        private System.Windows.Forms.Button refreshButton;
     }
 }
 

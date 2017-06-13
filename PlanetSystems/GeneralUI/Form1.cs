@@ -1,6 +1,7 @@
 ﻿using PlanetSystem.Data;
 using PlanetSystem.Models.Bodies;
 using PlanetSystem.Models.Utilities;
+using ReportsGenerators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace GeneralUI
         AstronomicalBody selectedBody;
         Plane planeOfGraph = Plane.XY;
         double scaleFactor = 0;
+        Bitmap canvasBitmap;
 
         public Form1()
         {
@@ -30,6 +32,9 @@ namespace GeneralUI
         {
             LoadCreateNewGroup();
             canvasPanel.BackColor = Color.White;
+            canvasBitmap = new Bitmap(canvasPanel.Width, canvasPanel.Height);
+            ClearCanvas();
+
 
             listboxOfPlanetarySystems.Width = planetarySystemTreeView.Width;
             listboxOfPlanetarySystems.Height = planetarySystemTreeView.Height;
@@ -125,9 +130,16 @@ namespace GeneralUI
 
         private void LoadBodyInfo(AstronomicalBody body)
         {
-            LoadGeneralInfo(body);
-            LoadPositionInfo(body);
-            LoadVelocityInfo(body);
+            try
+            {
+                LoadGeneralInfo(body);
+                LoadPositionInfo(body);
+                LoadVelocityInfo(body);
+            }
+            catch (Exception exc)
+            {
+            }
+
         }
 
         private void LoadGeneralInfo(AstronomicalBody body)
@@ -312,6 +324,7 @@ namespace GeneralUI
                 selectedBody.Velocity.Y = double.Parse(velYBox.Text);
                 selectedBody.Velocity.Z = double.Parse(velZBox.Text);
 
+                Refresh();
                 Backup();
             }
             catch (Exception exc)
@@ -757,17 +770,20 @@ namespace GeneralUI
         }
 
         private void DrawCurves(List<List<System.Drawing.Point>> curves)
-        {
-            Graphics g = canvasPanel.CreateGraphics();
+        {            
+            Graphics panelGraphics = canvasPanel.CreateGraphics();
+            Graphics bmpGraphics = Graphics.FromImage(canvasBitmap);
             Pen pen = new Pen(Color.Black, 3);
 
             curves.ForEach(c =>
             {
-                g.DrawCurve(pen, c.ToArray());
+                panelGraphics.DrawCurve(pen, c.ToArray());
+                bmpGraphics.DrawCurve(pen, c.ToArray());
             });
 
             pen.Dispose();
-            g.Dispose();
+            panelGraphics.Dispose();
+            bmpGraphics.Dispose();
         }
 
         private void Refresh()
@@ -814,6 +830,10 @@ namespace GeneralUI
             using (Graphics g = canvasPanel.CreateGraphics())
             {
                 g.Clear(Color.White);
+            }
+            using (Graphics bmpGraph = Graphics.FromImage(canvasBitmap))
+            {
+                bmpGraph.Clear(Color.White);
             }
         }
 
@@ -1009,6 +1029,32 @@ namespace GeneralUI
         private void rescaleButton_Click(object sender, EventArgs e)
         {
             SetScale();
+        }
+
+        private void orbitByRadiusRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (orbitByRadiusRadio.Checked)
+            {
+                orbitalParameterLabel.Text = "Radius";
+            }
+            else
+            {
+                orbitalParameterLabel.Text = "Speed";
+            }
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+
+        private void generateReport_Click(object sender, EventArgs e)
+        {
+            GeneralUIReportGenerator.GenerateReport(
+                currentPlanetarySystem.Name,
+                backupPlanetarySystem.GetAllBodies(),
+                currentPlanetarySystem.GetAllBodies(),
+                canvasBitmap);
         }
     }
 }
