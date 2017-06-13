@@ -7,6 +7,7 @@ using Excel;
 using PlanetSystem.Data;
 using System.Linq;
 using Newtonsoft.Json;
+using ReportsGenerators;
 
 namespace PlanetSystem.UserInterface
 {
@@ -145,7 +146,7 @@ namespace PlanetSystem.UserInterface
                 // Update ItemsSource.
                 dataGridStars.ItemsSource = null;
                 dataGridStars.ItemsSource = ctx.Stars.ToList();
-            }            
+            }
 
             System.Windows.MessageBox.Show("Update finished!");
         }
@@ -157,8 +158,13 @@ namespace PlanetSystem.UserInterface
 
         private void btnCreatePdfReport_Click(object sender, RoutedEventArgs e)
         {
-            ReportsGenerators.CreateReport.CreatePDFReport("somename");
+            if (dataGridFromFile.ItemsSource == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Can't create report. The DataGrid is empty.");
+                return;
+            }
 
+            CreateReport.CreatePdfReportFromDataTable(((DataView)dataGridFromFile.ItemsSource).Table);
         }
     }
 }

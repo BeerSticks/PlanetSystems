@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLiteData.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,9 +13,12 @@ namespace SQLiteData
         public SQLiteContext()
             : base("SQLiteConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SQLiteContext, Migrations.SQLiteConfig>(true));
+           Database.SetInitializer(new MigrateDatabaseToLatestVersion<SQLiteContext,SQLiteConfig>(true));
         }
 
-        public virtual DbSet<TestClass> Tests { get; set; }
+        public virtual DbSet<Satellite> Satellites { get; set; }
+
+        public virtual DbSet<SatelliteType> SatelliteTypes { get; set; }
+
     }
 }

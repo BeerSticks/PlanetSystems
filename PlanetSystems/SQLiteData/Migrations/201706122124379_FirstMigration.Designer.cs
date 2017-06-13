@@ -7,13 +7,13 @@ namespace SQLiteData.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class FirstSuccessfulSQLiteMigration : IMigrationMetadata
+    public sealed partial class FirstMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FirstSuccessfulSQLiteMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FirstMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706091940311_FirstSuccessfulSQLiteMigration"; }
+            get { return "201706122124379_FirstMigration"; }
         }
         
         string IMigrationMetadata.Source
