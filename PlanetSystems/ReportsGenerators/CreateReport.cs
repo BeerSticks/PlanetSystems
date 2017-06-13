@@ -98,7 +98,7 @@ namespace ReportsGenerators
             }
             catch (IOException)
             {
-                MessageBox.Show("Cannot write to file, because the file is currenly open.");
+                MessageBox.Show("Cannot write to file, because the file is currently open.");
             }
         }
     }
